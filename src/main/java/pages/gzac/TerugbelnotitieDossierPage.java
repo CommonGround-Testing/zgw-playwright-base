@@ -2,6 +2,7 @@ package pages.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 public class TerugbelnotitieDossierPage {
 
@@ -20,7 +21,7 @@ public class TerugbelnotitieDossierPage {
     public final Locator buttonVerzendNieuwDossier;
 
     public TerugbelnotitieDossierPage(Page page) {
-        this.buttonAanmakenNieuwDossier = page.locator("//button[contains(., 'Creëer Nieuw Dossier')]");
+        this.buttonAanmakenNieuwDossier = page.getByLabel("Table action bar").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Creëer Nieuw Dossier"));
         this.textfieldOnderwerp = page.locator("//input[contains(@id, 'klantVraag.onderwerp')]");
         this.textfieldKlantvraag = page.locator("//textarea[contains(@id, 'klantVraag.vraag')]");
         this.textfieldVoorletters = page.locator("//input[contains(@id, 'klant.contactgegevens.voorletters')]");
