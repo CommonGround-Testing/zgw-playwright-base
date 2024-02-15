@@ -1,12 +1,13 @@
 package steps.gui.klanportaal;
 
 import com.microsoft.playwright.Page;
-import org.junit.jupiter.api.Assertions;
 import pages.klantportaal.MijnGegevensPage;
 import users.ZGWDigidUser;
 import utils.TestDataGenerator;
 
 import java.util.List;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class MijnGegevensSteps extends KlantportaalSteps {
     public final MijnGegevensPage mijnGegevensPage;
@@ -17,9 +18,8 @@ public class MijnGegevensSteps extends KlantportaalSteps {
     }
 
     public void zijn_nationaliteit_en_naam_zichtbaar_en_correct(ZGWDigidUser user) {
-        mijnGegevensPage.mijnGegevensNationaliteit.waitFor();
-        Assertions.assertTrue(user.getNationaliteit().equals(mijnGegevensPage.mijnGegevensNationaliteit.allTextContents()) &&
-                user.getName().equals(mijnGegevensPage.mijnGegevensNaam.allTextContents()));
+        assertThat(mijnGegevensPage.mijnGegevensNationaliteit).hasText(user.getNationaliteit());
+        assertThat(mijnGegevensPage.mijnGegevensNaam).hasText(user.getName());
     }
 
     public void selecteer_telefoonnummer_aanpassen() {
@@ -28,41 +28,37 @@ public class MijnGegevensSteps extends KlantportaalSteps {
 
     public String vul_nieuw_telefoonnummer_in_en_sla_op() {
         this.selecteer_telefoonnummer_aanpassen();
-        final String nieuwTelefoonnummer = TestDataGenerator.telefoonNummer();
+        var nieuwTelefoonnummer = TestDataGenerator.telefoonNummer();
+        mijnGegevensPage.telefoonnummerInput.clear();
         mijnGegevensPage.telefoonnummerInput.fill(nieuwTelefoonnummer);
         mijnGegevensPage.opslaanButton.click();
         return nieuwTelefoonnummer;
     }
 
     public void is_nieuw_telefoonnummer_zichtbaar(String telNummer) {
-        mijnGegevensPage.mijnGegevensNationaliteit.waitFor();
-        Assertions.assertTrue(telNummer.equals(mijnGegevensPage.telefoonNummer.allTextContents()));
+        assertThat(mijnGegevensPage.telefoonNummer).hasText(telNummer);
     }
 
     public void is_nieuw_emailadres_zichtbaar(String email) {
-        mijnGegevensPage.mijnGegevensNationaliteit.waitFor();
-        Assertions.assertTrue(email.equals(mijnGegevensPage.emailAdres.allTextContents()));
-    }
-
-    public void selecteer_emailadres_aanpassen() {
-        mijnGegevensPage.emailAdresAanpassenKnop.click();
+        assertThat(mijnGegevensPage.emailAdres).hasText(email);
     }
 
     public String vul_nieuw_emailadres_in_en_sla_op() {
-        this.selecteer_emailadres_aanpassen();
-
-        final String emailAdres = TestDataGenerator.emailAdres();
-
+        mijnGegevensPage.emailAdresAanpassenKnop.click();
+        var emailAdres = TestDataGenerator.emailAdres();
+        mijnGegevensPage.emailAdresInput.clear();
         mijnGegevensPage.emailAdresInput.fill(emailAdres);
         mijnGegevensPage.opslaanButton.click();
         return emailAdres;
     }
 
     public void zijn_de_volgende_gegevens_zichtbaar_in_mijn_gegevens(List<String> verwachteKoppen) {
-        verwachteKoppen.forEach(kop -> Assertions.assertTrue(this.wordt_kop_h3_getoond(kop)));
+        verwachteKoppen.forEach(kop ->
+                assertThat(page.locator(
+                        String.format("//h3[contains(.,'%s')]", kop))).isVisible());
     }
 
     public void navigate() {
-        page.navigate("/account");
+        page.navigate(MijnGegevensPage.PAGE_URL);
     }
 }

@@ -15,11 +15,15 @@ abstract public class ZGWTestRunner {
     // New instance for each test method.
     // Cannot use standard library because we need to get cookies fTestWatcherExtensionrom context
     private static BrowserContext context;
-    private final String baseUrl;
+    private static String baseUrl;
     protected Page page;
 
     public ZGWTestRunner(String baseUrl) {
         this.baseUrl = baseUrl;
+    }
+
+    public static String getBaseUrl() {
+        return baseUrl;
     }
 
     public static BrowserContext getContext() {

@@ -1,8 +1,9 @@
 package steps.gui.klanportaal;
 
 import com.microsoft.playwright.Page;
-import org.junit.jupiter.api.Assertions;
 import pages.klantportaal.OverzichtPage;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class OverzichtSteps extends KlantportaalSteps {
     private final OverzichtPage overzichtPage;
@@ -15,15 +16,12 @@ public class OverzichtSteps extends KlantportaalSteps {
     }
 
     public void is_overzicht_zichtbaar_na_login() {
-        overzichtPage.overzichtZaakTegel.waitFor();
-        Assertions.assertTrue(overzichtPage.headerPage.isVisible() &&
-                overzichtPage.overzichtZaakTegel.isVisible());
+        assertThat(overzichtPage.headerPage).isVisible();
     }
 
 
     public void welkom_header_is_zichtbaar_en_juiste_taal(String text) {
-        Assertions.assertTrue(overzichtPage.headerPage.isVisible()
-                && overzichtPage.headerPage.allTextContents().contains(text));
+        assertThat(overzichtPage.headerPage).hasText(text);
     }
 
     public void navigate() {

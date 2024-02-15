@@ -8,6 +8,8 @@ import pages.klantportaal.MijnZakenPage;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class MijnZakenSteps extends KlantportaalSteps {
 
     private final MijnZakenPage mijnZakenPage;
@@ -33,7 +35,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
     }
 
     public void mijn_zaken_overzicht_is_zichtbaar() {
-        Assertions.assertTrue(mijnZakenPage.mijnZakenHeader.isVisible());
+        assertThat(mijnZakenPage.mijnZakenHeader).isVisible();
     }
 
     public void open_zaak(String zaakId) {
@@ -41,6 +43,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
     }
 
     public List<String> haal_alle_zaakdetailheaders(String expectedFields) {
+        mijnZakenPage.zaakStatusTimeline.waitFor();
         final List<String> listTextFields = mijnZakenPage.overviewZaakDetailHeaders.stream()
                 .map(Locator::textContent)
                 .collect(Collectors.toList());
@@ -48,28 +51,23 @@ public class MijnZakenSteps extends KlantportaalSteps {
     }
 
     public void controleer_dat_zaakstatus_timeline_zichtbaar_is() {
-        Assertions.assertTrue(mijnZakenPage.zaakStatusTimeline.isVisible());
+        assertThat(mijnZakenPage.zaakStatusTimeline).isVisible();
     }
 
 
     public void controleer_dat_downloadknop_van_een_document_zichtbaar_is_of_geen_documenten() {
-        Assertions.assertTrue(mijnZakenPage.zaakDocumentenDownloadButton.isVisible()
-                || mijnZakenPage.zaakGeenDocumenten.isVisible());
+        assertThat(mijnZakenPage.zaakDocumentenDownloadButton.first()).isVisible();
     }
 
     public void lijst_van_contactmomenten_is_zichtbaar() {
-        Assertions.assertTrue(mijnZakenPage.zaakContactmomentenList.isVisible());
-    }
-
-    public boolean details_van_zaak_worden_getoond() {
-        return mijnZakenPage.aanvraagdatumLabel.isVisible() && mijnZakenPage.zaaknummer.isVisible();
+        assertThat(mijnZakenPage.zaakContactmomentenList).isVisible();
     }
 
     public void de_zaakdetails_worden_getoond() {
-        mijnZakenPage.aanvraagdatumLabel.waitFor();
         final String verwachteVelden = "Status, Details, Documenten";
         final List<String> listTextFields = this.haal_alle_zaakdetailheaders(verwachteVelden);
         listTextFields.stream().forEach(text -> Assertions.assertTrue(verwachteVelden.contains(text)));
-
+        assertThat(mijnZakenPage.aanvraagdatumLabel).isVisible();
+        assertThat(mijnZakenPage.zaaknummer).isVisible();
     }
 }

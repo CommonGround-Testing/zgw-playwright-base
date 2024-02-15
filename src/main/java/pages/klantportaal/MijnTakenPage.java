@@ -5,6 +5,7 @@ import com.microsoft.playwright.Page;
 
 public class MijnTakenPage {
 
+    public final static String PAGE_URL = "/taken";
     public final Locator takenCard;
     public final Locator geenTakenVoorDeHuidigeGebruiker;
     public final Locator takenOphalenFoutmelding;

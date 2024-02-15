@@ -2,9 +2,12 @@ package pages.klantportaal;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 public class MijnGegevensPage {
 
+
+    public final static String PAGE_URL = "/account";
     public final Locator telefoonNummerAanpassenKnop;
     public final Locator telefoonnummerInput;
     public final Locator emailAdresInput;
@@ -17,10 +20,10 @@ public class MijnGegevensPage {
 
     public MijnGegevensPage(Page page) {
         this.telefoonNummerAanpassenKnop = page.locator("//b[text()='Telefoonnummer']/../../div/a/span[text()='Aanpassen']");
-        this.telefoonnummerInput = page.locator("//input[@id='Telefoonnummer']");
-        this.emailAdresInput = page.locator("//input[@id='E-mailadres']");
-        this.opslaanButton = page.locator("//button/span[text()='Opslaan']");
-        this.mijnGegevensNationaliteit = page.locator("//b[text()='Nationaliteit']/../../div/span[text()='Nederlandse']");
+        this.telefoonnummerInput = page.getByLabel("telefoonnummer");
+        this.emailAdresInput = page.getByLabel("e-mailadres");
+        this.opslaanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Opslaan"));
+        this.mijnGegevensNationaliteit = page.locator("//b[text()='Nationaliteit']/../../div/span");
         this.mijnGegevensNaam = page.locator("//b[text()='Voornamen']/../../div/span");
         this.telefoonNummer = page.locator("//b[text()='Telefoonnummer']/../../div/span");
         this.emailAdres = page.locator("//b[text()='E-mailadres']/../../div/span");

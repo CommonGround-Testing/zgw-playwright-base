@@ -2,6 +2,7 @@ package pages.klantportaal;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 public class KlantportaalPage {
     public final Locator inloggenDigidLink;
@@ -28,8 +29,8 @@ public class KlantportaalPage {
         this.inloggeneHerkenningMachtigenLink = page.locator("//*[@id='eherkenning-bewindvoering']");
         this.gebruikersMenuBurgerButton = page.locator("//button[contains(.,'Welkom Sierra')]");
         this.gebruikersMenuOndernemerButton = page.locator("//button[contains(.,'Welkom')]");
-        this.menu = page.locator("//button[contains(text(), 'Welkom')]");
-        this.languageButton = page.locator("//div[contains(@class, 'language-switcher')]/button");
+        this.menu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Welkom"));
+        this.languageButton = page.locator("//div[contains(@class,'denhaag-header__actions-action-language-switcher')]");
         this.disabledLanguageOption = page.locator("//ul/li/button[not(contains(@class, 'active'))]");
     }
 }

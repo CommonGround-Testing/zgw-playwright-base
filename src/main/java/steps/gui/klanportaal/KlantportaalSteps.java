@@ -1,5 +1,6 @@
 package steps.gui.klanportaal;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import pages.klantportaal.KlantportaalPage;
@@ -28,23 +29,22 @@ public abstract class KlantportaalSteps {
         page.navigate(url);
     }
 
-    public void login_als_burger_on_page(ZGWUser user, String url) {
-        this.navigate(url);
+    public void login_als_burger_on_page(ZGWUser user, String relativeUrl) {
+        this.navigate(relativeUrl);
         klantportaalPage.inloggenDigidLink.click();
         digidLoginSteps.login_als(user.getUsername(), user.getPassword());
-        klantportaalPage.gebruikersMenuBurgerButton.isVisible();
     }
 
-    public void log_in_op_het_klantportaal_via_digid_machtigen(ZGWUser user, String url) {
-        this.navigate(url);
+    public void log_in_op_het_klantportaal_via_digid_machtigen(ZGWUser user, String relativeUrl) {
+        this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
         this.selecteer_optie_inloggen_met_digid_machtigen();
         digidLoginSteps.login_als(user.getUsername(), user.getPassword());
         digidLoginSteps.selecteer_machtiginggever();
     }
 
-    public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user, String url) {
-        this.navigate(url);
+    public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user, String relativeUrl) {
+        this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
         this.selecteer_optie_inloggen_met_eherkenning();
         this.eherkenningSteps.login_als(user.getUsername(), user.getPassword());
@@ -86,6 +86,13 @@ public abstract class KlantportaalSteps {
     }
 
     public void selecteerNavigatieOptie(String menuOptie) {
+        page.locator("#site-header").getByRole(AriaRole.LINK,
+                new Locator
+                        .GetByRoleOptions()
+                        .setName(menuOptie)).click();
+    }
+
+    public void selecteerNavigatieHoofdMenu(String menuOptie) {
         page.getByRole(AriaRole.LINK,
                 new Page.GetByRoleOptions()
                         .setName(menuOptie)).click();
@@ -97,12 +104,14 @@ public abstract class KlantportaalSteps {
     }
 
     public void open_menu() {
+        klantportaalPage.menu.waitFor();
         klantportaalPage.menu.click();
     }
 
     public void burger_opent_taalmenu_en_verandert_taal() {
         klantportaalPage.languageButton.click();
         klantportaalPage.disabledLanguageOption.click();
+        klantportaalPage.menu.isHidden();
     }
 
     public void ingelogde_gebruiker_is(String naam) {

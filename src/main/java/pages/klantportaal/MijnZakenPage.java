@@ -7,6 +7,7 @@ import java.util.List;
 
 public class MijnZakenPage {
 
+    public final static String PAGE_URL = "/zaken";
     public final Locator afgerondeZakenButton;
     public final Locator zaakTegel;
     public final List<Locator> overviewZaakDetailHeaders;
