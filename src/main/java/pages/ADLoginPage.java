@@ -20,7 +20,7 @@ public class ADLoginPage {
         this.gebruikersnaamInput = page.locator("//input[@type='email']");
         this.wachtwoordInput = page.locator("//input[@name='passwd']");
         this.volgendeInput = page.locator("//input[@value='Next']");
-        this.aanmeldenInput = page.locator("input[@value='Sign in']");
+        this.aanmeldenInput = page.locator("//input[@value='Sign in']");
         this.kanAuthAppNietGebruikenLink = page.locator("//*[@id='signInAnotherWay']");
         this.gebruikVerificatieCode = page.locator("//div[contains(text(),'Use a verification code')]");
         this.codeInput = page.locator("//input[@name='otc']");
