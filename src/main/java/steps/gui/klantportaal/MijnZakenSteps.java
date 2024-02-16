@@ -1,4 +1,4 @@
-package steps.gui.klanportaal;
+package steps.gui.klantportaal;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
