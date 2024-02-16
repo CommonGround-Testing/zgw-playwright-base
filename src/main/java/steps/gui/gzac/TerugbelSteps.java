@@ -1,15 +1,17 @@
 package steps.gui.gzac;
 
 import com.microsoft.playwright.Page;
-import pages.gzac.TerugbelnotitieDossierPage;
+import pages.gzac.TerugbelnotitieDossierFormPage;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class TerugbelSteps extends GzacBaseSteps {
 
-    private final TerugbelnotitieDossierPage terugbelPage;
+    private final TerugbelnotitieDossierFormPage terugbelPage;
 
     public TerugbelSteps(Page page) {
         super(page);
-        this.terugbelPage = new TerugbelnotitieDossierPage(page);
+        this.terugbelPage = new TerugbelnotitieDossierFormPage(page);
     }
 
     public void navigate() {
@@ -28,10 +30,15 @@ public class TerugbelSteps extends GzacBaseSteps {
         terugbelPage.textfieldTelefoonnummer.fill("0611111111");
         terugbelPage.buttonGeboortedatum.click();
         terugbelPage.buttonGeboortedatumVandaag.click();
+        terugbelPage.datumUiterlijkeBeantwoording.click();
         terugbelPage.buttonProductSenioren.click();
         terugbelPage.textfieldProductSenioren.fill("14070");
         terugbelPage.buttonSelecteerProductSenioren.click();
         terugbelPage.buttonVerzendNieuwDossier.waitFor();
         terugbelPage.buttonVerzendNieuwDossier.click();
+    }
+
+    public void ik_zie_dossier_overzicht_van_nieuwe_terugbelnotitie() {
+        assertThat(terugbelPage.dossierOverzichtHeaderInhoud).isVisible();
     }
 }
