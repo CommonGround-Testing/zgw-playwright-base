@@ -75,4 +75,21 @@ public abstract class OpenFormsSteps {
     public void ga_naar_volgende_formulierstap() {
         openFormsPage.buttonVolgendeFormulierStap.click();
     }
+
+    public void tekstveld_bevat_prefill_gegevens
+            (String inputName, String prefillWaarde) {
+        assertThat(
+                page.locator(
+                        String.format("//input[@name='%s' and contains(@value,\"%s\")]",
+                                inputName,
+                                prefillWaarde)))
+                .isVisible();
+    }
+
+    public boolean button_volgende_is_enabled() {
+
+        return openFormsPage.buttonVolgendeFormulierStap.isVisible();
+    }
+
+
 }
