@@ -18,7 +18,7 @@ public abstract class OpenFormsSteps {
         this.digidLoginSteps = new DigidLoginSteps(page);
     }
 
-    public void navigate() {
+    public void navigateToUrl() {
         page.navigate("/");
     }
 
