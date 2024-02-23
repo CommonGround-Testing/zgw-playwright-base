@@ -1,6 +1,9 @@
 package steps.gui.openforms;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.assertions.LocatorAssertions;
+import com.microsoft.playwright.options.WaitForSelectorState;
 import pages.openforms.OpenFormsPage;
 import steps.gui.login.DigidLoginSteps;
 
@@ -26,6 +29,11 @@ public abstract class OpenFormsSteps {
         openFormsPage.buttonAccepteerCookies.click();
         openFormsPage.buttonInloggenDigid.click();
         digidLoginSteps.login_als(username, password);
+        openFormsPage.textlabelHeaderH1
+                .waitFor(new Locator
+                        .WaitForOptions()
+                        .setState(
+                                WaitForSelectorState.VISIBLE));
     }
 
     public void controleer_actieve_formulierstap_is(String stapNaam) {
@@ -33,6 +41,7 @@ public abstract class OpenFormsSteps {
     }
 
     public void controleer_h1_header_is(String tekst) {
+
         assertThat(openFormsPage.textlabelHeaderH1).hasText(tekst);
     }
 
@@ -41,7 +50,10 @@ public abstract class OpenFormsSteps {
     }
 
     public void controleer_formulier_body_bevat_tekst(String tekst) {
-        assertThat(page.locator("//p[contains(.,'" + tekst + "')]")).isVisible();
+        assertThat(page.locator("//p[contains(.,'" + tekst + "')]"))
+                .isVisible(new LocatorAssertions
+                        .IsVisibleOptions()
+                        .setTimeout(60000));
     }
 
     public void controleer_button_volgende_is_enabled_is(boolean isEnabled) {

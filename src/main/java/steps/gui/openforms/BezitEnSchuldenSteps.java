@@ -27,6 +27,6 @@ public class BezitEnSchuldenSteps extends OpenFormsSteps {
 
     public void rond_stap_bezit_en_schulden_overzicht_af() {
         assertThat(openFormsPage.linkActiveStep).hasText(FormStepNames.BEZIT_EN_SCHULDEN_OVERZICHT);
-        this.rond_formulierstap_af();
+        this.ga_naar_volgende_formulierstap();
     }
 }
