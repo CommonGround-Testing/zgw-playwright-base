@@ -22,6 +22,6 @@ public class OpenFormsPage {
         this.buttonVolgendeFormulierStap = page.locator("//button[@type='submit' and not(@aria-disabled='true') and text()='Volgende']");
         this.buttonVolgendeFormulierStapLoading = page.locator("//button[@type='submit' and @name='next' and contains(@class,'openforms-loading')]");
         this.textlabelHeaderH1 = page.locator("//h1");
-        this.textlabelHeaderH2 = page.locator("//h2");
+        this.textlabelHeaderH2 = page.locator("//h2").first();
     }
 }

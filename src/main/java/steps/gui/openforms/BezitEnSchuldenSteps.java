@@ -21,7 +21,7 @@ public class BezitEnSchuldenSteps extends OpenFormsSteps {
 
         bezitEnSchuldenPage.checkboxContanten.click();
         bezitEnSchuldenPage.textfieldContantGeld.fill("100");
-        bezitEnSchuldenPage.textfieldContantGeld.tap();
+        bezitEnSchuldenPage.textfieldContantGeld.press("Tab");
         ga_naar_volgende_formulierstap();
     }
 

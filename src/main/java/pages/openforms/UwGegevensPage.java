@@ -13,7 +13,7 @@ public class UwGegevensPage {
     public UwGegevensPage(Page page) {
         this.linkPersoonsgegevensAanpassen = page
                 .getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("persoonsgegevens aanpassen."));
-        this.textfieldEmailAdres = page.locator("//*[@name='data[email]']]");
-        this.textfieldTelefoonnummer = page.locator("//*[@name='data[Telefoonnummer]']]");
+        this.textfieldEmailAdres = page.locator("//*[@name='data[email]']");
+        this.textfieldTelefoonnummer = page.locator("//*[@name='data[Telefoonnummer]']");
     }
 }

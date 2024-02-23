@@ -19,7 +19,7 @@ public abstract class OpenFormsSteps {
     }
 
     public void navigateToUrl() {
-        page.navigate("/");
+        page.navigate("/aanvraag-formulier-ooievaarspas/startpagina");
     }
 
     public void login_via_digid(String username, String password) {
@@ -32,7 +32,7 @@ public abstract class OpenFormsSteps {
         assertThat(openFormsPage.linkActiveStep).hasText(stapNaam);
     }
 
-    public void constroleer_h1_header_is(String tekst) {
+    public void controleer_h1_header_is(String tekst) {
         assertThat(openFormsPage.textlabelHeaderH1).hasText(tekst);
     }
 

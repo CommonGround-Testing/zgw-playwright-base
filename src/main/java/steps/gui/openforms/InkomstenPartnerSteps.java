@@ -2,6 +2,7 @@ package steps.gui.openforms;
 
 import com.microsoft.playwright.Page;
 import pages.openforms.InkomstenPartnerPage;
+import utils.formvalues.FormStepNames;
 
 public class InkomstenPartnerSteps extends OpenFormsSteps {
 
@@ -62,8 +63,22 @@ public class InkomstenPartnerSteps extends OpenFormsSteps {
         }
     }
 
-    public void rond_formulierstap_af() {
+    public void kies_nee_voor_alle_vragen() {
+        this.kies_heeft_werkgever(false);
+        this.kies_geen_uitkering();
+        this.kies_krijgt_pensioen(false);
+        this.kies_krijgt_kinderalimentatie(false);
+        this.kies_heeft_inkomen_uit_onderhuur(false);
+        this.kies_is_ondernemer(false);
+    }
 
+    public void rond_stap_inkomsten_partner_af() {
+        this.controleer_actieve_formulierstap_is(FormStepNames.INKOMSTEN_PARTNER);
+        ga_naar_volgende_formulierstap();
+    }
+
+    public void rond_stap_inkomsten_partner_overzicht_af() {
+        this.controleer_actieve_formulierstap_is(FormStepNames.INKOMSTEN_PARTNER_OVERZICHT);
         ga_naar_volgende_formulierstap();
     }
 }
