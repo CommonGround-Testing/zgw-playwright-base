@@ -16,7 +16,7 @@ abstract public class ZGWTestRunner {
     // Cannot use standard library because we need to get cookies fTestWatcherExtensionrom context
     private static BrowserContext context;
     private static String baseUrl;
-    protected Page page;
+    protected static Page page;
 
     public ZGWTestRunner(String baseUrl) {
         this.baseUrl = baseUrl;
@@ -28,6 +28,10 @@ abstract public class ZGWTestRunner {
 
     public static BrowserContext getContext() {
         return context;
+    }
+
+    public static Page getPage() {
+        return page;
     }
 
     @BeforeAll
