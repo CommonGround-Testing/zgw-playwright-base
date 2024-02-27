@@ -21,7 +21,7 @@ public class VerklaringVanWaarheidSteps extends OpenFormsSteps {
             verklaringVanWaarheidPage.checkboxAkkoord.click();
         }
 
-        ga_naar_volgende_formulierstap();
+        clickVolgendeButtonAndWait(akkoord);
     }
 
     public void rond_stap_verklaring_van_waarheid_af_met_akkoord(boolean akkoord) {
@@ -30,6 +30,6 @@ public class VerklaringVanWaarheidSteps extends OpenFormsSteps {
     }
 
     public void controleer_tekst_bij_checkbox_is(String verwachteTekst) {
-        assertThat(verklaringVanWaarheidPage.checkboxAkkoord).hasText(verwachteTekst);
+        assertThat(verklaringVanWaarheidPage.textlabelCheckboxAkkoord).hasText(verwachteTekst);
     }
 }

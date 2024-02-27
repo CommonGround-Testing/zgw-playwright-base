@@ -56,9 +56,12 @@ public abstract class OpenFormsSteps {
                         .setTimeout(60000));
     }
 
-    public void controleer_button_volgende_is_enabled_is(boolean isEnabled) {
+    public void controleer_button_volgende_is_enabled() {
+        assertThat(openFormsPage.getButtonVolgendeFormulierStap()).isEnabled();
+    }
 
-        assertThat(openFormsPage.buttonVolgendeFormulierStap).isEnabled();
+    public void controleer_button_volgende_is_disabled() {
+        assertThat(openFormsPage.getButtonVolgendeFormulierStap()).isDisabled();
     }
 
     public void controleer_foutmelding_is_zichtbaar_met(String tekst) {
@@ -76,16 +79,30 @@ public abstract class OpenFormsSteps {
                 .isVisible();
     }
 
-    public boolean geen_foutmelding_zichtbaar() {
-        return page.locator("//div[@class='form-text error']").isVisible();
+    public void geen_foutmelding_zichtbaar() {
+        assertThat(page.locator("//div[@class='form-text error']")).isHidden();
     }
 
     public void verzend_formulierstap() {
+        openFormsPage.buttonVolgendeFormulierStapDisabled.waitFor(new Locator
+                .WaitForOptions()
+                .setState(WaitForSelectorState.VISIBLE));
+        openFormsPage.buttonVolgendeFormulierStapDisabled.waitFor(new Locator
+                .WaitForOptions()
+                .setState(WaitForSelectorState.HIDDEN));
         openFormsPage.buttonVolgendeFormulierStap.click();
     }
 
     public void ga_naar_volgende_formulierstap() {
+        clickVolgendeButtonAndWait(true);
+    }
+
+    public void clickVolgendeButtonAndWait(boolean waitForSpinner) {
         openFormsPage.buttonVolgendeFormulierStap.click();
+        if (waitForSpinner) {
+            openFormsPage.loader.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+            openFormsPage.loader.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
+        }
     }
 
     public void tekstveld_bevat_prefill_gegevens
@@ -103,5 +120,14 @@ public abstract class OpenFormsSteps {
         return openFormsPage.buttonVolgendeFormulierStap.isVisible();
     }
 
+    public void validatie_toon_foutmelding(Locator lo, String tekst, String verwachteTekst) {
+        lo.fill(tekst);
+        lo.blur();
 
+        if (verwachteTekst == null) {
+            geen_foutmelding_zichtbaar();
+        } else {
+            controleer_foutmelding_is_zichtbaar_met(verwachteTekst);
+        }
+    }
 }
