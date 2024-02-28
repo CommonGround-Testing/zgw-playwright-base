@@ -21,7 +21,7 @@ public class VerklaringVanWaarheidSteps extends OpenFormsSteps {
             verklaringVanWaarheidPage.checkboxAkkoord.click();
         }
 
-        clickVolgendeButtonAndWait(akkoord);
+        click_volgende_button_and_wait(akkoord);
     }
 
     public void rond_stap_verklaring_van_waarheid_af_met_akkoord(boolean akkoord) {

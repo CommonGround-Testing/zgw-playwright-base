@@ -23,14 +23,10 @@ public class OpenFormsPage {
         this.buttonAccepteerCookies = page.locator("//button[contains(@class,'cookie-notice__accept')]");
         this.linkActiveStep = page.locator("//a[contains(@class,'utrecht-link--openforms-active')]");
         this.buttonVolgendeFormulierStapDisabled = page.locator("//button[@type='submit' and @aria-disabled='true' and text()='Volgende']");
-        this.buttonVolgendeFormulierStap = page.locator("//button[@type='submit' and not(@aria-disabled='true') and text()='Volgende']");
+        this.buttonVolgendeFormulierStap = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Volgende"));
         this.buttonVolgendeFormulierStapLoading = page.locator("//button[@type='submit' and @name='next' and contains(@class,'openforms-loading')]");
         this.textlabelHeaderH1 = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Ooievaarspas aanvragen"));
         this.textlabelHeaderH2 = page.locator("//h2").first();
         this.loader = page.getByRole(AriaRole.STATUS);
-    }
-
-    public Locator getButtonVolgendeFormulierStap() {
-        return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Volgende"));
     }
 }

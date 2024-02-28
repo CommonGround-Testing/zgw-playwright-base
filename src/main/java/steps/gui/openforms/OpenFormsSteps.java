@@ -57,11 +57,11 @@ public abstract class OpenFormsSteps {
     }
 
     public void controleer_button_volgende_is_enabled() {
-        assertThat(openFormsPage.getButtonVolgendeFormulierStap()).isEnabled();
+        assertThat(openFormsPage.buttonVolgendeFormulierStap).isEnabled();
     }
 
     public void controleer_button_volgende_is_disabled() {
-        assertThat(openFormsPage.getButtonVolgendeFormulierStap()).isDisabled();
+        assertThat(openFormsPage.buttonVolgendeFormulierStap).isDisabled();
     }
 
     public void controleer_foutmelding_is_zichtbaar_met(String tekst) {
@@ -84,24 +84,20 @@ public abstract class OpenFormsSteps {
     }
 
     public void verzend_formulierstap() {
-        openFormsPage.buttonVolgendeFormulierStapDisabled.waitFor(new Locator
-                .WaitForOptions()
-                .setState(WaitForSelectorState.VISIBLE));
-        openFormsPage.buttonVolgendeFormulierStapDisabled.waitFor(new Locator
-                .WaitForOptions()
-                .setState(WaitForSelectorState.HIDDEN));
+        assertThat(openFormsPage.buttonVolgendeFormulierStap).isDisabled();
+        assertThat(openFormsPage.buttonVolgendeFormulierStap).isEnabled();
         openFormsPage.buttonVolgendeFormulierStap.click();
     }
 
     public void ga_naar_volgende_formulierstap() {
-        clickVolgendeButtonAndWait(true);
+        click_volgende_button_and_wait(true);
     }
 
-    public void clickVolgendeButtonAndWait(boolean waitForSpinner) {
+    public void click_volgende_button_and_wait(boolean waitForSpinner) {
         openFormsPage.buttonVolgendeFormulierStap.click();
         if (waitForSpinner) {
-            openFormsPage.loader.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-            openFormsPage.loader.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
+            assertThat(openFormsPage.loader).isVisible();
+            assertThat(openFormsPage.loader).isHidden(new LocatorAssertions.IsHiddenOptions().setTimeout(30000));
         }
     }
 
