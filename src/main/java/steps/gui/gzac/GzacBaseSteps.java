@@ -2,6 +2,7 @@ package steps.gui.gzac;
 
 import com.microsoft.playwright.Page;
 import pages.gzac.GzacBasePage;
+import pages.gzac.GzakMenu;
 import steps.gui.login.ADLoginSteps;
 import users.ADUser;
 import utils.MathUtils;
@@ -15,20 +16,22 @@ public abstract class GzacBaseSteps {
     protected final Page page;
     private final GzacBasePage basePage;
     private final ADLoginSteps adLoginSteps;
+    private final GzakMenu gzakMenu;
     protected int dossierNummer;
 
     public GzacBaseSteps(Page page) {
         this.page = page;
-        this.basePage = new GzacBasePage(page);
-        this.adLoginSteps = new ADLoginSteps(page);
+        basePage = new GzacBasePage(page);
+        adLoginSteps = new ADLoginSteps(page);
+        gzakMenu = new GzakMenu(page);
     }
 
     public void setDossierNummer() {
-        this.dossierNummer = MathUtils.generateRandomNumber();
+        dossierNummer = MathUtils.generateRandomNumber();
     }
 
     public void wachtOpLadenMenu() {
-        basePage.dashboardText.waitFor();
+        gzakMenu.menuItemDashboard.waitFor();
     }
 
     public boolean wordtTabbladGetoond(String TabbladText) {
@@ -64,6 +67,6 @@ public abstract class GzacBaseSteps {
     public void medewerker_logt_in_bij_GZAC(String url, ADUser user) {
         page.navigate(url);
         adLoginSteps.login_met_ad_user(user);
-        this.wachtOpLadenMenu();
+        wachtOpLadenMenu();
     }
 }
