@@ -36,10 +36,14 @@ abstract public class ZGWTestRunner {
 
     @BeforeAll
     static void launchBrowser() {
+        var headlessProp = System.getProperty("headless");
+        var setHeadless = (headlessProp != null && headlessProp.equals("true"))
+                ? true
+                : false;
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType
                 .LaunchOptions()
-                .setHeadless(false));
+                .setHeadless(setHeadless));
     }
 
     @AfterAll

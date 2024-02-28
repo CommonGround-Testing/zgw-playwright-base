@@ -68,27 +68,15 @@ public class UwGegevensSteps extends OpenFormsSteps {
     }
 
     public void validatie_email_toont_foutmelding(String emailAdres, String verwachteTekst) {
-
-        uwGegevensPage.textfieldEmailAdres.fill(emailAdres);
-        uwGegevensPage.textfieldEmailAdres.press("Tab");
-
-        if (verwachteTekst == null) {
-            geen_foutmelding_zichtbaar();
-        }
-
-        controleer_foutmelding_is_zichtbaar_met(verwachteTekst);
+        validatie_toon_foutmelding(uwGegevensPage.textfieldEmailAdres,
+                emailAdres,
+                verwachteTekst);
     }
 
     public void validatie_telnr_toont_foutmelding(String telnr, String verwachteTekst) {
-
-        uwGegevensPage.textfieldTelefoonnummer.fill(telnr);
-        uwGegevensPage.textfieldTelefoonnummer.press("Tab");
-
-        if (verwachteTekst == null) {
-            geen_foutmelding_zichtbaar();
-        }
-
-        controleer_foutmelding_is_zichtbaar_met(verwachteTekst);
+        validatie_toon_foutmelding(uwGegevensPage.textfieldTelefoonnummer,
+                telnr,
+                verwachteTekst);
     }
 
     public void rond_formulierstap_af(ZGWDigidUser user) {
