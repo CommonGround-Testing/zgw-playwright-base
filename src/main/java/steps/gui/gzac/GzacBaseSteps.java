@@ -1,5 +1,6 @@
 package steps.gui.gzac;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pages.gzac.GzacBasePage;
 import steps.gui.login.ADLoginSteps;
@@ -39,8 +40,8 @@ public abstract class GzacBaseSteps {
         basePage.tegelOverzichtButton.click();
     }
 
-    public boolean ikZieDirectMijnNieuwAangemaakteDossier(String dossierNummer) {
-        return page.locator("//valtimo-form-io//dt[contains(., '" + dossierNummer + "')]").isVisible();
+    public Locator nieuwAangemaakteDossierNummer(String dossierNummer) {
+        return page.locator("//valtimo-form-io//dt[contains(., '" + dossierNummer + "')]");
     }
 
     public void medewerker_ziet_tegels_met_kolommen(List<String> kolommen) {

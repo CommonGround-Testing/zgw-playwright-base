@@ -1,8 +1,9 @@
 package steps.gui.gzac;
 
 import com.microsoft.playwright.Page;
-import org.junit.jupiter.api.Assertions;
 import pages.gzac.GeneriekeZaakDossierPage;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
 
@@ -26,7 +27,7 @@ public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
     }
 
     public void nieuw_aangemaakt_dossier_is_zichtbaar() {
-        Assertions.assertTrue(this.ikZieDirectMijnNieuwAangemaakteDossier(String.valueOf(dossierNummer)));
+        assertThat(this.nieuwAangemaakteDossierNummer(String.valueOf(dossierNummer))).isVisible();
     }
 
     public void navigate() {
