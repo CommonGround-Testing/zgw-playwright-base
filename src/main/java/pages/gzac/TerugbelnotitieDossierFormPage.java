@@ -7,7 +7,7 @@ import utils.FormioType;
 
 import static utils.DossierFormLocatorHelper.getLocator;
 
-public class TerugbelnotitieDossierFormPage extends GeneriekeZaakDossierPage {
+public class TerugbelnotitieDossierFormPage {
 
     public final Locator textfieldOnderwerp;
     public final Locator textfieldKlantvraag;
@@ -25,7 +25,6 @@ public class TerugbelnotitieDossierFormPage extends GeneriekeZaakDossierPage {
     public final Locator dossierOverzichtHeaderInhoud;
 
     public TerugbelnotitieDossierFormPage(Page page) {
-        super(page);
         this.textfieldOnderwerp = getLocator(FormioType.TEXTINPUT, "Onderwerp");
         this.textfieldKlantvraag = getLocator(FormioType.TEXTINPUT, "Vraag van de klant");
         this.textfieldVoorletters = getLocator(FormioType.TEXTINPUT, "Voorletters");

@@ -3,7 +3,6 @@ package steps.gui.gzac;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pages.gzac.GzacBasePage;
-import pages.gzac.GzakMenu;
 import steps.gui.login.ADLoginSteps;
 import users.ADUser;
 import utils.MathUtils;
@@ -12,35 +11,33 @@ import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-public abstract class GzacBaseSteps {
+public class GzacBaseSteps {
 
     protected final Page page;
     private final GzacBasePage basePage;
     private final ADLoginSteps adLoginSteps;
-    private final GzakMenu gzakMenu;
     protected int dossierNummer;
 
     public GzacBaseSteps(Page page) {
         this.page = page;
         basePage = new GzacBasePage(page);
         adLoginSteps = new ADLoginSteps(page);
-        gzakMenu = new GzakMenu(page);
     }
 
     public void setDossierNummer() {
         dossierNummer = MathUtils.generateRandomNumber();
     }
 
+    public void klik_op_knop(String text){
+        basePage.clickButton(text);
+    }
+
     public void wachtOpLadenMenu() {
-        gzakMenu.menuItemDashboard.waitFor();
+        basePage.menu.menuItemDashboard.waitFor();
     }
 
     public boolean wordtTabbladGetoond(String TabbladText) {
         return page.locator("//valtimo-widget//li[contains(.,'" + TabbladText + "')]").isVisible();
-    }
-
-    public void tegelOverzichtOpenen() {
-        basePage.tegelOverzichtButton.click();
     }
 
     public Locator nieuwAangemaakteDossierNummer(String dossierNummer) {
@@ -71,7 +68,7 @@ public abstract class GzacBaseSteps {
         wachtOpLadenMenu();
     }
 
-    public Locator paginaTitel(){
-        return basePage.pageTitle;
+    public Locator menuItem(String text){
+        return basePage.menu.getMenuItem(text);
     }
 }

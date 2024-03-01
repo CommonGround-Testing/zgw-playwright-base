@@ -4,7 +4,6 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 public class DigidLoginPage {
-    private final Page page;
     public final Locator linkSelectAuthenticationWithTrustLevel;
     public final Locator dropdownBetrouwbaarheidsniveau;
     public final Locator textfieldUsername;
@@ -13,7 +12,6 @@ public class DigidLoginPage {
     public final Locator buttonSelecteerMachtiginggever;
 
     public DigidLoginPage(Page page) {
-        this.page = page;
         this.linkSelectAuthenticationWithTrustLevel = page.locator("//*[@id='authentication_type_account_test']");
         this.dropdownBetrouwbaarheidsniveau = page.locator("//*[@id='authentication_test_zekerheidsniveau']");
         this.textfieldUsername = page.locator("//*[@id='authentication_username']");

@@ -3,8 +3,9 @@ package pages.gzac;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
-public class GeneriekeZaakDossierPage extends GzacBasePage {
-
+public class GeneriekeZaakDossierPage  {
+    private final Page page;
+    public final Locator pageTitle;
     public final Locator textfieldVoorletters;
     public final Locator textfieldAchternaam;
     public final Locator buttonVerzendNieuwDossier;
@@ -21,7 +22,8 @@ public class GeneriekeZaakDossierPage extends GzacBasePage {
     private final String exactTextPath;
 
     public GeneriekeZaakDossierPage(Page page) {
-        super(page);
+        this.page = page;
+        pageTitle = page.locator("//valtimo-page-title//h2");
         dossierModalPath = "//div[contains(@class,'modal-content')]";
         parentPath = "/..";
         inputFieldPath = "//input";

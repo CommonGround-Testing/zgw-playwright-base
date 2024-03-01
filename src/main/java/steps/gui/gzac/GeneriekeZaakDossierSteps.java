@@ -3,15 +3,18 @@ package steps.gui.gzac;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pages.gzac.GeneriekeZaakDossierPage;
+import pages.gzac.GzacBasePage;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
 
     private final GeneriekeZaakDossierPage zaakDossierPage;
+    private final GzacBasePage basePage;
 
     public GeneriekeZaakDossierSteps(Page page) {
         super(page);
+        basePage = new GzacBasePage(page);
         zaakDossierPage = new GeneriekeZaakDossierPage(page);
     }
 
@@ -33,7 +36,7 @@ public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
     }
 
     public void klik_knop(String text){
-        zaakDossierPage.getFirstButton(text).first().click();
+        basePage.clickButton(text);
     }
 
     public void vul_waarde_in(String veld, Integer number) {
@@ -56,5 +59,8 @@ public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
     }
     public Locator haal_veld_op(String veld, boolean exact) {
         return zaakDossierPage.getTextInputField(veld, exact);
+    }
+    public Locator paginaTitel(){
+        return zaakDossierPage.pageTitle;
     }
 }
