@@ -1,6 +1,7 @@
 package steps.gui.gzac;
 
 import com.microsoft.playwright.Page;
+import pages.gzac.GzacBasePage;
 import pages.gzac.TerugbelnotitieDossierFormPage;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -8,10 +9,12 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class TerugbelSteps extends GzacBaseSteps {
 
     private final TerugbelnotitieDossierFormPage terugbelPage;
+    private final GzacBasePage basePage;
 
     public TerugbelSteps(Page page) {
         super(page);
-        this.terugbelPage = new TerugbelnotitieDossierFormPage(page);
+        basePage = new GzacBasePage(page);
+        terugbelPage = new TerugbelnotitieDossierFormPage(page);
     }
 
     public void navigate() {
@@ -19,8 +22,7 @@ public class TerugbelSteps extends GzacBaseSteps {
     }
 
     public void maak_nieuw_terugbel_dossier_aan() {
-        terugbelPage.buttonAanmakenNieuwDossier.waitFor();
-        terugbelPage.buttonAanmakenNieuwDossier.click();
+        klik_op_knop("nieuw dossier");
         terugbelPage.textfieldOnderwerp.waitFor();
         terugbelPage.textfieldOnderwerp.fill(this.dossierNummer + " - onderwerp");
         terugbelPage.textfieldKlantvraag.fill("Ik heb een vraag");

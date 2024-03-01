@@ -1,25 +1,26 @@
 package steps.gui.gzac;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pages.gzac.GeneriekeZaakDossierPage;
+import pages.gzac.GzacBasePage;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
 
-    private final GeneriekeZaakDossierPage zaakDossierSteps;
+    private final GeneriekeZaakDossierPage zaakDossierPage;
+    private final GzacBasePage basePage;
 
     public GeneriekeZaakDossierSteps(Page page) {
         super(page);
-        this.zaakDossierSteps = new GeneriekeZaakDossierPage(page);
+        basePage = new GzacBasePage(page);
+        zaakDossierPage = new GeneriekeZaakDossierPage(page);
     }
 
     public void maak_nieuw_dossier_aan() {
-        zaakDossierSteps.buttonAanmakenNieuwDossier.click();
-        zaakDossierSteps.textfieldVoorletters.waitFor();
-        zaakDossierSteps.textfieldVoorletters.fill("T.E.S.T");
-        zaakDossierSteps.textfieldAchternaam.fill(this.dossierNummer + "achternamen");
-        zaakDossierSteps.buttonVerzendNieuwDossier.click();
+        klik_knop("nieuw dossier");
+        zaakDossierPage.dossierTitel.waitFor();
     }
 
     public void open_eerste_dossier() {
@@ -32,5 +33,34 @@ public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
 
     public void navigate() {
         page.navigate("/dossiers/generieke-zaak");
+    }
+
+    public void klik_knop(String text){
+        basePage.clickButton(text);
+    }
+
+    public void vul_waarde_in(String veld, Integer number) {
+        zaakDossierPage.fillNumericInputField(veld, number);
+    }
+    public void vul_waarde_in(String veld, String text) {
+        zaakDossierPage.fillTextInputField(veld, text, false);
+    }
+    public void vul_waarde_in(String veld, String text, boolean exact) {
+        zaakDossierPage.fillTextInputField(veld, text, exact);
+    }
+    public void selecteer_checkbox(String veld) {
+        zaakDossierPage.checkCheckbox(veld, false);
+    }
+    public void selecteer_optie(String veld, String optie) {
+        zaakDossierPage.selectRadioOption(veld, optie);
+    }
+    public Locator haal_veld_op(String veld) {
+        return zaakDossierPage.getTextInputField(veld, false);
+    }
+    public Locator haal_veld_op(String veld, boolean exact) {
+        return zaakDossierPage.getTextInputField(veld, exact);
+    }
+    public Locator paginaTitel(){
+        return zaakDossierPage.pageTitle;
     }
 }

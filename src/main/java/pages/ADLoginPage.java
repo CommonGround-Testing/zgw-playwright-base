@@ -5,7 +5,6 @@ import com.microsoft.playwright.Page;
 
 public class ADLoginPage {
 
-    private final Page page;
     public final Locator gebruikersnaamInput;
     public final Locator wachtwoordInput;
     public final Locator volgendeInput;
@@ -16,7 +15,6 @@ public class ADLoginPage {
     public final Locator verifierenInput;
 
     public ADLoginPage(Page page) {
-        this.page = page;
         this.gebruikersnaamInput = page.locator("//input[@type='email']");
         this.wachtwoordInput = page.locator("//input[@name='passwd']");
         this.volgendeInput = page.locator("//input[@value='Next']");

@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-public abstract class GzacBaseSteps {
+public class GzacBaseSteps {
 
     protected final Page page;
     private final GzacBasePage basePage;
@@ -20,24 +20,24 @@ public abstract class GzacBaseSteps {
 
     public GzacBaseSteps(Page page) {
         this.page = page;
-        this.basePage = new GzacBasePage(page);
-        this.adLoginSteps = new ADLoginSteps(page);
+        basePage = new GzacBasePage(page);
+        adLoginSteps = new ADLoginSteps(page);
     }
 
     public void setDossierNummer() {
-        this.dossierNummer = MathUtils.generateRandomNumber();
+        dossierNummer = MathUtils.generateRandomNumber();
+    }
+
+    public void klik_op_knop(String text){
+        basePage.clickButton(text);
     }
 
     public void wachtOpLadenMenu() {
-        basePage.dashboardText.waitFor();
+        basePage.menu.menuItemDashboard.waitFor();
     }
 
     public boolean wordtTabbladGetoond(String TabbladText) {
         return page.locator("//valtimo-widget//li[contains(.,'" + TabbladText + "')]").isVisible();
-    }
-
-    public void tegelOverzichtOpenen() {
-        basePage.tegelOverzichtButton.click();
     }
 
     public Locator nieuwAangemaakteDossierNummer(String dossierNummer) {
@@ -65,6 +65,10 @@ public abstract class GzacBaseSteps {
     public void medewerker_logt_in_bij_GZAC(String url, ADUser user) {
         page.navigate(url);
         adLoginSteps.login_met_ad_user(user);
-        this.wachtOpLadenMenu();
+        wachtOpLadenMenu();
+    }
+
+    public Locator menuItem(String text){
+        return basePage.menu.getMenuItem(text);
     }
 }

@@ -18,4 +18,8 @@ public class PODashboardSteps extends GzacBaseSteps {
     public void navigate() {
         page.navigate("/");
     }
+
+    public void tegelOverzichtOpenen() {
+        dashboardPage.tegelOverzichtButton.click();
+    }
 }
