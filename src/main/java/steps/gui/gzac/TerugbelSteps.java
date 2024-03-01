@@ -19,8 +19,7 @@ public class TerugbelSteps extends GzacBaseSteps {
     }
 
     public void maak_nieuw_terugbel_dossier_aan() {
-        terugbelPage.buttonAanmakenNieuwDossier.waitFor();
-        terugbelPage.buttonAanmakenNieuwDossier.click();
+        terugbelPage.clickButton("nieuw dossier");
         terugbelPage.textfieldOnderwerp.waitFor();
         terugbelPage.textfieldOnderwerp.fill(this.dossierNummer + " - onderwerp");
         terugbelPage.textfieldKlantvraag.fill("Ik heb een vraag");
