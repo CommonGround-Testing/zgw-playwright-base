@@ -1,5 +1,6 @@
 package steps.gui.gzac;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pages.gzac.GzacBasePage;
 import pages.gzac.GzakMenu;
@@ -68,5 +69,9 @@ public abstract class GzacBaseSteps {
         page.navigate(url);
         adLoginSteps.login_met_ad_user(user);
         wachtOpLadenMenu();
+    }
+
+    public Locator paginaTitel(){
+        return basePage.pageTitle;
     }
 }
