@@ -32,7 +32,6 @@ public class UwSituatieSteps extends OpenFormsSteps {
     }
 
     public void burger_heeft_uitkering_is(boolean keuze) {
-
         this.kies_uitkering(keuze);
     }
 
@@ -45,6 +44,6 @@ public class UwSituatieSteps extends OpenFormsSteps {
         this.controleer_actieve_formulierstap_is(FormStepNames.UW_SITUATIE);
         this.kies_uitkering(false);
         this.kies_schuldhulpverlening(false);
-        ga_naar_volgende_formulierstap();
+        click_volgende_button();
     }
 }

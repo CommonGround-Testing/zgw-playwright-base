@@ -80,7 +80,7 @@ public class UwInkomstenSteps extends OpenFormsSteps {
 
     public void rond_stap_uwinkomsten_overzicht_af() {
         this.controleer_actieve_formulierstap_is(FormStepNames.UW_INKOMSTEN_OVERZICHT);
-        this.ga_naar_volgende_formulierstap();
+        this.click_volgende_button();
     }
 
     public void kies_nee_voor_alle_vragen_geen_partner() {
@@ -108,6 +108,6 @@ public class UwInkomstenSteps extends OpenFormsSteps {
 
     public void rond_stap_uwinkomsten_af() {
         this.controleer_actieve_formulierstap_is(FormStepNames.UW_INKOMSTEN);
-        this.ga_naar_volgende_formulierstap();
+        this.click_volgende_button();
     }
 }

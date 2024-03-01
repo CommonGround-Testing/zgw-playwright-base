@@ -82,6 +82,6 @@ public class GezinssamenstellingSteps extends OpenFormsSteps {
 
     public void rond_stap_gezinssamenstelling_af() {
 
-        this.ga_naar_volgende_formulierstap();
+        this.click_volgende_button();
     }
 }
