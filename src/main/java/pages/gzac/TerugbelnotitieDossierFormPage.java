@@ -7,9 +7,8 @@ import utils.FormioType;
 
 import static utils.DossierFormLocatorHelper.getLocator;
 
-public class TerugbelnotitieDossierFormPage {
+public class TerugbelnotitieDossierFormPage extends GeneriekeZaakDossierPage {
 
-    public final Locator buttonAanmakenNieuwDossier;
     public final Locator textfieldOnderwerp;
     public final Locator textfieldKlantvraag;
     public final Locator textfieldVoorletters;
@@ -26,11 +25,7 @@ public class TerugbelnotitieDossierFormPage {
     public final Locator dossierOverzichtHeaderInhoud;
 
     public TerugbelnotitieDossierFormPage(Page page) {
-        this.buttonAanmakenNieuwDossier = page.getByLabel("Table action bar")
-                .getByRole(AriaRole.BUTTON,
-                        new Locator
-                                .GetByRoleOptions()
-                                .setName("Creëer Nieuw Dossier"));
+        super(page);
         this.textfieldOnderwerp = getLocator(FormioType.TEXTINPUT, "Onderwerp");
         this.textfieldKlantvraag = getLocator(FormioType.TEXTINPUT, "Vraag van de klant");
         this.textfieldVoorletters = getLocator(FormioType.TEXTINPUT, "Voorletters");
