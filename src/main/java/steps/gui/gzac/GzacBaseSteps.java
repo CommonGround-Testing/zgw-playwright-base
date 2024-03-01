@@ -43,8 +43,8 @@ public abstract class GzacBaseSteps {
         basePage.tegelOverzichtButton.click();
     }
 
-    public boolean ikZieDirectMijnNieuwAangemaakteDossier(String dossierNummer) {
-        return page.locator("//valtimo-form-io//dt[contains(., '" + dossierNummer + "')]").isVisible();
+    public Locator nieuwAangemaakteDossierNummer(String dossierNummer) {
+        return page.locator("//valtimo-form-io//dt[contains(., '" + dossierNummer + "')]");
     }
 
     public void medewerker_ziet_tegels_met_kolommen(List<String> kolommen) {

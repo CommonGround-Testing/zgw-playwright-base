@@ -22,7 +22,7 @@ public class TestWatcherExtension implements TestWatcher {
     public void testFailed(ExtensionContext context, Throwable cause) {
         ZGWTestRunner.getContext().tracing().stop(new Tracing.StopOptions()
                 .setPath(
-                        Paths.get("./build/test-results/" +
+                        Paths.get("./target/site/" +
                                 context.getTestMethod() +
                                 "trace.zip")));
         ZGWTestRunner.getContext().close();
