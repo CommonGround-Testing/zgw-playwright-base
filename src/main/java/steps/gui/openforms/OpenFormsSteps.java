@@ -83,22 +83,10 @@ public abstract class OpenFormsSteps {
         assertThat(page.locator("//div[@class='form-text error']")).isHidden();
     }
 
-    public void verzend_formulierstap() {
-        assertThat(openFormsPage.buttonVolgendeFormulierStap).isDisabled();
-        assertThat(openFormsPage.buttonVolgendeFormulierStap).isEnabled();
+    public void click_volgende_button() {
+        var resp = page.waitForResponse(res -> res.url().contains("/_check_logic"), () -> {
+        });
         openFormsPage.buttonVolgendeFormulierStap.click();
-    }
-
-    public void ga_naar_volgende_formulierstap() {
-        click_volgende_button_and_wait(true);
-    }
-
-    public void click_volgende_button_and_wait(boolean waitForSpinner) {
-        openFormsPage.buttonVolgendeFormulierStap.click();
-        if (waitForSpinner) {
-            assertThat(openFormsPage.loader).isVisible();
-            assertThat(openFormsPage.loader).isHidden(new LocatorAssertions.IsHiddenOptions().setTimeout(30000));
-        }
     }
 
     public void tekstveld_bevat_prefill_gegevens

@@ -22,11 +22,11 @@ public class BezitEnSchuldenSteps extends OpenFormsSteps {
         bezitEnSchuldenPage.checkboxContanten.click();
         bezitEnSchuldenPage.textfieldContantGeld.fill("100");
         bezitEnSchuldenPage.textfieldContantGeld.press("Tab");
-        ga_naar_volgende_formulierstap();
+        click_volgende_button();
     }
 
     public void rond_stap_bezit_en_schulden_overzicht_af() {
         assertThat(openFormsPage.linkActiveStep).hasText(FormStepNames.BEZIT_EN_SCHULDEN_OVERZICHT);
-        this.ga_naar_volgende_formulierstap();
+        click_volgende_button();
     }
 }

@@ -74,11 +74,11 @@ public class InkomstenPartnerSteps extends OpenFormsSteps {
 
     public void rond_stap_inkomsten_partner_af() {
         this.controleer_actieve_formulierstap_is(FormStepNames.INKOMSTEN_PARTNER);
-        ga_naar_volgende_formulierstap();
+        click_volgende_button();
     }
 
     public void rond_stap_inkomsten_partner_overzicht_af() {
         this.controleer_actieve_formulierstap_is(FormStepNames.INKOMSTEN_PARTNER_OVERZICHT);
-        ga_naar_volgende_formulierstap();
+        click_volgende_button();
     }
 }

@@ -83,7 +83,7 @@ public class UwGegevensSteps extends OpenFormsSteps {
 
         uwGegevensPage.textfieldEmailAdres.fill(user.getEmail());
         uwGegevensPage.textfieldEmailAdres.press("Tab");
-        ga_naar_volgende_formulierstap();
+        click_volgende_button();
     }
 
     public void controleer_prefill_gegevens_zijn_zichtbaar(ZGWDigidUser user) {
