@@ -24,7 +24,6 @@ public class TerugbelSteps extends GzacBaseSteps {
 
     public void maak_nieuw_terugbel_dossier_aan() {
         basePage.clickButton("nieuw dossier");
-        dossierPage.dossierTitel.waitFor();
         dossierPage.fillTextInputField("Onderwerp", MathUtils.generateRandomNumber() + " - onderwerp", false);
         dossierPage.fillTextAreaField("Vraag van de klant", "Ik heb een vraag", false);
         dossierPage.fillTextInputField("Voorletters", "T.E.S.T", false);
