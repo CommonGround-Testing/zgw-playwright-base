@@ -39,26 +39,58 @@ public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
         basePage.clickButton(text);
     }
 
-    public void vul_waarde_in(String veld, Integer number) {
+    /**
+     *
+     * Note that this only works on numeric fields
+     *
+     * @param veld - text of the field you want to enter the text for
+     * @param number - number you want to enter into the field
+     */
+    public void vul_nummer_in(String veld, int number) {
         zaakDossierPage.fillNumericInputField(veld, number);
     }
-    public void vul_waarde_in(String veld, String text) {
-        zaakDossierPage.fillTextInputField(veld, text, false);
+
+    /**
+     *
+     * Note that this only works on input and textarea fields
+     *
+     * @param veld - text of the field you want to enter the text for
+     * @param text - text you want to enter into the field
+     */
+    public void vul_tekst_in(String veld, String text) {
+        try{
+            zaakDossierPage.fillTextInputField(veld, text, false);
+        } catch (Exception ex){
+            zaakDossierPage.fillTextAreaField(veld, text, false);
+        }
     }
-    public void vul_waarde_in(String veld, String text, boolean exact) {
+
+    public void vul_datum_in(String veld, String datum){
+        zaakDossierPage.getDateField(veld, false).click();
+        zaakDossierPage.getDateField(veld, false).fill(datum);
+    }
+
+    public void selecteer_datum(String veld){
+        zaakDossierPage.getDateField(veld, false).click();
+    }
+    public void vul_tekst_in(String veld, String text, boolean exact) {
         zaakDossierPage.fillTextInputField(veld, text, exact);
     }
     public void selecteer_checkbox(String veld) {
         zaakDossierPage.checkCheckbox(veld, false);
     }
+    public void selecteer_waarde_in_dropdown(String veld, String text) {
+        zaakDossierPage.getDropdownField(veld).click();
+        zaakDossierPage.getDropdownOption(veld, text).click();
+    }
     public void selecteer_optie(String veld, String optie) {
         zaakDossierPage.selectRadioOption(veld, optie);
     }
     public Locator haal_veld_op(String veld) {
-        return zaakDossierPage.getTextInputField(veld, false);
+        return zaakDossierPage.getInputField(veld, false);
     }
     public Locator haal_veld_op(String veld, boolean exact) {
-        return zaakDossierPage.getTextInputField(veld, exact);
+        return zaakDossierPage.getInputField(veld, exact);
     }
     public Locator paginaTitel(){
         return zaakDossierPage.pageTitle;
