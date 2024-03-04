@@ -3,21 +3,18 @@ package steps.gui.gzac;
 import com.microsoft.playwright.Page;
 import pages.gzac.GeneriekeZaakDossierPage;
 import pages.gzac.GzacBasePage;
-import pages.gzac.TerugbelnotitieDossierFormPage;
 import utils.MathUtils;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class TerugbelSteps extends GzacBaseSteps {
 
-    private final TerugbelnotitieDossierFormPage terugbelPage;
     private final GeneriekeZaakDossierPage dossierPage;
     private final GzacBasePage basePage;
 
     public TerugbelSteps(Page page) {
         super(page);
         basePage = new GzacBasePage(page);
-        terugbelPage = new TerugbelnotitieDossierFormPage(page);
         dossierPage = new GeneriekeZaakDossierPage(page);
     }
 
@@ -45,9 +42,5 @@ public class TerugbelSteps extends GzacBaseSteps {
         dossierPage.getDropdownOption("Product", "14070 Senioren");
         basePage.clickButton("Verzenden");
         assertThat(dossierPage.pageTitle).containsText("Dossier details");
-    }
-
-    public void ik_zie_dossier_overzicht_van_nieuwe_terugbelnotitie() {
-        assertThat(terugbelPage.dossierOverzichtHeaderInhoud).isVisible();
     }
 }
