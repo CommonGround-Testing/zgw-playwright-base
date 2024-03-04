@@ -16,7 +16,7 @@ public class GzacBaseSteps {
     protected final Page page;
     private final GzacBasePage basePage;
     private final ADLoginSteps adLoginSteps;
-    protected int dossierNummer;
+    public int dossierNummer;
 
     public GzacBaseSteps(Page page) {
         this.page = page;
