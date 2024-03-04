@@ -58,8 +58,8 @@ public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
      * @param text - text you want to enter into the field
      */
     public void vul_tekst_in(String veld, String text) {
-        zaakDossierPage.getInputField(veld, false).waitFor();
         try{
+            zaakDossierPage.getInputField(veld, false).waitFor(new Locator.WaitForOptions().setTimeout(1000));
             zaakDossierPage.fillTextInputField(veld, text, false);
         } catch (Exception ex){
             zaakDossierPage.fillTextAreaField(veld, text, false);
