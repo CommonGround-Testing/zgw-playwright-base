@@ -24,4 +24,8 @@ public class GzakMenu {
     public Locator getMenuItem(String text){
         return page.locator(sideNavPath + xpath.replace("${text}", text));
     }
+
+    public void clickMenuItem(String text){
+        getMenuItem(text).click();
+    }
 }
