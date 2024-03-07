@@ -2,6 +2,7 @@ package steps.gui.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import pages.gzac.GzacBasePage;
 import steps.gui.login.ADLoginSteps;
 import users.ADUser;
@@ -71,4 +72,23 @@ public class GzacBaseSteps {
     public Locator menuItem(String text){
         return basePage.menu.getMenuItem(text);
     }
+
+    /**
+     * Verifieer of de tekst op het scherm staat
+
+     * @param text
+     */
+    public void check_of_text_zichtbaar_is(String text){
+        assertThat(page.getByText(text)).isVisible();
+    }
+
+    /**
+     * Klik op een link
+
+     * @param text
+     */
+    public void klik_op_link(String text){
+        page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(text));
+    }
+
 }

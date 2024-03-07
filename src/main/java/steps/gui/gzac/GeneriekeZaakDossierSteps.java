@@ -59,7 +59,7 @@ public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
      */
     public void vul_tekst_in(String veld, String text) {
         try{
-            zaakDossierPage.getInputField(veld, false).waitFor(new Locator.WaitForOptions().setTimeout(1000));
+            zaakDossierPage.getInputField(veld, false).waitFor(new Locator.WaitForOptions().setTimeout(500));
             zaakDossierPage.fillTextInputField(veld, text, false);
         } catch (Exception ex){
             zaakDossierPage.fillTextAreaField(veld, text, false);

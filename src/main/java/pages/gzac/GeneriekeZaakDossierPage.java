@@ -83,7 +83,7 @@ public class GeneriekeZaakDossierPage  {
         } else {
             fieldLocator = containsTextLocator.replace("${text}", field);
         }
-        var fullXPath = dossierModalPath + fieldLocator + parentPath + inputFieldPath;
+        var fullXPath = dossierModalPath + fieldLocator + parentPath + inputFieldPath + notHidden;
         return page.locator(fullXPath);
     }
 
