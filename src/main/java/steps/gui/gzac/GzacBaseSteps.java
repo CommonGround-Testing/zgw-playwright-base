@@ -76,16 +76,16 @@ public class GzacBaseSteps {
     /**
      * Verifieer of de tekst op het scherm staat
 
-     * @param text
+     * @param text die zichtbaar zou moeten zijn
      */
-    public void check_of_text_zichtbaar_is(String text){
+    public void check_of_tekst_zichtbaar_is(String text){
         assertThat(page.getByText(text)).isVisible();
     }
 
     /**
-     * Klik op een link
+     * Klik op een link. Dit kan een deel van de tekst zijn of de gehele tekst
 
-     * @param text
+     * @param text van de link
      */
     public void klik_op_link(String text){
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(text));
