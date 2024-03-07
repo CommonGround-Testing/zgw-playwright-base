@@ -3,8 +3,6 @@ package pages.gzac;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-
 public class GeneriekeZaakDossierPage  {
     private final Page page;
     public final Locator pageTitle;
@@ -83,7 +81,7 @@ public class GeneriekeZaakDossierPage  {
         } else {
             fieldLocator = containsTextLocator.replace("${text}", field);
         }
-        var fullXPath = dossierModalPath + fieldLocator + parentPath + inputFieldPath;
+        var fullXPath = dossierModalPath + fieldLocator + parentPath + inputFieldPath + notHidden;
         return page.locator(fullXPath);
     }
 
