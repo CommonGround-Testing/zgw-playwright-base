@@ -35,10 +35,6 @@ public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
         page.navigate("/dossiers/generieke-zaak");
     }
 
-    public void klik_knop(String text){
-        basePage.clickButton(text);
-    }
-
     /**
      *
      * Note that this only works on numeric fields

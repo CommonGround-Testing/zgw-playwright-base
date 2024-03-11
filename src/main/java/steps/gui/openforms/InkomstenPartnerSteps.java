@@ -1,84 +1,32 @@
 package steps.gui.openforms;
 
 import com.microsoft.playwright.Page;
-import pages.openforms.InkomstenPartnerPage;
-import utils.formvalues.FormStepNames;
 
-public class InkomstenPartnerSteps extends OpenFormsSteps {
+public class InkomstenPartnerSteps extends UwInkomstenSteps {
 
-    private final InkomstenPartnerPage inkomstenPartnerPage;
+    public static String TEKST_HEEFT_PARTNER_WERKGEVER = "Heeft uw partner een werkgever?";
+    public static String TEKST_HEEFT_PARTNER_UITKERING = "Heeft uw partner een van deze uitkeringen? Kruis al de uitkeringen aan.";
+    public static String TEKST_KRIJGT_PARTNER_PENSIOEN = "Krijgt uw partner pensioen?";
+    public static String TEKST_KRIJGT_PARTNER_KINDER_ALIMENTATIE = "Krijgt uw partner alimentatie voor zijn of haar kinderen? (kinderalimentatie)";
+    public static String TEKST_PARTNER_INKOMEN_ONDERHUUR = "Heeft uw partner inkomen uit onderhuur?";
+    public static String TEKST_IS_PARTNER_ONDERNEMER = "Is uw partner ondernemer?";
 
     public InkomstenPartnerSteps(Page page) {
         super(page);
-        this.inkomstenPartnerPage = new InkomstenPartnerPage(page);
-    }
-
-    public void kies_heeft_werkgever(boolean keuze) {
-
-        if (keuze) {
-            inkomstenPartnerPage.radiobuttonHeeftWerkgeverJa.click();
-        } else {
-            inkomstenPartnerPage.radiobuttonHeeftWerkgeverNee.click();
-        }
-    }
-
-    public void kies_geen_uitkering() {
-
-        inkomstenPartnerPage.checkboxGeenUitkering.click();
-    }
-
-    public void kies_krijgt_pensioen(boolean keuze) {
-
-        if (keuze) {
-            inkomstenPartnerPage.radiobuttonKrijgtPensioenJa.click();
-        } else {
-            inkomstenPartnerPage.radiobuttonKrijgtPensioenNee.click();
-        }
-    }
-
-    public void kies_krijgt_kinderalimentatie(boolean keuze) {
-
-        if (keuze) {
-            inkomstenPartnerPage.radiobuttonKrijgtKinderalimentatieJa.click();
-        } else {
-            inkomstenPartnerPage.radiobuttonKrijgtKinderalimentatieNee.click();
-        }
-    }
-
-    public void kies_heeft_inkomen_uit_onderhuur(boolean keuze) {
-
-        if (keuze) {
-            inkomstenPartnerPage.radiobuttonHeeftInkomenUitOnderhuurJa.click();
-        } else {
-            inkomstenPartnerPage.radiobuttonHeeftInkomenUitOnderhuurNee.click();
-        }
-    }
-
-    public void kies_is_ondernemer(boolean keuze) {
-
-        if (keuze) {
-            inkomstenPartnerPage.radiobuttonIsOndernemerJa.click();
-        } else {
-            inkomstenPartnerPage.radiobuttonIsOndernemerNee.click();
-        }
     }
 
     public void kies_nee_voor_alle_vragen() {
-        this.kies_heeft_werkgever(false);
-        this.kies_geen_uitkering();
-        this.kies_krijgt_pensioen(false);
-        this.kies_krijgt_kinderalimentatie(false);
-        this.kies_heeft_inkomen_uit_onderhuur(false);
-        this.kies_is_ondernemer(false);
+        selecteer_optie(TEKST_HEEFT_PARTNER_WERKGEVER, "Nee");
+        selecteer_optie(TEKST_HEEFT_PARTNER_UITKERING, "Nee");
+        selecteer_optie(TEKST_KRIJGT_PARTNER_PENSIOEN, "Nee");
+        if(get_radiogroep(TEKST_KRIJGT_PARTNER_KINDER_ALIMENTATIE).isVisible()){
+            selecteer_optie(TEKST_KRIJGT_PARTNER_KINDER_ALIMENTATIE, "Nee");
+        }
+        if(get_radiogroep(TEKST_KRIJGT_U_KINDER_ALIMENTATIE).isVisible()) {
+            selecteer_optie(TEKST_KRIJGT_U_KINDER_ALIMENTATIE, "Nee");
+        }
+        selecteer_optie(TEKST_PARTNER_INKOMEN_ONDERHUUR, "Nee");
+        selecteer_optie(TEKST_IS_PARTNER_ONDERNEMER, "Nee");
     }
 
-    public void rond_stap_inkomsten_partner_af() {
-        this.controleer_actieve_formulierstap_is(FormStepNames.INKOMSTEN_PARTNER);
-        click_volgende_button();
-    }
-
-    public void rond_stap_inkomsten_partner_overzicht_af() {
-        this.controleer_actieve_formulierstap_is(FormStepNames.INKOMSTEN_PARTNER_OVERZICHT);
-        click_volgende_button();
-    }
 }

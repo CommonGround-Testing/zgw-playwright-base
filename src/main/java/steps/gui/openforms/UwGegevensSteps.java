@@ -1,24 +1,16 @@
 package steps.gui.openforms;
 
 import com.microsoft.playwright.Page;
-import pages.openforms.UwGegevensPage;
+import pages.openforms.GeneriekeOpenformsPage;
 import users.ZGWDigidUser;
-import utils.formvalues.FormStepNames;
-
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class UwGegevensSteps extends OpenFormsSteps {
 
-    private final UwGegevensPage uwGegevensPage;
+    protected final GeneriekeOpenformsPage openformsPage;
 
     public UwGegevensSteps(Page page) {
         super(page);
-        this.uwGegevensPage = new UwGegevensPage(page);
-    }
-
-    public void link_persoonsgegevens_aanpassen_is_zichtbaar() {
-
-        assertThat(uwGegevensPage.linkPersoonsgegevensAanpassen).isVisible();
+        openformsPage = new GeneriekeOpenformsPage(page);
     }
 
     public void voorletters_zijn(String verwachteVoorletters) {
@@ -67,39 +59,37 @@ public class UwGegevensSteps extends OpenFormsSteps {
         tekstveld_bevat_prefill_gegevens("data[plaatsPrefill]", verwachteWoonplaats);
     }
 
-    public void validatie_email_toont_foutmelding(String emailAdres, String verwachteTekst) {
-        validatie_toon_foutmelding(uwGegevensPage.textfieldEmailAdres,
-                emailAdres,
-                verwachteTekst);
-    }
+    /**
+     * Methode om makkelijk foutmeldingen mee te testen
+     *
+     * @param veld dat gechecked moet worden
+     * @param tekst wat ingevuld moet worden
+     * @param verwachteMelding verwachte foutmelding
+     */
 
-    public void validatie_telnr_toont_foutmelding(String telnr, String verwachteTekst) {
-        validatie_toon_foutmelding(uwGegevensPage.textfieldTelefoonnummer,
-                telnr,
-                verwachteTekst);
-    }
-
-    public void rond_formulierstap_af(ZGWDigidUser user) {
-
-        uwGegevensPage.textfieldEmailAdres.fill(user.getEmail());
-        uwGegevensPage.textfieldEmailAdres.press("Tab");
-        click_volgende_button();
-    }
-
-    public void controleer_prefill_gegevens_zijn_zichtbaar(ZGWDigidUser user) {
-        this.voorletters_zijn(user.getInitials());
-        this.voornaam_is(user.getName());
-        this.achternaam_is(user.getLastName());
-        this.bsn_is(user.getBsn());
-        this.postcode_is(user.getAddressZipcode());
-        this.huisnummer_is(user.getAddressHouseNumber());
-        this.huisletter_is(user.getAddressHouseLetter());
-        this.straatnaam_is(user.getAddressStreet());
-        this.woonplaats_is(user.getAddressCity());
+    public void test_foutmelding_voor_veld(String veld, String tekst, String verwachteMelding) {
+        var inputField = openformsPage.getInputField(veld, false);
+        openformsPage.fillTextInputField(veld, tekst, false);
+        wacht_op_volgende_knop_response();
+        validatie_toon_foutmelding(inputField,
+                tekst,
+                verwachteMelding);
     }
 
     public void rond_stap_uwgegevens_af(ZGWDigidUser user) {
-        this.controleer_actieve_formulierstap_is(FormStepNames.UW_GEGEVENS);
-        this.rond_formulierstap_af(user);
+        openformsPage.fillTextInputField("E-mailadres", user.getEmail(), false);
+        klik_volgende_knop();
+    }
+
+    public void controleer_prefill_gegevens_zijn_zichtbaar(ZGWDigidUser user) {
+        voorletters_zijn(user.getInitials());
+        voornaam_is(user.getName());
+        achternaam_is(user.getLastName());
+        bsn_is(user.getBsn());
+        postcode_is(user.getAddressZipcode());
+        huisnummer_is(user.getAddressHouseNumber());
+        huisletter_is(user.getAddressHouseLetter());
+        straatnaam_is(user.getAddressStreet());
+        woonplaats_is(user.getAddressCity());
     }
 }

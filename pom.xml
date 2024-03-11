@@ -6,7 +6,7 @@
 
     <groupId>io.github.commonground-testing</groupId>
     <artifactId>zgw-playwright-base</artifactId>
-    <version>0.0.15</version>
+    <version>0.0.17</version>
     <packaging>jar</packaging>
 
     <name>ZGW Playwright Testautomation Base Library</name>
@@ -26,6 +26,11 @@
             <id>frederikcampagne</id>
             <name>Frederik Campagne</name>
             <email>frederik.campagne@denhaag.nl</email>
+        </developer>
+        <developer>
+            <id>erwinbooij</id>
+            <name>Erwin Booij</name>
+            <email>erwin.booij@denhaag.nl</email>
         </developer>
     </developers>
 
@@ -149,7 +154,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <keyname>0xDF64C182</keyname>
+                    <keyname>0x9E76258E</keyname>
                     <passphraseServerId>ossrh</passphraseServerId>
                 </configuration>
             </plugin>
