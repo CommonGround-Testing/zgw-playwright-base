@@ -11,11 +11,9 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class TerugbelSteps extends GzacBaseSteps {
 
     private final GeneriekeZaakDossierPage dossierPage;
-    private final GzacBasePage basePage;
 
     public TerugbelSteps(Page page) {
         super(page);
-        basePage = new GzacBasePage(page);
         dossierPage = new GeneriekeZaakDossierPage(page);
     }
 

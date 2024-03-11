@@ -82,10 +82,9 @@ public class GeneriekeSteps {
      * Haal de eerste knop op met een bepaalde tekst
      *
      * @param text van de knop
-     * @return
+     * @return Locator
      */
     public Locator get_knop(String text) {
-        var buttons = page.getByRole(AriaRole.BUTTON);
         return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(text)).first();
     }
 

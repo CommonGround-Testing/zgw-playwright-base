@@ -10,11 +10,9 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class GeneriekeZaakDossierSteps extends GzacBaseSteps {
 
     private final GeneriekeZaakDossierPage zaakDossierPage;
-    private final GzacBasePage basePage;
 
     public GeneriekeZaakDossierSteps(Page page) {
         super(page);
-        basePage = new GzacBasePage(page);
         zaakDossierPage = new GeneriekeZaakDossierPage(page);
     }
 

@@ -2,7 +2,6 @@ package steps.gui.openforms;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.assertions.LocatorAssertions;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import pages.openforms.GeneriekeOpenformsPage;
 import pages.openforms.OpenFormsPage;
@@ -82,7 +81,7 @@ public class OpenFormsSteps extends GeneriekeSteps {
                 .isVisible();
     }
 
-    public void validatie_toon_foutmelding(Locator lo, String tekst, String verwachteTekst) {
+    public void validatie_toon_foutmelding(Locator lo, String verwachteTekst) {
         lo.blur();
         lo.waitFor(new Locator.WaitForOptions().setTimeout(1000));
         page.keyboard().press("Enter");
