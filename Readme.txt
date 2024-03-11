@@ -1,2 +1,2 @@
-#Deploy naar Maven Central
+Deploy naar Maven Central
 mvn clean deploy -DskipTests
