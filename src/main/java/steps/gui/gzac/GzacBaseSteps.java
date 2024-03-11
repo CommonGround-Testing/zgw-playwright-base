@@ -2,8 +2,8 @@ package steps.gui.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.AriaRole;
 import pages.gzac.GzacBasePage;
+import steps.gui.GeneriekeSteps;
 import steps.gui.login.ADLoginSteps;
 import users.ADUser;
 import utils.MathUtils;
@@ -12,26 +12,20 @@ import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-public class GzacBaseSteps {
+public class GzacBaseSteps extends GeneriekeSteps {
 
-    protected final Page page;
     private final GzacBasePage basePage;
     private final ADLoginSteps adLoginSteps;
     public int dossierNummer;
-    private Locator byText;
 
     public GzacBaseSteps(Page page) {
-        this.page = page;
+        super(page);
         basePage = new GzacBasePage(page);
         adLoginSteps = new ADLoginSteps(page);
     }
 
     public void setDossierNummer() {
         dossierNummer = MathUtils.generateRandomNumber();
-    }
-
-    public void klik_op_knop(String text){
-        basePage.clickButton(text);
     }
 
     public void wachtOpLadenMenu() {
@@ -73,35 +67,4 @@ public class GzacBaseSteps {
     public Locator menuItem(String text){
         return basePage.menu.getMenuItem(text);
     }
-
-    /**
-     * Verifieer of de tekst op het scherm staat
-
-     * @param text die zichtbaar zou moeten zijn
-     */
-    public void check_of_tekst_zichtbaar_is(String text){
-        assertThat(page.getByText(text)).isVisible();
-    }
-
-    /**
-     * Klik op een link.
-
-     * @param text van de link of een deel daarvan
-     */
-    public void klik_link(String text){
-        page.getByRole(AriaRole.LINK).getByText(text).click();
-    }
-    public Locator get_link(String text){
-        return page.getByRole(AriaRole.LINK).getByText(text);
-    }
-
-    /**
-     * Klik op een tab.
-
-     * @param text van de tab of een deel daarvan
-     */
-    public void klik_tab(String text){
-        page.getByRole(AriaRole.TAB).getByText(text).click();
-    }
-    public Locator get_tab(String text) {return byText;}
 }
