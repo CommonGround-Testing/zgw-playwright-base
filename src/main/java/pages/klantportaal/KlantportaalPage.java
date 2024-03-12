@@ -30,7 +30,14 @@ public class KlantportaalPage {
         this.gebruikersMenuBurgerButton = page.locator("//button[contains(.,'Welkom Sierra')]");
         this.gebruikersMenuOndernemerButton = page.locator("//button[contains(.,'Welkom')]");
         this.menu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Welkom"));
-        this.languageButton = page.locator("//div[contains(@class,'denhaag-header__actions-action-language-switcher')]");
+        this.languageButton = page.locator("//div[contains(@class,'denhaag-header__actions-action-language-switcher')]/button");
         this.disabledLanguageOption = page.locator("//ul/li/button[not(contains(@class, 'active'))]");
+    }
+
+    public Locator getMenuButtonByText(boolean isNL) {
+        final var buttonText = isNL
+                ? "Welkom"
+                : "Welcome";
+        return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
     }
 }
