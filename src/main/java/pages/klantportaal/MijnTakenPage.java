@@ -13,7 +13,7 @@ public class MijnTakenPage {
 
     public MijnTakenPage(Page page) {
         this.page = page;
-        this.takenCard = page.locator("//div[@class='denhaag-card__content']").first();
+        this.takenCard = page.locator("//div[@class='denhaag-action denhaag-action--single']").first();
         this.geenTakenVoorDeHuidigeGebruiker = page.locator("//p[text()='Er zijn geen openstaande taken.']");
         this.takenOphalenFoutmelding = page.locator("//p[contains(., 'Er is een fout opgetreden')]");
     }
