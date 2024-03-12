@@ -111,7 +111,7 @@ public abstract class KlantportaalSteps {
     public void burger_opent_taalmenu_en_verandert_taal() {
         klantportaalPage.languageButton.click();
         klantportaalPage.disabledLanguageOption.click();
-        klantportaalPage.menu.isHidden();
+        assertThat(klantportaalPage.menu).isHidden();
     }
 
     public void ingelogde_gebruiker_is(String naam) {
