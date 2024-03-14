@@ -2,6 +2,7 @@ package steps.gui.klantportaal;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import pages.klantportaal.KlantportaalPage;
 import steps.gui.login.DigidLoginSteps;
@@ -25,8 +26,8 @@ public abstract class KlantportaalSteps {
         this.eherkenningSteps = new EherkenningSteps(page);
     }
 
-    public void navigate(String url) {
-        page.navigate(url);
+    public Response navigate(String url) {
+        return page.navigate(url);
     }
 
     public void login_als_burger_on_page(ZGWUser user, String relativeUrl) {
