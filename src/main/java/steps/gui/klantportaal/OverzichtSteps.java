@@ -11,7 +11,7 @@ public class OverzichtSteps extends KlantportaalSteps {
 
     public OverzichtSteps(Page page) {
         super(page);
-        this.overzichtPage = new OverzichtPage(page);
+        overzichtPage = new OverzichtPage(page);
 
     }
 

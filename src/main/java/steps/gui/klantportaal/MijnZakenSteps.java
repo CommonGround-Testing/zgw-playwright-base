@@ -16,7 +16,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
 
     public MijnZakenSteps(Page page) {
         super(page);
-        this.mijnZakenPage = new MijnZakenPage(page);
+        mijnZakenPage = new MijnZakenPage(page);
     }
 
     public void navigate() {
@@ -44,10 +44,9 @@ public class MijnZakenSteps extends KlantportaalSteps {
 
     public List<String> haal_alle_zaakdetailheaders(String expectedFields) {
         mijnZakenPage.zaakStatusTimeline.waitFor();
-        final List<String> listTextFields = mijnZakenPage.overviewZaakDetailHeaders.stream()
+        return mijnZakenPage.overviewZaakDetailHeaders.stream()
                 .map(Locator::textContent)
                 .collect(Collectors.toList());
-        return listTextFields;
     }
 
     public void controleer_dat_zaakstatus_timeline_zichtbaar_is() {
@@ -66,7 +65,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
     public void de_zaakdetails_worden_getoond() {
         final String verwachteVelden = "Status, Details, Documenten";
         final List<String> listTextFields = this.haal_alle_zaakdetailheaders(verwachteVelden);
-        listTextFields.stream().forEach(text -> Assertions.assertTrue(verwachteVelden.contains(text)));
+        listTextFields.forEach(text -> Assertions.assertTrue(verwachteVelden.contains(text)));
         assertThat(mijnZakenPage.aanvraagdatumLabel).isVisible();
         assertThat(mijnZakenPage.zaaknummer).isVisible();
     }
