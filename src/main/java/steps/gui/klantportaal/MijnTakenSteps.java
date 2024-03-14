@@ -11,7 +11,7 @@ public class MijnTakenSteps extends KlantportaalSteps {
 
     public MijnTakenSteps(Page page) {
         super(page);
-        this.mijnTakenPage = new MijnTakenPage(page);
+        mijnTakenPage = new MijnTakenPage(page);
     }
 
     public void taken_ophalen_foutmelding_is_zichtbaar() {
