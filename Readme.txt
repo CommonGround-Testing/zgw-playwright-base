@@ -5,4 +5,4 @@ mvn clean deploy -DskipTests
 
 Check the following:
 1 - the pom.xml has the correct version number for the library (1 higher than the latest one as this will become the new one)
-2 - keep your pgp password at hand because you need it during the deploy
+2 - keep your gpg password at hand because you need it during the deploy
