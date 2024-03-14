@@ -2,7 +2,6 @@ package steps.gui.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import pages.gzac.GeneriekeZaakDossierPage;
 import pages.gzac.GzacBasePage;
 import steps.gui.GeneriekeSteps;
 import steps.gui.login.ADLoginSteps;
@@ -18,13 +17,11 @@ public class GzacBaseSteps extends GeneriekeSteps {
     private final GzacBasePage basePage;
     private final ADLoginSteps adLoginSteps;
     public int dossierNummer;
-    private final GeneriekeZaakDossierPage zaakDossierPage;
 
     public GzacBaseSteps(Page page) {
         super(page);
         basePage = new GzacBasePage(page);
         adLoginSteps = new ADLoginSteps(page);
-        zaakDossierPage = new GeneriekeZaakDossierPage(page);
     }
 
     public void setDossierNummer() {
@@ -73,7 +70,7 @@ public class GzacBaseSteps extends GeneriekeSteps {
 
     public void maak_nieuw_dossier_aan() {
         klik_knop("nieuw dossier");
-        zaakDossierPage.dossierTitel.waitFor();
+        basePage.dossierTitel.waitFor();
     }
 
     public void open_eerste_dossier() {
@@ -96,7 +93,7 @@ public class GzacBaseSteps extends GeneriekeSteps {
      * @param number - number you want to enter into the field
      */
     public void vul_nummer_in(String veld, int number) {
-        zaakDossierPage.fillNumericInputField(veld, number);
+        basePage.fillNumericInputField(veld, number);
     }
 
     /**
@@ -108,42 +105,42 @@ public class GzacBaseSteps extends GeneriekeSteps {
      */
     public void vul_tekst_in(String veld, String text) {
         try{
-            zaakDossierPage.getInputField(veld, false).waitFor(new Locator.WaitForOptions().setTimeout(500));
-            zaakDossierPage.fillTextInputField(veld, text, false);
+            basePage.getInputField(veld, false).waitFor(new Locator.WaitForOptions().setTimeout(500));
+            basePage.fillTextInputField(veld, text, false);
         } catch (Exception ex){
-            zaakDossierPage.fillTextAreaField(veld, text, false);
+            basePage.fillTextAreaField(veld, text, false);
         }
     }
 
     public void vul_datum_in(String veld, String datum){
-        zaakDossierPage.getDateField(veld, false).click();
-        zaakDossierPage.getDateField(veld, false).fill(datum);
+        basePage.getDateField(veld, false).click();
+        basePage.getDateField(veld, false).fill(datum);
     }
 
     public void selecteer_datum(String veld){
-        zaakDossierPage.getDateField(veld, false).click();
+        basePage.getDateField(veld, false).click();
     }
     public void vul_tekst_in(String veld, String text, boolean exact) {
-        zaakDossierPage.fillTextInputField(veld, text, exact);
+        basePage.fillTextInputField(veld, text, exact);
     }
     public void selecteer_checkbox(String veld) {
-        zaakDossierPage.checkCheckbox(veld, false);
+        basePage.checkCheckbox(veld, false);
     }
     public void selecteer_waarde_in_dropdown(String veld, String text) {
-        zaakDossierPage.getDropdownField(veld).click();
-        zaakDossierPage.getDropdownOption(veld, text).click();
+        basePage.getDropdownField(veld).click();
+        basePage.getDropdownOption(veld, text).click();
     }
     public void selecteer_optie(String veld, String optie) {
-        zaakDossierPage.selectRadioOption(veld, optie);
+        basePage.selectRadioOption(veld, optie);
     }
     public Locator haal_veld_op(String veld) {
-        return zaakDossierPage.getInputField(veld, false);
+        return basePage.getInputField(veld, false);
     }
     public Locator haal_veld_op(String veld, boolean exact) {
-        return zaakDossierPage.getInputField(veld, exact);
+        return basePage.getInputField(veld, exact);
     }
     public Locator paginaTitel(){
-        return zaakDossierPage.pageTitle;
+        return basePage.pageTitle;
     }
 
 }
