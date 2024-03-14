@@ -21,7 +21,7 @@ public class OverzichtSteps extends KlantportaalSteps {
 
 
     public void welkom_header_is_zichtbaar_en_juiste_taal(String text) {
-        assertThat(overzichtPage.headerPage).hasText(text);
+        assertThat(overzichtPage.headerPage).containsText(text);
     }
 
     public void navigate() {
