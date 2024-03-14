@@ -14,7 +14,7 @@ public class MijnGegevensSteps extends KlantportaalSteps {
 
     public MijnGegevensSteps(Page page) {
         super(page);
-        this.mijnGegevensPage = new MijnGegevensPage(page);
+        mijnGegevensPage = new MijnGegevensPage(page);
     }
 
     public void zijn_nationaliteit_en_naam_zichtbaar_en_correct(ZGWDigidUser user) {
