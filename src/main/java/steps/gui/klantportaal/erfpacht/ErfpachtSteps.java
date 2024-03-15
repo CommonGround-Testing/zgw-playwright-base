@@ -9,7 +9,9 @@ public class ErfpachtSteps extends KlantportaalSteps {
 
     public final static String URL_ERFPACHT = "/erfpacht";
     protected ErfpachtPage erfpachtPage;
-    public final String ERFPACHTCONTRACTEN = "Erfpachtcontracten";
+    public final String ERFPACHT_CONTRACTEN = "Erfpachtcontracten";
+    public final String ERFPACHT_TAKEN = "Mijn taken";
+
 
     public ErfpachtSteps(Page page) {
         super(page);
@@ -20,7 +22,15 @@ public class ErfpachtSteps extends KlantportaalSteps {
         page.navigate(URL_ERFPACHT);
     }
 
-    public Locator get_erfpacht_contracten() {
-        return erfpachtPage.getContracten(ERFPACHTCONTRACTEN);
+    public Locator alle_erfpacht_contracten() {
+        return erfpachtPage.getContracten(ERFPACHT_CONTRACTEN);
+    }
+
+    public Locator alle_erfpacht_zaken(){
+        return erfpachtPage.zakenLocator;
+    }
+
+    public Locator alle_erfpacht_taken(){
+        return erfpachtPage.getTaken(ERFPACHT_TAKEN);
     }
 }
