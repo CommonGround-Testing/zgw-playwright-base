@@ -99,9 +99,8 @@ public abstract class KlantportaalSteps {
                         .setName(menuOptie)).click();
     }
 
-
-    public boolean wordt_kop_h3_getoond(String kopText) {
-        return page.locator(String.format("//h3[contains(.,'%s')]", kopText)).isVisible();
+    public Locator get_h3_header(String kopText) {
+        return page.locator(String.format("//h3[contains(.,'%s')]", kopText));
     }
 
     public void open_menu() {
