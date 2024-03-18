@@ -12,6 +12,10 @@ public class AlgDashboardSteps extends GzacBaseSteps {
         this.dashboardPage = new GzacALGDashboardPage(page);
     }
 
+    /**
+     * Open het dashboard
+     *
+     */
     public void navigate() {
         page.navigate("/");
     }

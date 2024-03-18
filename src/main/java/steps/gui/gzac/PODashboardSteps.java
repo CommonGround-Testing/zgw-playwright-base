@@ -15,10 +15,18 @@ public class PODashboardSteps extends GzacBaseSteps {
         this.adLoginSteps = new ADLoginSteps(page);
     }
 
+    /**
+     * Open het dashboard
+     *
+     */
     public void navigate() {
         page.navigate("/");
     }
 
+    /**
+     * Klik op de knop voor het tegeloverzicht
+     *
+     */
     public void tegelOverzichtOpenen() {
         dashboardPage.tegelOverzichtButton.click();
     }

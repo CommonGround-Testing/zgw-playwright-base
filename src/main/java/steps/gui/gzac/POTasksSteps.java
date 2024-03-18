@@ -12,10 +12,18 @@ public class POTasksSteps extends GzacBaseSteps {
         this.poTasksPage = new GzacPOTasksPage(page);
     }
 
+    /**
+     * Open de pagina met taken
+     *
+     */
     public void navigate() {
         page.navigate("/tasks");
     }
 
+    /**
+     * Klik op de 'alle taken' link
+     *
+     */
     public void open_lijst_alle_taken() {
         poTasksPage.linkAlleTaken.click();
     }

@@ -17,15 +17,28 @@ public class MijnGegevensSteps extends KlantportaalSteps {
         mijnGegevensPage = new MijnGegevensPage(page);
     }
 
+    /**
+     * Valideer of nationaliteit en de naam correct op het scherm staan
+     *
+     * @param user gegevens
+     */
     public void zijn_nationaliteit_en_naam_zichtbaar_en_correct(ZGWDigidUser user) {
         assertThat(mijnGegevensPage.mijnGegevensNationaliteit).hasText(user.getNationaliteit());
         assertThat(mijnGegevensPage.mijnGegevensNaam).hasText(user.getName());
     }
 
+    /**
+     * Klik op de knop met de tekst 'Telefoonnummer aanpassen
+     */
     public void selecteer_telefoonnummer_aanpassen() {
         mijnGegevensPage.telefoonNummerAanpassenKnop.click();
     }
 
+    /**
+     * Maak een random telefoonnummer aan en vul dit in
+     *
+     * @return String met ingevulde telefoonnummer
+     */
     public String vul_nieuw_telefoonnummer_in_en_sla_op() {
         this.selecteer_telefoonnummer_aanpassen();
         var nieuwTelefoonnummer = TestDataGenerator.telefoonNummer();
@@ -35,14 +48,29 @@ public class MijnGegevensSteps extends KlantportaalSteps {
         return nieuwTelefoonnummer;
     }
 
+    /**
+     * Valideer dat het telefoonnummer op het scherm staat
+     *
+     * @param telNummer
+     */
     public void is_nieuw_telefoonnummer_zichtbaar(String telNummer) {
         assertThat(mijnGegevensPage.telefoonNummer).hasText(telNummer);
     }
 
+    /**
+     * Valideer dat het email adres op het scherm staat
+     *
+     * @param email
+     */
     public void is_nieuw_emailadres_zichtbaar(String email) {
         assertThat(mijnGegevensPage.emailAdres).hasText(email);
     }
 
+    /**
+     * Maak een random email adres aan en vul dit in
+     *
+     * @return email adres
+     */
     public String vul_nieuw_emailadres_in_en_sla_op() {
         mijnGegevensPage.emailAdresAanpassenKnop.click();
         var emailAdres = TestDataGenerator.emailAdres();
@@ -52,12 +80,21 @@ public class MijnGegevensSteps extends KlantportaalSteps {
         return emailAdres;
     }
 
+    /**
+     * Valideer dat de koppen op het scherm staan
+     *
+     * @param verwachteKoppen
+     */
     public void zijn_de_volgende_gegevens_zichtbaar_in_mijn_gegevens(List<String> verwachteKoppen) {
         verwachteKoppen.forEach(kop ->
                 assertThat(page.locator(
                         String.format("//h3[contains(.,'%s')]", kop))).isVisible());
     }
 
+    /**
+     * Open de Mijn gegevens pagina
+     *
+     */
     public void navigate() {
         page.navigate(MijnGegevensPage.PAGE_URL);
     }

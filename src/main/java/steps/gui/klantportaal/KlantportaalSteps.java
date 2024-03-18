@@ -26,16 +26,34 @@ public abstract class KlantportaalSteps {
         this.eherkenningSteps = new EherkenningSteps(page);
     }
 
+    /**
+     * Open a url
+     *
+     * @param url to be opened
+     * @return
+     */
     public Response navigate(String url) {
         return page.navigate(url);
     }
 
+    /**
+     * Open a certain url and login with a user
+     *
+     * @param user
+     * @param relativeUrl can be empty string if you want to open the overview page
+     */
     public void login_als_burger_on_page(ZGWUser user, String relativeUrl) {
         this.navigate(relativeUrl);
         klantportaalPage.inloggenDigidLink.click();
         digidLoginSteps.login_als(user.getUsername(), user.getPassword());
     }
 
+    /**
+     * Open a certain url and login with a user that has digid-machtigen
+     *
+     * @param user
+     * @param relativeUrl can be empty string if you want to open the overview page
+     */
     public void log_in_op_het_klantportaal_via_digid_machtigen(ZGWUser user, String relativeUrl) {
         this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
@@ -44,6 +62,12 @@ public abstract class KlantportaalSteps {
         digidLoginSteps.selecteer_machtiginggever();
     }
 
+    /**
+     * Open a certain url and login with a user that is an 'ondernemer'
+     *
+     * @param user
+     * @param relativeUrl can be empty string if you want to open the overview page
+     */
     public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user, String relativeUrl) {
         this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
@@ -56,31 +80,60 @@ public abstract class KlantportaalSteps {
         klantportaalPage.headerIngelogdeNamen.waitFor();
     }
 
+    /**
+     * Get the current url
+     *
+     * @return url
+     */
     public String getCurrentUrl() {
         return page.url();
     }
 
+    /**
+     * Klik op de optie burger 'Inloggen met DigiD'
+     *
+     */
     public void selecteer_optie_inloggen_met_digid() {
         klantportaalPage.inloggenDigidLink.click();
     }
 
+    /**
+     * Klik op de optie burger 'Inloggen met eHerkenning'
+     *
+     */
     public void selecteer_optie_inloggen_met_eherkenning() {
         klantportaalPage.inloggeneHerkenningLink.click();
     }
 
+    /**
+     * Login via digid voor iemand anders bij 'Als vrijwillig gemachtigde'
+     *
+     */
     public void selecteer_optie_inloggen_met_digid_machtigen() {
         klantportaalPage.inloggenDigidMachtigenLink.click();
     }
 
+    /**
+     * Login via eHerkenning voor iemand anders bij 'Als professioneel bewindvoerder'
+     *
+     */
     public void selecteer_optie_inloggen_met_eherkenning_machtiging() {
         klantportaalPage.inloggeneHerkenningMachtigenLink.click();
     }
 
+    /**
+     * Log uit indien je als burger bent ingelogd
+     *
+     */
     public void log_burger_uit() {
         klantportaalPage.gebruikersMenuBurgerButton.click();
         klantportaalPage.buttonLogout.click();
     }
 
+    /**
+     * Log uit indien je als ondernemer bent ingelogd
+     *
+     */
     public void log_ondernemer_uit() {
         klantportaalPage.gebruikersMenuOndernemerButton.click();
         klantportaalPage.buttonLogout.click();
