@@ -2,6 +2,7 @@ package steps.gui.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import pages.gzac.GzacBasePage;
 import pages.gzac.GzakMenu;
 import steps.gui.GeneriekeSteps;
@@ -260,6 +261,18 @@ public class GzacBaseSteps extends GeneriekeSteps {
     public Locator paginaTitel(){
         return basePage.pageTitle;
     }
+
+
+    /**
+     * Haalt de eerste actieve tab op
+     *
+     * @return Locator waarop een actie uitgevoerd kan worden
+     */
+    public Locator haal_actieve_tab_op() {
+        return basePage.activeTab;
+    }
+
+    // Private Methods
 
     private Locator getNumericInputField(String field){
         String fieldLocator;

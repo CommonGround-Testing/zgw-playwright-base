@@ -2,6 +2,7 @@ package pages.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 public class GzacBasePage {
     public final Locator pageTitle;
@@ -23,6 +24,8 @@ public class GzacBasePage {
     public final String numericOnlyPath;
     public final String exactTextPath;
     public final String notHidden;
+    public final Locator activeTab;
+    private final Locator scopeActive;
 
     public final Page page;
     public GzakMenu menu;
@@ -49,5 +52,7 @@ public class GzacBasePage {
         headerGeneriekeZaak = page.locator("//h2[contains(text(), 'Generieke zaak')]");
         headerTable = page.locator("//th[contains(text(),'Referentienummer')]");
         tableCellEersteDossier = page.locator("//table[contains(@class,'table-striped')]/tbody/tr[1]/td[1]");
+        scopeActive = page.locator(":scope.cds--tabs__nav-item--selected:visible");
+        activeTab = page.locator("//valtimo-widget-dashboard").getByRole(AriaRole.TAB).filter(new Locator.FilterOptions().setHas(scopeActive));
     }
 }
