@@ -1,17 +1,18 @@
-package steps.gui.gzac;
+package steps.gui.gzac.algemeen;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pages.gzac.GzacBasePage;
+import steps.gui.gzac.GzacBaseSteps;
 import utils.MathUtils;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-public class TerugbelSteps extends GzacBaseSteps {
+public class GzakTerugbelSteps extends GzacBaseSteps {
 
     protected GzacBasePage basePage;
 
-    public TerugbelSteps(Page page) {
+    public GzakTerugbelSteps(Page page) {
         super(page);
         basePage = new GzacBasePage(page);
     }

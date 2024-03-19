@@ -264,12 +264,12 @@ public class GzacBaseSteps extends GeneriekeSteps {
 
 
     /**
-     * Haalt de eerste actieve tab op
+     * Haalt de actieve tab op relatief aan een Locator
      *
      * @return Locator waarop een actie uitgevoerd kan worden
      */
-    public Locator haal_actieve_tab_op() {
-        return basePage.activeTab;
+    protected Locator haal_actieve_tab_op(Locator mainContent) {
+        return mainContent.locator(basePage.activeTab);
     }
 
     // Private Methods

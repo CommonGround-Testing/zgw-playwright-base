@@ -29,4 +29,13 @@ public class GzakDashboardSteps extends GzacBaseSteps {
     public Locator haal_alle_tegels_op(){
         return dashboardPage.dashboardTiles;
     }
+
+    /**
+     * Haal de actieve tab op
+     *
+     * @return Locator waarop een actie kan worden uitgevoerd
+     */
+    public Locator haal_actieve_tab_op() {
+        return super.haal_actieve_tab_op(dashboardPage.mainContent);
+    }
 }

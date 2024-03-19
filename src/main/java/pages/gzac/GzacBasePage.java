@@ -53,6 +53,6 @@ public class GzacBasePage {
         headerTable = page.locator("//th[contains(text(),'Referentienummer')]");
         tableCellEersteDossier = page.locator("//table[contains(@class,'table-striped')]/tbody/tr[1]/td[1]");
         scopeActive = page.locator(":scope.cds--tabs__nav-item--selected:visible");
-        activeTab = page.locator("//valtimo-widget-dashboard").getByRole(AriaRole.TAB).filter(new Locator.FilterOptions().setHas(scopeActive));
+        activeTab = page.getByRole(AriaRole.TAB).filter(new Locator.FilterOptions().setHas(scopeActive));
     }
 }

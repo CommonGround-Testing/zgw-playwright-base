@@ -6,9 +6,11 @@ import com.microsoft.playwright.Page;
 public class GzakDashboardPage extends GzacBasePage {
 
     public final Locator dashboardTiles;
+    public final Locator mainContent;
 
     public GzakDashboardPage(Page page) {
         super(page);
         dashboardTiles = page.locator("//div[@class='widget-configuration']");
+        mainContent = page.locator("//valtimo-widget-dashboard");
     }
 }
