@@ -7,14 +7,17 @@ import users.ADUser;
 
 public class ADLoginSteps {
 
-    private final Page page;
     private final ADLoginPage adLoginPage;
 
     public ADLoginSteps(Page page) {
-        this.page = page;
-        this.adLoginPage = new ADLoginPage(page);
+        adLoginPage = new ADLoginPage(page);
     }
 
+    /**
+     * Wacht op het veld voor naam gebruiker en vul dan alle gegevens in
+     *
+     * @param user
+     */
     public void login_met_ad_user(ADUser user) {
         adLoginPage.gebruikersnaamInput.waitFor();
         adLoginPage.gebruikersnaamInput.fill(user.getUsername());

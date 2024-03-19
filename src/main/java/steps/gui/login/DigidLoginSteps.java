@@ -6,13 +6,17 @@ import pages.DigidLoginPage;
 public class DigidLoginSteps {
 
     private final DigidLoginPage digidLoginPage;
-    private final Page page;
 
     public DigidLoginSteps(Page page) {
-        this.page = page;
-        this.digidLoginPage = new DigidLoginPage(page);
+        digidLoginPage = new DigidLoginPage(page);
     }
 
+    /**
+     * Login met digid niveau Midden
+     *
+     * @param username
+     * @param password
+     */
     public void login_als(String username, String password) {
         digidLoginPage.linkSelectAuthenticationWithTrustLevel.click();
         digidLoginPage.dropdownBetrouwbaarheidsniveau.selectOption("Midden");
@@ -21,6 +25,10 @@ public class DigidLoginSteps {
         digidLoginPage.buttonDoLogin.click();
     }
 
+    /**
+     * Klik op de selecteer machtiginggever knop
+     *
+     */
     public void selecteer_machtiginggever() {
         digidLoginPage.buttonSelecteerMachtiginggever.click();
     }

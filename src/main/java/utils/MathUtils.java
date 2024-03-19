@@ -4,6 +4,11 @@ import java.util.Random;
 
 public class MathUtils {
 
+    /**
+     * Generate a random number between 10.000 and 100.000
+     *
+     * @return int
+     */
     public static int generateRandomNumber() {
         final Random rand = new Random();
         final int min = 10000;
