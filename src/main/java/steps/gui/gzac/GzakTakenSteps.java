@@ -9,9 +9,16 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class GzakTakenSteps extends GzacBaseSteps {
 
     protected GzakTakenPage takenPage;
+    public final static String URL = GzakTakenPage.URL;
     public final static String TAB_MIJN_TAKEN = "Mijn taken";
     public final static String TAB_NIET_TOEGEWEZEN_TAKEN = "Niet toegewezen taken";
     public final static String TAB_ALLE_TAKEN = "Alle taken";
+    public final static String TEKST_AANMAAKDATUM = "Aanmaakdatum";
+    public final static String TEKST_NAAM = "Naam";
+    public final static String TEKST_EIGENAAR = "Eigenaar";
+    public final static String TEKST_OPLEVERINGSDATUM = "Opleveringsdatum";
+    public final static String TEKST_CONTEXT = "Context";
+    public final static String TEKST_GEEN_TAKEN = "Je hebt geen taken op je naam staan";
 
     public GzakTakenSteps(Page page) {
         super(page);
