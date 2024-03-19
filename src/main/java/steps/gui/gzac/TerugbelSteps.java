@@ -16,10 +16,18 @@ public class TerugbelSteps extends GzacBaseSteps {
         basePage = new GzacBasePage(page);
     }
 
+    /**
+     * Open de terugbelnotitie pagina
+     *
+     */
     public void navigate() {
         page.navigate("/dossiers/terugbelnotitie");
     }
 
+    /**
+     * Klik op knop voor het aanmaken van een nieuwe dossier en vul alle gegevens in
+     *
+     */
     public void maak_nieuw_terugbel_dossier_aan() {
         klik_knop("nieuw dossier");
         basePage.getInputField("Onderwerp", false).waitFor(new Locator.WaitForOptions().setTimeout(1000));
