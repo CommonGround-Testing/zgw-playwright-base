@@ -5,14 +5,18 @@ import pages.EherkenningLoginPage;
 
 public class EherkenningSteps {
 
-    private final Page page;
     private final EherkenningLoginPage eherkenningPage;
 
     public EherkenningSteps(Page page) {
-        this.page = page;
         this.eherkenningPage = new EherkenningLoginPage(page);
     }
 
+    /**
+     * Login met eHerkenning
+     *
+     * @param username
+     * @param password
+     */
     public void login_als(String username, String password) {
 
         eherkenningPage.dropdownSelectIdentityProvider.selectOption("Digidentity AD 1.13 (preproduction)");

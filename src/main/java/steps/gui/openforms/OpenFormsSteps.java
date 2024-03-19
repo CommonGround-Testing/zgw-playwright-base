@@ -23,10 +23,20 @@ public class OpenFormsSteps extends GeneriekeSteps {
         digidLoginSteps = new DigidLoginSteps(page);
     }
 
+    /**
+     * Open de pagina voor aanvraag ooievaarspas
+     *
+     */
     public void open_pagina() {
         page.navigate("/aanvraag-formulier-ooievaarspas/startpagina");
     }
 
+    /**
+     * Login via Digid
+     *
+     * @param username
+     * @param password
+     */
     public void login_via_digid(String username, String password) {
         openFormsPage.buttonAccepteerCookies.click();
         get_tekst("Inloggen met DigiD").click();
@@ -38,39 +48,84 @@ public class OpenFormsSteps extends GeneriekeSteps {
                                 WaitForSelectorState.VISIBLE));
     }
 
+    /**
+     * Valideer dat de stap als actief staat
+     *
+     * @param stapNaam die actief moet zijn
+     */
     public void valideer_actieve_stap(String stapNaam) {
         assertThat(openFormsPage.linkActiveStep).hasText(stapNaam);
     }
 
+    /**
+     * Valideer dat een bepaalde h1 header op het scherm staat
+     * @param tekst
+     */
     public void controleer_h1_header_is(String tekst) {
 
         assertThat(openFormsPage.textlabelHeaderH1).hasText(tekst);
     }
 
+    /**
+     * Valideer dat een bepaalde h2 header op het scherm staat
+     * @param tekst
+     */
     public void controleer_h2_header_is(String tekst) {
         assertThat(openFormsPage.textlabelHeaderH2).hasText(tekst);
     }
 
+    /**
+     * Valideer dat er een bepaalde foutmelding op het scherm staat
+     *
+     * @param tekst
+     */
     public void controleer_foutmelding_is_zichtbaar_met(String tekst) {
         assertThat(get_alert().getByText(tekst)).isVisible();
     }
 
+    /**
+     * Haal de Locator op van een tekst op het scherm
+     *
+     * @param tekst
+     * @return Locator waarop een actie uitgevoerd kan worden
+     */
     public Locator get_tekst(String tekst){
         return page.getByText(tekst);
     }
 
+    /**
+     * Haal de Locator van een inputveld op
+     *
+     * @param tekst
+     * @return Locator waarop een actie uitgevoerd kan worden
+     */
     public Locator get_input_veld(String tekst){
         return genericPage.getInputField(tekst, false);
     }
 
+    /**
+     * Haal de Locator van een alert op
+     *
+     * @return Locator waarop een actie uitgevoerd kan worden
+     */
     public Locator get_alert(){
         return page.locator("//div[contains(@role,'alert')]//div");
     }
 
+    /**
+     * Valideer dat er geen foutmelding zichtbaar is op het scherm
+     *
+     */
     public void geen_foutmelding_zichtbaar() {
         assertThat(page.locator("//div[@class='form-text error']")).isHidden();
     }
 
+    /**
+     * Valideer dat een bepaald veld de goede waarde heeft
+     *
+     * @param inputName
+     * @param prefillWaarde
+     */
     public void tekstveld_bevat_prefill_gegevens
             (String inputName, String prefillWaarde) {
         assertThat(
@@ -81,9 +136,15 @@ public class OpenFormsSteps extends GeneriekeSteps {
                 .isVisible();
     }
 
-    public void validatie_toon_foutmelding(Locator lo, String verwachteTekst) {
-        lo.blur();
-        lo.waitFor(new Locator.WaitForOptions().setTimeout(1000));
+    /**
+     * Valideer dat er een bepaalde foutmelding getoond wordt op het scherm
+     *
+     * @param locator
+     * @param verwachteTekst
+     */
+    public void validatie_toon_foutmelding(Locator locator, String verwachteTekst) {
+        locator.blur();
+        locator.waitFor(new Locator.WaitForOptions().setTimeout(1000));
         page.keyboard().press("Enter");
         page.keyboard().press("Tab");
         if (verwachteTekst == null) {
@@ -93,11 +154,19 @@ public class OpenFormsSteps extends GeneriekeSteps {
         }
     }
 
+    /**
+     * Klik op de volgende knop
+     *
+     */
     public void klik_volgende_knop() {
         wacht_op_volgende_knop_response();
         klik_knop("Volgende");
     }
 
+    /**
+     * Wacht totdat de validatie in de backend is uitgevoerd
+     *
+     */
     public void wacht_op_volgende_knop_response(){
         try{
             page.setDefaultTimeout(2000);
@@ -109,6 +178,12 @@ public class OpenFormsSteps extends GeneriekeSteps {
         }
     }
 
+    /**
+     * Haal de Locator op van de checkbox
+     *
+     * @param tekst
+     * @return Locator waarop een actie uitgevoerd kan worden
+     */
     public Locator get_checkbox(String tekst){
         return genericPage.getCheckbox(tekst);
     }

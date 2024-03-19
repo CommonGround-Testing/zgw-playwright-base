@@ -8,6 +8,13 @@ import java.io.IOException;
 
 public class MockRequests {
 
+    /**
+     * Mock een graphql request zodat je niet afhankelijk bent van de api call
+     *
+     * @param page
+     * @param query
+     * @param pathToMockJson
+     */
     public static void mockRequestWithQuery(Page page, String query, String pathToMockJson) {
         page.route(ZGWTestRunner.getBaseUrl() + "/graphql", route -> {
             if (isQueryInRequestBody(query, route)) {
