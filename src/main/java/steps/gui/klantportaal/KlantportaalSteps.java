@@ -19,8 +19,11 @@ public abstract class KlantportaalSteps {
     private final DigidLoginSteps digidLoginSteps;
     private final EherkenningSteps eherkenningSteps;
 
+    private static boolean isLanguageNL;
+
     public KlantportaalSteps(Page page) {
         this.page = page;
+        this.isLanguageNL = true;
         this.klantportaalPage = new KlantportaalPage(page);
         this.digidLoginSteps = new DigidLoginSteps(page);
         this.eherkenningSteps = new EherkenningSteps(page);
@@ -91,7 +94,6 @@ public abstract class KlantportaalSteps {
 
     /**
      * Klik op de optie burger 'Inloggen met DigiD'
-     *
      */
     public void selecteer_optie_inloggen_met_digid() {
         klantportaalPage.inloggenDigidLink.click();
@@ -99,7 +101,6 @@ public abstract class KlantportaalSteps {
 
     /**
      * Klik op de optie burger 'Inloggen met eHerkenning'
-     *
      */
     public void selecteer_optie_inloggen_met_eherkenning() {
         klantportaalPage.inloggeneHerkenningLink.click();
@@ -107,7 +108,6 @@ public abstract class KlantportaalSteps {
 
     /**
      * Login via digid voor iemand anders bij 'Als vrijwillig gemachtigde'
-     *
      */
     public void selecteer_optie_inloggen_met_digid_machtigen() {
         klantportaalPage.inloggenDigidMachtigenLink.click();
@@ -115,7 +115,6 @@ public abstract class KlantportaalSteps {
 
     /**
      * Login via eHerkenning voor iemand anders bij 'Als professioneel bewindvoerder'
-     *
      */
     public void selecteer_optie_inloggen_met_eherkenning_machtiging() {
         klantportaalPage.inloggeneHerkenningMachtigenLink.click();
@@ -123,7 +122,6 @@ public abstract class KlantportaalSteps {
 
     /**
      * Log uit indien je als burger bent ingelogd
-     *
      */
     public void log_burger_uit() {
         klantportaalPage.gebruikersMenuBurgerButton.click();
@@ -132,7 +130,6 @@ public abstract class KlantportaalSteps {
 
     /**
      * Log uit indien je als ondernemer bent ingelogd
-     *
      */
     public void log_ondernemer_uit() {
         klantportaalPage.gebruikersMenuOndernemerButton.click();
@@ -164,6 +161,8 @@ public abstract class KlantportaalSteps {
     public void burger_opent_taalmenu_en_verandert_taal() {
         klantportaalPage.languageButton.click();
         klantportaalPage.disabledLanguageOption.click();
+        assertThat(klantportaalPage.getMenuButtonByText(isLanguageNL)).isHidden();
+        switchLanguage();
     }
 
     public void ingelogde_gebruiker_is(String naam) {
@@ -172,5 +171,9 @@ public abstract class KlantportaalSteps {
 
     public void is_de_sessie_op_het_klantportaal_beeindigd() {
         assertThat(klantportaalPage.inloggenDigidLink).isVisible();
+    }
+
+    private static void switchLanguage() {
+        isLanguageNL = !isLanguageNL;
     }
 }
