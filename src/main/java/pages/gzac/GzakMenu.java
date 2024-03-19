@@ -11,21 +11,13 @@ public class GzakMenu {
     public final static String DOSSIERS = "Dossiers";
     public final Locator menuItemTaken;
     public final static String TAKEN = "Taken";
-    private final static String sideNavPath = "//cds-sidenav";
-    private final static String xpath = "//*[contains(text(),'${text}')]";
+    public final static String SIDE_NAV_PATH = "//cds-sidenav";
+    public final static String XPATH = "//*[contains(text(),'${text}')]";
 
     public GzakMenu(Page page) {
         this.page = page;
-        menuItemDashboard =  page.locator(sideNavPath + xpath.replace("${text}", DASHBOARD));
-        menuItemDossiers =  page.locator(sideNavPath + xpath.replace("${text}", DOSSIERS));
-        menuItemTaken =  page.locator(sideNavPath + xpath.replace("${text}", TAKEN));
-    }
-
-    public Locator getMenuItem(String text){
-        return page.locator(sideNavPath + xpath.replace("${text}", text));
-    }
-
-    public void clickMenuItem(String text){
-        getMenuItem(text).click();
+        menuItemDashboard =  page.locator(SIDE_NAV_PATH + XPATH.replace("${text}", DASHBOARD));
+        menuItemDossiers =  page.locator(SIDE_NAV_PATH + XPATH.replace("${text}", DOSSIERS));
+        menuItemTaken =  page.locator(SIDE_NAV_PATH + XPATH.replace("${text}", TAKEN));
     }
 }

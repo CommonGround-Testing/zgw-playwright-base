@@ -5,10 +5,10 @@ import com.microsoft.playwright.Page;
 
 public class GzakDashboardPage extends GzacBasePage {
 
-    protected Locator dashboardTile;
+    public final Locator dashboardTiles;
 
     public GzakDashboardPage(Page page) {
         super(page);
-        dashboardTile = page.locator("//div[@class='widget-configuration']");
+        dashboardTiles = page.locator("//div[@class='widget-configuration']");
     }
 }
