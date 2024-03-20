@@ -2,10 +2,15 @@ package steps.gui.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import pages.gzac.GzacDossiersPage;
+
+import java.util.List;
+import java.util.Map;
 
 public class GzacDossiersSteps extends GzacBaseSteps {
 
+    public final static String URL = "dossiers/";
     public final static String TAB_ALGEMEEN = "Algemeen";
     public final static String TAB_Voortgang = "Voortgang";
     public final static String TAB_LOG = "Log";
@@ -19,11 +24,20 @@ public class GzacDossiersSteps extends GzacBaseSteps {
         dossiersPage = new GzacDossiersPage(page);
     }
 
-    public Locator tabelHeader(){
+    /**
+     * Open een specifieke dossier pagina
+     *
+     * @param dossierUrl met het relatieve path
+     */
+    public void navigeer_naar_dossier(String dossierUrl) {
+        dossiersPage.navigate(URL + dossierUrl);
+    }
+
+    public Locator tabelHeader() {
         return dossiersPage.headerRow;
     }
 
-    public Locator alleTabelRegels(){
+    public Locator alleTabelRegels() {
         return dossiersPage.tableRow;
     }
 }

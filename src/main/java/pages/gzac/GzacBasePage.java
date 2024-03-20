@@ -55,4 +55,8 @@ public class GzacBasePage {
         scopeActive = page.locator(":scope.cds--tabs__nav-item--selected:visible");
         activeTab = page.getByRole(AriaRole.TAB).filter(new Locator.FilterOptions().setHas(scopeActive));
     }
+
+    public void navigate(String url){
+        page.navigate(url);
+    }
 }
