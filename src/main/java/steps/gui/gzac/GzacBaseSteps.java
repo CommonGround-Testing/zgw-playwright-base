@@ -147,7 +147,7 @@ public class GzacBaseSteps extends GeneriekeSteps {
      * @param veld - text of the field you want to enter the text for
      * @param number - number you want to enter into the field
      */
-    public void vul_nummer_in(String veld, int number) {
+    public void vul_nummer_in(String veld, String number) {
         fillNumericInputField(veld, number);
     }
 
@@ -273,7 +273,7 @@ public class GzacBaseSteps extends GeneriekeSteps {
 
     // Private Methods
 
-    private Locator getNumericInputField(String field){
+    protected Locator getNumericInputField(String field){
         String fieldLocator;
         fieldLocator = basePage.numericOnlyPath.replace("${text}", field);
         var fullXPath = basePage.dossierModalPath + fieldLocator + basePage.parentPath + basePage.inputFieldPath;
@@ -286,7 +286,16 @@ public class GzacBaseSteps extends GeneriekeSteps {
         inputField.fill(text);
     }
 
-    private Locator getInputField(String field, boolean exact){
+    protected Locator getField(String field){
+        try{
+            getInputField(field, false).waitFor(new Locator.WaitForOptions().setTimeout(500));
+            return getInputField(field, false);
+        } catch (Exception ex){
+            return getTextAreaField(field, false);
+        }
+    }
+
+    protected Locator getInputField(String field, boolean exact){
         String fieldLocator;
         if(exact){
             fieldLocator = basePage.exactTextPath.replace("${text}", field);
@@ -297,8 +306,8 @@ public class GzacBaseSteps extends GeneriekeSteps {
         return page.locator(fullXPath);
     }
 
-    private void fillNumericInputField(String field, int number){
-        getNumericInputField(field).fill(String.valueOf(number));
+    private void fillNumericInputField(String field, String number){
+        getNumericInputField(field).fill(number);
     }
 
     private void fillTextAreaField(String field, String text, boolean exact){

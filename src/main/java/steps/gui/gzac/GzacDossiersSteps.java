@@ -33,11 +33,41 @@ public class GzacDossiersSteps extends GzacBaseSteps {
         dossiersPage.navigate(URL + dossierUrl);
     }
 
+    /**
+     * Locator van de Header row
+     *
+     * @return Locator waarop een actie uitgevoerd kan worden
+     */
     public Locator tabelHeader() {
         return dossiersPage.headerRow;
     }
 
+    /**
+     * Locator van de rows met dossiers
+     *
+     * @return Locator waarop een actie uitgevoerd kan worden
+     */
     public Locator alleTabelRegels() {
         return dossiersPage.tableRow;
+    }
+
+
+    /**
+     * Vul alle waardes in bij de velden die zijn meegegeven
+     *
+     * @param formData met Veld en Waarde die ingevuld moeten worden
+     */
+    public void vul_dossier_in(Map<String,String> formData){
+        formData.forEach(this::vul_veld_in);
+    }
+
+    private void vul_veld_in(String veld, String waarde){
+        var inputfield = getField(veld);
+        var inputmode = inputfield.getAttribute("inputmode");
+        if (inputmode != null &&  inputmode.equals("decimal")){
+            vul_nummer_in(veld, waarde);
+        } else {
+            vul_tekst_in(veld, waarde);
+        }
     }
 }
