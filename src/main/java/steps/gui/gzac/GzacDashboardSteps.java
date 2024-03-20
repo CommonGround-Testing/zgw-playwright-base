@@ -2,15 +2,15 @@ package steps.gui.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import pages.gzac.GzakDashboardPage;
+import pages.gzac.GzacDashboardPage;
 
-public class GzakDashboardSteps extends GzacBaseSteps {
+public class GzacDashboardSteps extends GzacBaseSteps {
 
-    protected final GzakDashboardPage dashboardPage;
+    protected final GzacDashboardPage dashboardPage;
 
-    public GzakDashboardSteps(Page page) {
+    public GzacDashboardSteps(Page page) {
         super(page);
-        dashboardPage = new GzakDashboardPage(page);
+        dashboardPage = new GzacDashboardPage(page);
     }
 
     /**

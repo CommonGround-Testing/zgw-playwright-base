@@ -28,11 +28,11 @@ public class GzacBasePage {
     private final Locator scopeActive;
 
     public final Page page;
-    public GzakMenu menu;
+    public GzacMenu menu;
 
     public GzacBasePage(Page page) {
         this.page = page;
-        menu = new GzakMenu(page);
+        menu = new GzacMenu(page);
         notHidden = "[not(contains(@type,'hidden'))]";
         pageTitle = page.locator("//valtimo-page-title//h2");
         dossierModalPath = "//div[contains(@class,'modal-content')]";

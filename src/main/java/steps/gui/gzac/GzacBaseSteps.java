@@ -2,9 +2,8 @@ package steps.gui.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.AriaRole;
 import pages.gzac.GzacBasePage;
-import pages.gzac.GzakMenu;
+import pages.gzac.GzacMenu;
 import steps.gui.GeneriekeSteps;
 import steps.gui.login.ADLoginSteps;
 import users.ADUser;
@@ -33,7 +32,7 @@ public class GzacBaseSteps extends GeneriekeSteps {
      * @return Locator waarop een actie uitgevoerd kan worden
      */
     public Locator getMenuItem(String text){
-        return page.locator(GzakMenu.SIDE_NAV_PATH + GzakMenu.XPATH.replace("${text}", text));
+        return page.locator(GzacMenu.SIDE_NAV_PATH + GzacMenu.XPATH.replace("${text}", text));
     }
 
     /**

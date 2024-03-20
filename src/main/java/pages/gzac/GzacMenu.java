@@ -3,7 +3,7 @@ package pages.gzac;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
-public class GzakMenu {
+public class GzacMenu {
     private final Page page;
     public final Locator menuItemDashboard;
     public final static String DASHBOARD = "Dashboard";
@@ -14,7 +14,7 @@ public class GzakMenu {
     public final static String SIDE_NAV_PATH = "//cds-sidenav";
     public final static String XPATH = "//*[contains(text(),'${text}')]";
 
-    public GzakMenu(Page page) {
+    public GzacMenu(Page page) {
         this.page = page;
         menuItemDashboard =  page.locator(SIDE_NAV_PATH + XPATH.replace("${text}", DASHBOARD));
         menuItemDossiers =  page.locator(SIDE_NAV_PATH + XPATH.replace("${text}", DOSSIERS));
