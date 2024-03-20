@@ -22,9 +22,7 @@ public class MockGzakRequests {
     }
 
     /**
-     * Mock de taken response
-     * emptyResponse om geen taken te zien
-     * takenResponse om wel taken te zien
+     * Mock een lege taken response
      *
      * @param page
      */
