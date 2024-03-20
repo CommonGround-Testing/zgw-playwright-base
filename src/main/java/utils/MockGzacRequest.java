@@ -1,11 +1,8 @@
 package utils;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Route;
 
-import java.io.IOException;
-
-public class MockGzakRequest extends MockResponse {
+public class MockGzacRequest extends MockResponse {
 
     private static String TAKEN_API_PATH = "**/task**";
 
