@@ -6,7 +6,7 @@ import runner.ZGWTestRunner;
 
 import java.io.IOException;
 
-public class MockRequests {
+public class MockGraphqlRequests {
 
     /**
      * Mock een graphql request zodat je niet afhankelijk bent van de api call
