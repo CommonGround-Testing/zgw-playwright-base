@@ -6,10 +6,12 @@ import runner.ZGWTestRunner;
 
 import java.io.IOException;
 
-public class MockGraphqlRequests {
+public class MockGraphqlRequest{
 
     /**
      * Mock een graphql request zodat je niet afhankelijk bent van de api call
+     * The path to the json file should contain the full path to the file starting from src
+     *  example: src/test/resources/fileWithMockData.json
      *
      * @param page
      * @param query
