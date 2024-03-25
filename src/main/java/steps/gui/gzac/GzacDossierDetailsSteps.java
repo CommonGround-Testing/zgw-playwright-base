@@ -21,7 +21,6 @@ public class GzacDossierDetailsSteps extends GzacBaseSteps {
     /**
      * Maak de toewijzing ongedaan
      *
-     * @return
      */
     public void maak_toewijzing_ongedaan() {
         dossierPage.buttonToewijzingOngedaanMaken.click();
