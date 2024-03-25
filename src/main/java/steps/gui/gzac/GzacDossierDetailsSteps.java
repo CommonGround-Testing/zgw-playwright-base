@@ -19,7 +19,7 @@ public class GzacDossierDetailsSteps extends GzacBaseSteps {
     }
 
     /**
-     * Haalt alle tegels op van het Dashboard
+     * Maak de toewijzing ongedaan
      *
      * @return
      */
