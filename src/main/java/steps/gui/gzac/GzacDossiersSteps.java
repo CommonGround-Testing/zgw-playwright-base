@@ -2,10 +2,8 @@ package steps.gui.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.AriaRole;
 import pages.gzac.GzacDossiersPage;
 
-import java.util.List;
 import java.util.Map;
 
 public class GzacDossiersSteps extends GzacBaseSteps {
@@ -69,5 +67,9 @@ public class GzacDossiersSteps extends GzacBaseSteps {
         } else {
             vul_tekst_in(veld, waarde);
         }
+    }
+
+    public Locator dossier_formulier(){
+        return dossiersPage.dialog;
     }
 }

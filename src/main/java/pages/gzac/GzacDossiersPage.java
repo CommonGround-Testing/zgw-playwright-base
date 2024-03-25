@@ -10,6 +10,7 @@ public class GzacDossiersPage extends GzacBasePage {
     public final static String TAB_MIJN_DOSSIERS = "Mijn dossiers";
     public final static String TAB_NIET_TOEGEWEZEN_DOSSIERS = "Niet-toegewezen dossiers";
     public final static String TAB_ALLE_DOSSIERS = "Alle dossiers";
+    public final Locator dossierModal;
 
     public final Locator mainContent;
     public final Locator headerRow;
@@ -22,5 +23,6 @@ public class GzacDossiersPage extends GzacBasePage {
         headerRow = mainContent.locator("//thead");
         tableRow = mainContent.locator("//tbody/tr");
         submitButton = page.locator("");
+        dossierModal = page.getByRole(AriaRole.DIALOG);
     }
 }

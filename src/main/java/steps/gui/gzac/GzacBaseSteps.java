@@ -230,14 +230,14 @@ public class GzacBaseSteps extends GeneriekeSteps {
     }
 
     /**
-     * Haal een input veld op
+     * Haal het eerster input veld op
      * De veldnaam match wordt gedaan via een 'bevat' dus 'adres' zal ook het veld 'Mijn adres' of 'buitenlandsadres' vinden
      *
      * @param veld wat opgehaald moet worden
      * @return Locator waarop een actie uitgevoerd kan worden
      */
     public Locator haal_veld_op(String veld) {
-        return getInputField(veld, false);
+        return getInputField(veld, false).first();
     }
 
     /**

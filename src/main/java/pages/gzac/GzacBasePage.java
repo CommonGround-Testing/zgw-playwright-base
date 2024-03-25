@@ -26,6 +26,7 @@ public class GzacBasePage {
     public final String notHidden;
     public final Locator activeTab;
     private final Locator scopeActive;
+    public final Locator dialog;
 
     public final Page page;
     public GzacMenu menu;
@@ -54,6 +55,7 @@ public class GzacBasePage {
         tableCellEersteDossier = page.locator("//table[contains(@class,'table-striped')]/tbody/tr[1]/td[1]");
         scopeActive = page.locator(":scope.cds--tabs__nav-item--selected:visible");
         activeTab = page.getByRole(AriaRole.TAB).filter(new Locator.FilterOptions().setHas(scopeActive));
+        dialog = page.getByRole(AriaRole.DIALOG);
     }
 
     public void navigate(String url){
