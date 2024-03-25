@@ -59,6 +59,12 @@ public class GzacDossiersSteps extends GzacBaseSteps {
         formData.forEach(this::vul_veld_in);
     }
 
+    /**
+     * Vul een invoerveld in met een bepaalde waarde
+     *
+     * @param veld
+     * @param waarde
+     */
     private void vul_veld_in(String veld, String waarde){
         var inputfield = getField(veld);
         var inputmode = inputfield.getAttribute("inputmode");
