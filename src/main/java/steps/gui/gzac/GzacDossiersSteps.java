@@ -69,7 +69,12 @@ public class GzacDossiersSteps extends GzacBaseSteps {
         }
     }
 
-    public Locator dossier_formulier(){
+    /**
+     * Locator van het dossier formulier (modal)
+     *
+     * @return
+     */
+    public Locator dossierFormulier(){
         return dossiersPage.dialog;
     }
 }
