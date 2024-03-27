@@ -2,6 +2,7 @@ package pages.gzac;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 public class GzacBasePage {
     public final Locator pageTitle;
@@ -13,23 +14,26 @@ public class GzacBasePage {
     public final Locator tableCellEersteDossier;
     public final Locator dossierTitel;
     public final String dossierModalPath;
-    private final String parentPath;
-    private final String inputFieldPath;
-    private final String textAreaFieldPath;
-    private final String radioInputPath;
-    private final String dropdownPath;
-    private final String dropdownOption;
-    private final String containsTextLocator;
-    private final String numericOnlyPath;
-    private final String exactTextPath;
-    private final String notHidden;
+    public final String parentPath;
+    public final String inputFieldPath;
+    public final String textAreaFieldPath;
+    public final String radioInputPath;
+    public final String dropdownPath;
+    public final String dropdownOption;
+    public final String containsTextLocator;
+    public final String numericOnlyPath;
+    public final String exactTextPath;
+    public final String notHidden;
+    public final Locator activeTab;
+    private final Locator scopeActive;
+    public final Locator dialog;
 
-    protected final Page page;
-    public GzakMenu menu;
+    public final Page page;
+    public GzacMenu menu;
 
     public GzacBasePage(Page page) {
         this.page = page;
-        menu = new GzakMenu(page);
+        menu = new GzacMenu(page);
         notHidden = "[not(contains(@type,'hidden'))]";
         pageTitle = page.locator("//valtimo-page-title//h2");
         dossierModalPath = "//div[contains(@class,'modal-content')]";
@@ -49,92 +53,12 @@ public class GzacBasePage {
         headerGeneriekeZaak = page.locator("//h2[contains(text(), 'Generieke zaak')]");
         headerTable = page.locator("//th[contains(text(),'Referentienummer')]");
         tableCellEersteDossier = page.locator("//table[contains(@class,'table-striped')]/tbody/tr[1]/td[1]");
+        scopeActive = page.locator(":scope.cds--tabs__nav-item--selected:visible");
+        activeTab = page.getByRole(AriaRole.TAB).filter(new Locator.FilterOptions().setHas(scopeActive));
+        dialog = page.getByRole(AriaRole.DIALOG);
     }
 
-    /*
-     * Fill inputfield for a certail item
-     * provide text of the field and the value for input
-     * */
-    public void fillNumericInputField(String field, int number){
-        getNumericInputField(field).fill(String.valueOf(number));
+    public void navigate(String url){
+        page.navigate(url);
     }
-
-    public void fillTextInputField(String field, String text, boolean exact){
-        var inputField = getInputField(field, exact);
-        inputField.waitFor(new Locator.WaitForOptions().setTimeout(300));
-        inputField.fill(text);
-    }
-
-    public void fillTextAreaField(String field, String text, boolean exact){
-        getTextAreaField(field, exact).fill(text);
-    }
-
-    public void checkCheckbox(String field, boolean exact){
-        getInputField(field, exact).check();
-    }
-
-    public void selectRadioOption(String field, String option){
-        getRadioField(field, option).click();
-    }
-
-    public Locator getInputField(String field, boolean exact){
-        String fieldLocator;
-        if(exact){
-            fieldLocator = exactTextPath.replace("${text}", field);
-        } else {
-            fieldLocator = containsTextLocator.replace("${text}", field);
-        }
-        var fullXPath = dossierModalPath + fieldLocator + parentPath + inputFieldPath + notHidden;
-        return page.locator(fullXPath);
-    }
-
-    public Locator getTextAreaField(String field, boolean exact){
-        String fieldLocator;
-        if(exact){
-            fieldLocator = exactTextPath.replace("${text}", field);
-        } else {
-            fieldLocator = containsTextLocator.replace("${text}", field);
-        }
-        var fullXPath = dossierModalPath + fieldLocator + parentPath + textAreaFieldPath;
-        return page.locator(fullXPath);
-    }
-
-    public Locator getDateField(String field, boolean exact){
-        String fieldLocator;
-        if(exact){
-            fieldLocator = exactTextPath.replace("${text}", field);
-        } else {
-            fieldLocator = containsTextLocator.replace("${text}", field);
-        }
-        var fullXPath = dossierModalPath + fieldLocator + parentPath + inputFieldPath + notHidden;
-        return page.locator(fullXPath);
-    }
-
-    public Locator getNumericInputField(String field){
-        String fieldLocator;
-        fieldLocator = numericOnlyPath.replace("${text}", field);
-        var fullXPath = dossierModalPath + fieldLocator + parentPath + inputFieldPath;
-        return page.locator(fullXPath);
-    }
-
-    public Locator getRadioField(String field, String option){
-        String fieldLocator;
-        fieldLocator = containsTextLocator.replace("${text}", field);
-        var fullXPath = dossierModalPath + fieldLocator + parentPath + radioInputPath.replace("${text}", option);
-        return page.locator(fullXPath);
-    }
-
-    public Locator getDropdownField(String field){
-        String fieldLocator;
-        fieldLocator = containsTextLocator.replace("${text}", field);
-        var fullXPath = dossierModalPath + fieldLocator + parentPath + dropdownPath;
-        return page.locator(fullXPath);
-    }
-
-    public Locator getDropdownOption(String field, String text){
-        String fieldLocator = containsTextLocator.replace("${text}", field);
-        var fullXPath = dossierModalPath + fieldLocator + parentPath + dropdownOption + containsTextLocator.replace("${text}", text);
-        return page.locator(fullXPath);
-    }
-
 }

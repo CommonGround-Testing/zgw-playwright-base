@@ -34,12 +34,12 @@ public class GeneriekeSteps {
     }
 
     /**
-     * Klik op een link.
+     * Klik op de eerste link.
      *
      * @param text van de link of een deel daarvan
      */
     public void klik_link(String text) {
-        page.getByRole(AriaRole.LINK).getByText(text).click();
+        page.getByRole(AriaRole.LINK).getByText(text).first().click();
     }
 
     /**
