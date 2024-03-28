@@ -14,7 +14,7 @@ abstract public class ZGWTestRunner {
     static Browser browser;
     // New instance for each test method.
     // Cannot use standard library because we need to get cookies fTestWatcherExtensionrom context
-    private static BrowserContext context;
+    protected static BrowserContext context;
     private static String baseUrl;
     protected static Page page;
 
