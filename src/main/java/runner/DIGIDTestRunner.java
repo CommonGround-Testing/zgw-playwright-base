@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import steps.gui.klantportaal.OverzichtSteps;
 import users.ZGWDigidUser;
-import utils.Secrets;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -16,14 +15,12 @@ import java.nio.file.Paths;
 abstract public class DIGIDTestRunner extends ZGWTestRunner {
 
     protected ZGWDigidUser digidUser;
+    private String stateFile;
 
-    public DIGIDTestRunner(String baseUrl) {
+    public DIGIDTestRunner(String baseUrl, ZGWDigidUser user) {
         super(baseUrl);
-        digidUser = ZGWDigidUser.builder()
-                .name("Sierra")
-                .nationaliteit("Nederlandse")
-                .username("zgwdigiduser1")
-                .password(Secrets.getSecretByName("zgwdigiduser1-password")).build();
+        digidUser = user;
+        stateFile = digidUser.getUsername() + "-state.json";
     }
 
     @BeforeEach
@@ -31,16 +28,16 @@ abstract public class DIGIDTestRunner extends ZGWTestRunner {
         Browser.NewContextOptions options = new Browser.NewContextOptions();
         options.baseURL = getBaseUrl();
 
-        if (new File("digidsession.json").exists()) {
+        if (new File(stateFile).exists()) {
             // use existing session
-            options.setStorageStatePath(Paths.get("digidsession.json"));
+            options.setStorageStatePath(Paths.get(stateFile));
             context = browser.newContext(options);
             page = context.newPage();
         } else {
             context = browser.newContext(options);
             page = context.newPage();
             new OverzichtSteps(page).login_als_burger_on_page(digidUser, "");
-            context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get("digidsession.json")));
+            context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get(stateFile)));
         }
 
         context.tracing().start(new Tracing.StartOptions()
