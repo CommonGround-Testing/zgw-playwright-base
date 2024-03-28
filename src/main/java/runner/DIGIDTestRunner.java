@@ -15,7 +15,6 @@ import java.nio.file.Paths;
 @ExtendWith(TestWatcherExtension.class)
 abstract public class DIGIDTestRunner extends ZGWTestRunner {
 
-    protected OverzichtSteps overzichtSteps;
     protected ZGWDigidUser digidUser;
 
     public DIGIDTestRunner(String baseUrl) {
@@ -34,18 +33,20 @@ abstract public class DIGIDTestRunner extends ZGWTestRunner {
 
         if (new File("digidsession.json").exists()) {
             // use existing session
-            context = browser.newContext(
-                    new Browser.NewContextOptions().setStorageStatePath(Paths.get("digidsession.json")));
+            options.setStorageStatePath(Paths.get("digidsession.json"));
+            context = browser.newContext(options);
             page = context.newPage();
         } else {
             context = browser.newContext(options);
             page = context.newPage();
             new OverzichtSteps(page).login_als_burger_on_page(digidUser, "");
-            context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get("digidsession.json")));        }
+            context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get("digidsession.json")));
+        }
 
         context.tracing().start(new Tracing.StartOptions()
                 .setScreenshots(true)
                 .setSnapshots(true)
                 .setSources(true));
+        page.navigate("/");
     }
 }
