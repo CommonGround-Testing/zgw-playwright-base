@@ -20,7 +20,7 @@ public class ContextHandler {
     /**
      * Use an existing session if available and otherwise login and store this new session
      *
-     * @param user
+     * @param user ZGWDigidUser
      */
     public static void getOrStartNewDigidSession(@NonNull ZGWDigidUser user) {
         String stateFile = user.getUsername() + "-state.json";
