@@ -16,11 +16,11 @@ abstract public class ZGWTestRunner {
     // New instance for each test method.
     // Cannot use standard library because we need to get cookies fTestWatcherExtensionrom context
     @Getter
-    protected static BrowserContext context;
+    public static BrowserContext context;
     @Getter
-    private static String baseUrl;
+    public static String baseUrl;
     @Getter
-    protected static Page page;
+    public static Page page;
 
     public ZGWTestRunner(String url) {
         baseUrl = url;
@@ -47,7 +47,6 @@ abstract public class ZGWTestRunner {
         options.baseURL = baseUrl;
         context = browser.newContext(options);
         page = context.newPage();
-
         context.tracing().start(new Tracing.StartOptions()
                 .setScreenshots(true)
                 .setSnapshots(true)
