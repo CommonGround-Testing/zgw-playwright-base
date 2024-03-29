@@ -17,6 +17,6 @@ abstract public class DIGIDTestRunner extends ZGWTestRunner {
     @BeforeEach
     @Override
     void createContextAndPage() {
-        ContextHandler.getOrStartNewDigidSession(digidUser);
+        ContextHandler.createDigidContextAndPage(digidUser);
     }
 }

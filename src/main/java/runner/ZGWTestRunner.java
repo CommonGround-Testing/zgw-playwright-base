@@ -43,14 +43,6 @@ abstract public class ZGWTestRunner {
 
     @BeforeEach
     void createContextAndPage() {
-        Browser.NewContextOptions options = new Browser.NewContextOptions();
-        options.baseURL = baseUrl;
-        context = browser.newContext(options);
-        page = context.newPage();
-        context.tracing().start(new Tracing.StartOptions()
-                .setScreenshots(true)
-                .setSnapshots(true)
-                .setSources(true));
-
+        ContextHandler.createCleanContextAndPage();
     }
 }

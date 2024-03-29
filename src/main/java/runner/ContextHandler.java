@@ -18,11 +18,11 @@ import static runner.ZGWTestRunner.*;
 public class ContextHandler {
 
     /**
-     * Use an existing session if available and otherwise login and store this new session
+     * Use an existing session if available and otherwise login and put it in the context
      *
      * @param user ZGWDigidUser
      */
-    public static void getOrStartNewDigidSession(@NonNull ZGWDigidUser user) {
+    public static void createDigidContextAndPage(@NonNull ZGWDigidUser user) {
         String stateFile = user.getUsername() + "-state.json";
         var options = createContextOptions();
         var storageStatePath = Paths.get(stateFile);
@@ -35,6 +35,14 @@ public class ContextHandler {
             new OverzichtSteps(page).login_als_burger_on_page(user, "");
             context.storageState(new BrowserContext.StorageStateOptions().setPath(storageStatePath));
         }
+        addTracingToContext();
+    }
+
+    /**
+     * Create a clean context and page
+     */
+    public static void createCleanContextAndPage(){
+        createContextAndPage(createContextOptions());
         addTracingToContext();
     }
 
