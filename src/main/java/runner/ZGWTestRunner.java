@@ -1,6 +1,7 @@
 package runner;
 
 import com.microsoft.playwright.*;
+import lombok.Getter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,32 +15,21 @@ abstract public class ZGWTestRunner {
     static Browser browser;
     // New instance for each test method.
     // Cannot use standard library because we need to get cookies fTestWatcherExtensionrom context
+    @Getter
     protected static BrowserContext context;
+    @Getter
     private static String baseUrl;
+    @Getter
     protected static Page page;
 
-    public ZGWTestRunner(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
-    public static String getBaseUrl() {
-        return baseUrl;
-    }
-
-    public static BrowserContext getContext() {
-        return context;
-    }
-
-    public static Page getPage() {
-        return page;
+    public ZGWTestRunner(String url) {
+        baseUrl = url;
     }
 
     @BeforeAll
     static void launchBrowser() {
         var headlessProp = System.getProperty("headless");
-        var setHeadless = (headlessProp != null && headlessProp.equals("true"))
-                ? true
-                : false;
+        var setHeadless = headlessProp != null && headlessProp.equals("true");
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType
                 .LaunchOptions()
