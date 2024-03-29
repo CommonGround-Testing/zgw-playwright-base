@@ -4,8 +4,10 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Tracing;
 import lombok.NonNull;
+import steps.gui.gzac.GzacTakenSteps;
 import steps.gui.klantportaal.OverzichtSteps;
-import users.ZGWDigidUser;
+import users.ADUser;
+import users.ZGWUser;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -25,9 +27,9 @@ public class ContextHandler {
     /**
      * Use an existing session if available and otherwise login and put it in the context
      *
-     * @param user ZGWDigidUser
+     * @param user ZGWUser
      */
-    public static void createDigidContextAndPage(@NonNull ZGWDigidUser user) {
+    public static void createDigidContextAndPage(@NonNull ZGWUser user) {
         String stateFile = user.getUsername() + "-state.json";
         var storageStatePath = Paths.get(stateFile);
         var options = createContextOptions();
@@ -44,9 +46,30 @@ public class ContextHandler {
     }
 
     /**
+     * Use an existing session if available and otherwise login and put it in the context
+     *
+     * @param user ADUser
+     */
+    public static void createDigidContextAndPage(@NonNull ADUser user) {
+        String stateFile = user.getUsername() + "-state.json";
+        var storageStatePath = Paths.get(stateFile);
+        var options = createContextOptions();
+
+        if (isThereAnExistingValidSession(stateFile)) {
+            options.setStorageStatePath(storageStatePath);
+            createContextAndPage(options);
+        } else {
+            createContextAndPage(options);
+            new GzacTakenSteps(page).medewerker_logt_in_bij_GZAC(GzacTakenSteps.URL, user);
+            context.storageState(new BrowserContext.StorageStateOptions().setPath(storageStatePath));
+        }
+        addTracingToContext();
+    }
+
+    /**
      * Create a clean context and page
      */
-    public static void createCleanContextAndPage(){
+    public static void createCleanContextAndPage() {
         createContextAndPage(createContextOptions());
         addTracingToContext();
     }
@@ -58,20 +81,20 @@ public class ContextHandler {
      * @param stateFile filepath
      * @return boolean true or false
      */
-    private static boolean isThereAnExistingValidSession(String stateFile){
+    private static boolean isThereAnExistingValidSession(String stateFile) {
         var storageStatePath = Paths.get(stateFile);
-        if (!new File(stateFile).exists()){
+        if (!new File(stateFile).exists()) {
             return false;
         }
-        try{
+        try {
             var creationTime = Files.getLastModifiedTime(storageStatePath).toInstant();
             var now = Clock.systemDefaultZone().instant();
             var diff = Duration.between(creationTime, now);
-            if ( diff.toMinutes() >= sessionTimeoutInMinutes){
+            if (diff.toMinutes() >= sessionTimeoutInMinutes) {
                 return (!new File(stateFile).delete());
             }
             return true;
-        } catch (Exception ex){
+        } catch (Exception ex) {
             return false;
         }
     }

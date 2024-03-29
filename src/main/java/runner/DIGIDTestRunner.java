@@ -2,21 +2,20 @@ package runner;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
-import users.ZGWDigidUser;
+import users.ZGWUser;
 
 @ExtendWith(TestWatcherExtension.class)
 abstract public class DIGIDTestRunner extends ZGWTestRunner {
+    protected ZGWUser zgwUser;
 
-    protected ZGWDigidUser digidUser;
-
-    public DIGIDTestRunner(String baseUrl, ZGWDigidUser user) {
+    public DIGIDTestRunner(String baseUrl, ZGWUser user) {
         super(baseUrl);
-        digidUser = user;
+        zgwUser = user;
     }
 
     @BeforeEach
     @Override
     void createContextAndPage() {
-        ContextHandler.createDigidContextAndPage(digidUser);
+        ContextHandler.createDigidContextAndPage(zgwUser);
     }
 }
