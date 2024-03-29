@@ -17,7 +17,12 @@ import static runner.ZGWTestRunner.*;
  */
 public class ContextHandler {
 
-    public static void getOrStartNewDigidSession(ZGWDigidUser user) {
+    /**
+     * Use an existing session if available and otherwise login and store this new session
+     *
+     * @param user
+     */
+    public static void getOrStartNewDigidSession(@NonNull ZGWDigidUser user) {
         String stateFile = user.getUsername() + "-state.json";
         var options = createContextOptions();
         var storageStatePath = Paths.get(stateFile);
@@ -39,7 +44,6 @@ public class ContextHandler {
      *
      * @return Browser.NewContextOptions
      */
-    @NonNull
     private static Browser.NewContextOptions createContextOptions() {
         Browser.NewContextOptions options = new Browser.NewContextOptions();
         options.baseURL = ZGWTestRunner.getBaseUrl();
@@ -49,9 +53,9 @@ public class ContextHandler {
     /**
      * set the context and create a new page
      *
-     * @param options
+     * @param options with options
      */
-    private static void createContextAndPage(Browser.NewContextOptions options) {
+    private static void createContextAndPage(@NonNull Browser.NewContextOptions options) {
         context = browser.newContext(options);
         page = context.newPage();
     }
