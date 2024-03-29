@@ -8,7 +8,10 @@ import steps.gui.klantportaal.OverzichtSteps;
 import users.ZGWDigidUser;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Clock;
+import java.time.Duration;
 
 import static runner.ZGWTestRunner.*;
 
@@ -17,6 +20,8 @@ import static runner.ZGWTestRunner.*;
  */
 public class ContextHandler {
 
+    private final static Integer sessionTimeoutInMinutes = 13;
+
     /**
      * Use an existing session if available and otherwise login and put it in the context
      *
@@ -24,10 +29,10 @@ public class ContextHandler {
      */
     public static void createDigidContextAndPage(@NonNull ZGWDigidUser user) {
         String stateFile = user.getUsername() + "-state.json";
-        var options = createContextOptions();
         var storageStatePath = Paths.get(stateFile);
+        var options = createContextOptions();
 
-        if (new File(stateFile).exists()) {
+        if (isThereAnExistingValidSession(stateFile)) {
             options.setStorageStatePath(storageStatePath);
             createContextAndPage(options);
         } else {
@@ -44,6 +49,31 @@ public class ContextHandler {
     public static void createCleanContextAndPage(){
         createContextAndPage(createContextOptions());
         addTracingToContext();
+    }
+
+    /**
+     * Check if an existing statefile exists and check if it is still valid
+     * Sessions only last 15 minutes
+     *
+     * @param stateFile filepath
+     * @return boolean true or false
+     */
+    private static boolean isThereAnExistingValidSession(String stateFile){
+        var storageStatePath = Paths.get(stateFile);
+        if (!new File(stateFile).exists()){
+            return false;
+        }
+        try{
+            var creationTime = Files.getLastModifiedTime(storageStatePath).toInstant();
+            var now = Clock.systemDefaultZone().instant();
+            var diff = Duration.between(creationTime, now);
+            if ( diff.toMinutes() >= sessionTimeoutInMinutes){
+                return (!new File(stateFile).delete());
+            }
+            return true;
+        } catch (Exception ex){
+            return false;
+        }
     }
 
     /**
