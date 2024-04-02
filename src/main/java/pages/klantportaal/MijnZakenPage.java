@@ -35,7 +35,7 @@ public class MijnZakenPage {
         this.zaaknummer = page
                 .locator("//dt[@class='denhaag-description-list__title' and text()='Zaaknummer']");
         this.zaakDocumentenDownloadButton = page
-                .locator("//a[contains(@href,'document')]/span[text()='Download']");
+                .locator("//button[contains(@class,'denhaag-file')]//div[text()='Download']");
         this.zaakGeenDocumenten = page.locator("//p[text()='Er zijn geen documenten.']");
         this.zaakContactmomentenList = page.locator("//ol[contains(@class,'denhaag-contact-timeline')]");
     }
