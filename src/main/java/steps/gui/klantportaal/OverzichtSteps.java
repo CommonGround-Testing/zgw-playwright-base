@@ -18,6 +18,7 @@ public class OverzichtSteps extends KlantportaalSteps {
      *
      */
     public void is_overzicht_zichtbaar_na_login() {
+        overzichtPage.headerPage.waitFor();
         assertThat(overzichtPage.headerPage).isVisible();
     }
 

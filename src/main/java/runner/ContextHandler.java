@@ -39,7 +39,9 @@ public class ContextHandler {
             createContextAndPage(options);
         } else {
             createContextAndPage(options);
-            new OverzichtSteps(page).login_als_burger_on_page(user, "");
+            var overzichtSteps = new OverzichtSteps(page);
+            overzichtSteps.navigate();
+            overzichtSteps.Login(user);
             context.storageState(new BrowserContext.StorageStateOptions().setPath(storageStatePath));
         }
         addTracingToContext();

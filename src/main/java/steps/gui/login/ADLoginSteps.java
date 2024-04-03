@@ -3,9 +3,9 @@ package steps.gui.login;
 import com.microsoft.playwright.Page;
 import org.jboss.aerogear.security.otp.Totp;
 import pages.ADLoginPage;
-import users.ADUser;
+import users.User;
 
-public class ADLoginSteps {
+public class ADLoginSteps implements LoginSteps {
 
     private final ADLoginPage adLoginPage;
 
@@ -18,7 +18,7 @@ public class ADLoginSteps {
      *
      * @param user
      */
-    public void login_met_ad_user(ADUser user) {
+    public void Login(User user) {
         adLoginPage.gebruikersnaamInput.waitFor();
         adLoginPage.gebruikersnaamInput.fill(user.getUsername());
         adLoginPage.volgendeInput.click();

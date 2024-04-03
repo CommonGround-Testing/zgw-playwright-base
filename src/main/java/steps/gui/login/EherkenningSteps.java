@@ -2,8 +2,9 @@ package steps.gui.login;
 
 import com.microsoft.playwright.Page;
 import pages.EherkenningLoginPage;
+import users.User;
 
-public class EherkenningSteps {
+public class EherkenningSteps implements LoginSteps {
 
     private final EherkenningLoginPage eherkenningPage;
 
@@ -14,17 +15,16 @@ public class EherkenningSteps {
     /**
      * Login met eHerkenning
      *
-     * @param username
-     * @param password
+     * @param user User
      */
-    public void login_als(String username, String password) {
+    public void Login(User user) {
 
         eherkenningPage.dropdownSelectIdentityProvider.selectOption("Digidentity AD 1.13 (preproduction)");
         eherkenningPage.buttonConfirmIdentityProviderSelection.click();
 
-        eherkenningPage.textfieldUsername.fill(username);
+        eherkenningPage.textfieldUsername.fill(user.getUsername());
         eherkenningPage.buttonContinue.click();
-        eherkenningPage.textfieldPassword.fill(password);
+        eherkenningPage.textfieldPassword.fill(user.getPassword());
         eherkenningPage.buttonLogin.click();
 
         // TODO: verifieren dat dit op TEST ook goed werkt.

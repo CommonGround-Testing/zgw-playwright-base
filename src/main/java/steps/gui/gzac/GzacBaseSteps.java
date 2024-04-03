@@ -102,7 +102,7 @@ public class GzacBaseSteps extends GeneriekeSteps {
      */
     public void medewerker_logt_in_bij_GZAC(String url, ADUser user) {
         page.navigate(url);
-        adLoginSteps.login_met_ad_user(user);
+        adLoginSteps.Login(user);
         wachtOpLadenMenu();
     }
 
