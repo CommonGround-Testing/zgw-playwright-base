@@ -2,6 +2,7 @@ package runner;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
+import steps.gui.login.DigidLoginSteps;
 import users.ZGWUser;
 
 @ExtendWith(TestWatcherExtension.class)
@@ -15,7 +16,7 @@ abstract public class DIGIDTestRunner extends ZGWTestRunner {
 
     @BeforeEach
     @Override
-    void createContextAndPage() {
-        ContextHandler.createDigidContextAndPage(zgwUser);
+    protected void createContextAndPage() {
+        ContextHandler.createDigidContextAndPage(DigidLoginSteps.class, zgwUser);
     }
 }

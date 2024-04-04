@@ -4,7 +4,7 @@ import com.microsoft.playwright.Page;
 import pages.EherkenningLoginPage;
 import users.User;
 
-public class EherkenningSteps implements LoginSteps {
+public class EherkenningSteps extends LoginSteps {
 
     private final EherkenningLoginPage eherkenningPage;
 

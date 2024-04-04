@@ -6,10 +6,13 @@ import com.microsoft.playwright.Tracing;
 import lombok.NonNull;
 import steps.gui.gzac.GzacTakenSteps;
 import steps.gui.klantportaal.OverzichtSteps;
+import steps.gui.login.LoginSteps;
 import users.ADUser;
+import users.User;
 import users.ZGWUser;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Clock;
@@ -27,9 +30,9 @@ public class ContextHandler {
     /**
      * Use an existing session if available and otherwise login and put it in the context
      *
-     * @param user ZGWUser
+     * @param user User
      */
-    public static void createDigidContextAndPage(@NonNull ZGWUser user) {
+    public static void createDigidContextAndPage(Type stepsClass, User user) {
         String stateFile = user.getUsername() + "-state.json";
         var storageStatePath = Paths.get(stateFile);
         var options = createContextOptions();
@@ -37,35 +40,22 @@ public class ContextHandler {
         if (isThereAnExistingValidSession(stateFile)) {
             options.setStorageStatePath(storageStatePath);
             createContextAndPage(options);
+            addTracingToContext();
         } else {
             createContextAndPage(options);
-            var overzichtSteps = new OverzichtSteps(page);
-            overzichtSteps.navigate();
-            overzichtSteps.Login(user);
-            context.storageState(new BrowserContext.StorageStateOptions().setPath(storageStatePath));
-        }
-        addTracingToContext();
-    }
+            addTracingToContext();
 
-    /**
-     * Use an existing session if available and otherwise login and put it in the context
-     *
-     * @param user ADUser
-     */
-    public static void createDigidContextAndPage(@NonNull ADUser user) {
-        String stateFile = user.getUsername() + "-state.json";
-        var storageStatePath = Paths.get(stateFile);
-        var options = createContextOptions();
-
-        if (isThereAnExistingValidSession(stateFile)) {
-            options.setStorageStatePath(storageStatePath);
-            createContextAndPage(options);
-        } else {
-            createContextAndPage(options);
-            new GzacTakenSteps(page).medewerker_logt_in_bij_GZAC(GzacTakenSteps.URL, user);
-            context.storageState(new BrowserContext.StorageStateOptions().setPath(storageStatePath));
+            try {
+                var myClass = Class.forName(stepsClass.getTypeName());
+                var constructor = myClass.getDeclaredConstructors();
+                var loginSteps = (LoginSteps) constructor[0].newInstance(page);
+                loginSteps.navigate();
+                loginSteps.Login(user);
+                context.storageState(new BrowserContext.StorageStateOptions().setPath(storageStatePath));
+            } catch (Exception ex) {
+                System.out.println("Something went wrong while creating the Context and page : " + ex.getLocalizedMessage());
+            }
         }
-        addTracingToContext();
     }
 
     /**

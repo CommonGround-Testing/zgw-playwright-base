@@ -5,7 +5,7 @@ import org.jboss.aerogear.security.otp.Totp;
 import pages.ADLoginPage;
 import users.User;
 
-public class ADLoginSteps implements LoginSteps {
+public class ADLoginSteps extends LoginSteps {
 
     private final ADLoginPage adLoginPage;
 
@@ -13,10 +13,15 @@ public class ADLoginSteps implements LoginSteps {
         adLoginPage = new ADLoginPage(page);
     }
 
+
+    public void navigate(){
+        adLoginPage.navigate();
+    }
+
     /**
      * Wacht op het veld voor naam gebruiker en vul dan alle gegevens in
      *
-     * @param user
+     * @param user User
      */
     public void Login(User user) {
         adLoginPage.gebruikersnaamInput.waitFor();

@@ -2,6 +2,7 @@ package runner;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
+import steps.gui.login.ADLoginSteps;
 import users.ADUser;
 
 @ExtendWith(TestWatcherExtension.class)
@@ -15,7 +16,7 @@ abstract public class ADTestRunner extends ZGWTestRunner {
 
     @BeforeEach
     @Override
-    void createContextAndPage() {
-        ContextHandler.createDigidContextAndPage(adUser);
+    protected void createContextAndPage() {
+        ContextHandler.createDigidContextAndPage(ADLoginSteps.class, adUser);
     }
 }
