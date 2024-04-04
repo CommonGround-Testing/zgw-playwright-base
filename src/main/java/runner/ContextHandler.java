@@ -4,12 +4,8 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Tracing;
 import lombok.NonNull;
-import steps.gui.gzac.GzacTakenSteps;
-import steps.gui.klantportaal.OverzichtSteps;
 import steps.gui.login.LoginSteps;
-import users.ADUser;
 import users.User;
-import users.ZGWUser;
 
 import java.io.File;
 import java.lang.reflect.Type;
