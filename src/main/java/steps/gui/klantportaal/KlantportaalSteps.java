@@ -46,6 +46,7 @@ public abstract class KlantportaalSteps {
      * @param user User
      */
     public void Login(User user) {
+        page.navigate("");
         klantportaalPage.inloggenDigidLink.click();
         digidLoginSteps.Login(user);
     }
