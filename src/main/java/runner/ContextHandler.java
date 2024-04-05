@@ -37,6 +37,7 @@ public class ContextHandler {
         if (isThereAnExistingValidSession(stateFile)) {
             options.setStorageStatePath(storageStatePath);
             createContextAndPage(options);
+            page.navigate("");
             addTracingToContext();
         } else {
             createContextAndPage(options);
