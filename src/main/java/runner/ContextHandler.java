@@ -24,7 +24,8 @@ public class ContextHandler {
     private final static Integer sessionTimeoutInMinutes = 13;
 
     /**
-     * Use an existing session if available and otherwise login and put it in the context
+     * Use an existing session if available and otherwise login and store this session
+     * The sessions are stored in -state.json files which can be re-used for multiple tests
      *
      * @param user User
      */
@@ -46,17 +47,6 @@ public class ContextHandler {
                 loginSteps.Login(user);
                 context.storageState(new BrowserContext.StorageStateOptions().setPath(storageStatePath));
             }
-        }
-    }
-
-    private static LoginSteps instantiateLoginSteps(Type stepsClass) {
-        try {
-            var myClass = Class.forName(stepsClass.getTypeName());
-            var constructor = myClass.getDeclaredConstructors();
-            return (LoginSteps) constructor[0].newInstance(page);
-        } catch (Exception ex) {
-            System.out.println("Something went wrong while trying to instantiate the Login steps : " + ex.getLocalizedMessage());
-            return null;
         }
     }
 
@@ -90,6 +80,23 @@ public class ContextHandler {
             return true;
         } catch (Exception ex) {
             return false;
+        }
+    }
+
+    /**
+     * Create a new steps class for the loginsteps that are needed to create a new session
+     *
+     * @param stepsClass to be instantiated
+     * @return LoginSteps
+     */
+    private static LoginSteps instantiateLoginSteps(Type stepsClass) {
+        try {
+            var myClass = Class.forName(stepsClass.getTypeName());
+            var constructor = myClass.getDeclaredConstructors();
+            return (LoginSteps) constructor[0].newInstance(page);
+        } catch (Exception ex) {
+            System.out.println("Something went wrong while trying to instantiate the Login steps : " + ex.getLocalizedMessage());
+            return null;
         }
     }
 

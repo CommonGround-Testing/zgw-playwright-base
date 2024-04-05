@@ -7,6 +7,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+/**
+ * This runner will prepare everything that is needed for your tests to run
+ * Note that this code runs before each test
+ */
 @ExtendWith(TestWatcherExtension.class)
 abstract public class ZGWTestRunner {
 
