@@ -35,6 +35,7 @@ public class MijnTakenSteps extends KlantportaalSteps {
      *
      */
     public void een_overzicht_van_de_taken_voor_de_burger_wordt_getoond() {
+        mijnTakenPage.takenCard.waitFor();
         assertThat(mijnTakenPage.takenCard).isVisible();
         assertThat(mijnTakenPage.takenOphalenFoutmelding).isHidden();
     }

@@ -5,6 +5,7 @@ import com.microsoft.playwright.Page;
 
 public class ADLoginPage {
 
+    protected Page page;
     public final Locator gebruikersnaamInput;
     public final Locator wachtwoordInput;
     public final Locator volgendeInput;
@@ -14,14 +15,19 @@ public class ADLoginPage {
     public final Locator codeInput;
     public final Locator verifierenInput;
 
+    public void navigate(){
+        page.navigate("");
+    }
+
     public ADLoginPage(Page page) {
-        this.gebruikersnaamInput = page.locator("//input[@type='email']");
-        this.wachtwoordInput = page.locator("//input[@name='passwd']");
-        this.volgendeInput = page.locator("//input[@value='Next']");
-        this.aanmeldenInput = page.locator("//input[@value='Sign in']");
-        this.kanAuthAppNietGebruikenLink = page.locator("//*[@id='signInAnotherWay']");
-        this.gebruikVerificatieCode = page.locator("//div[contains(text(),'Use a verification code')]");
-        this.codeInput = page.locator("//input[@name='otc']");
-        this.verifierenInput = page.locator("//input[@value='Verify']");
+        this.page = page;
+        gebruikersnaamInput = page.locator("//input[@type='email']");
+        wachtwoordInput = page.locator("//input[@name='passwd']");
+        volgendeInput = page.locator("//input[@value='Next']");
+        aanmeldenInput = page.locator("//input[@value='Sign in']");
+        kanAuthAppNietGebruikenLink = page.locator("//*[@id='signInAnotherWay']");
+        gebruikVerificatieCode = page.locator("//div[contains(text(),'Use a verification code')]");
+        codeInput = page.locator("//input[@name='otc']");
+        verifierenInput = page.locator("//input[@value='Verify']");
     }
 }

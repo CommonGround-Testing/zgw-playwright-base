@@ -7,6 +7,7 @@ import com.microsoft.playwright.options.AriaRole;
 import pages.klantportaal.KlantportaalPage;
 import steps.gui.login.DigidLoginSteps;
 import steps.gui.login.EherkenningSteps;
+import users.User;
 import users.ZGWUser;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -23,10 +24,10 @@ public abstract class KlantportaalSteps {
 
     public KlantportaalSteps(Page page) {
         this.page = page;
-        this.isLanguageNL = true;
-        this.klantportaalPage = new KlantportaalPage(page);
-        this.digidLoginSteps = new DigidLoginSteps(page);
-        this.eherkenningSteps = new EherkenningSteps(page);
+        isLanguageNL = true;
+        klantportaalPage = new KlantportaalPage(page);
+        digidLoginSteps = new DigidLoginSteps(page);
+        eherkenningSteps = new EherkenningSteps(page);
     }
 
     /**
@@ -42,13 +43,12 @@ public abstract class KlantportaalSteps {
     /**
      * Open a certain url and login with a user
      *
-     * @param user
-     * @param relativeUrl can be empty string if you want to open the overview page
+     * @param user User
      */
-    public void login_als_burger_on_page(ZGWUser user, String relativeUrl) {
-        this.navigate(relativeUrl);
+    public void Login(User user) {
+        page.navigate("");
         klantportaalPage.inloggenDigidLink.click();
-        digidLoginSteps.login_als(user.getUsername(), user.getPassword());
+        digidLoginSteps.Login(user);
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class KlantportaalSteps {
         this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
         this.selecteer_optie_inloggen_met_digid_machtigen();
-        digidLoginSteps.login_als(user.getUsername(), user.getPassword());
+        digidLoginSteps.Login(user);
         digidLoginSteps.selecteer_machtiginggever();
     }
 
@@ -74,8 +74,8 @@ public abstract class KlantportaalSteps {
     public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user, String relativeUrl) {
         this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
-        this.selecteer_optie_inloggen_met_eherkenning();
-        this.eherkenningSteps.login_als(user.getUsername(), user.getPassword());
+        selecteer_optie_inloggen_met_eherkenning();
+        eherkenningSteps.Login(user);
         klantportaalPage.gebruikersMenuOndernemerButton.isVisible();
     }
 
