@@ -2,6 +2,47 @@
 
 ![github-actions-ci](https://github.com/CommonGround-Testing/zgw-playwright-base/actions/workflows/ci.yml/badge.svg) ![Maven Central](https://img.shields.io/maven-central/v/io.github.commonground-testing/zgw-playwright-base)
 
+## Let's get started
+
+The intention of this library is to provide an easy setup and execution for playwright tests for the zgw-platform (zaak
+gericht werken). This mainly entails implementations of three applications Gzac, Openforms and Klantportaal.
+
+### Testrunner
+
+To start off with the library we need to create a class that will be responsible for your implementation specific setup.
+To refer to this class, we'll name it a "runner".
+So, create a class and call it <nameOfYourApp>Runner.class. In this class extends it with the class ZGWTestRunner. This
+is a class in the library that contains basic Playwright setup.
+Example:
+
+```java
+
+import runner.ZGWTestRunner;
+
+public class OpenFormsTestRunner extends ZGWTestRunner {
+
+}
+```
+
+Next you need to supply the baseUrl of your application. See below.
+
+```java
+
+import runner.ZGWTestRunner;
+
+public class OpenFormsTestRunner extends ZGWTestRunner {
+
+    public OpenFormsTestRunner() {
+        super("https://openformulieren-zgw.test.denhaag.nl/aanvraag-formulier-ooievaarspas");
+    }
+}
+```
+
+It is worth noting that if you want to run tests on different environment (e.g. test & acceptance) instead of entering a
+hardcoded url.
+
+### Steps
+
 General info: https://medium.com/@efthymiou.dimitrios1/how-to-publish-your-library-to-maven-central-3923139967e1
 
 Deploy naar Maven Central
