@@ -40,17 +40,23 @@ public class ContextHandler {
         } else {
             createContextAndPage(options);
             addTracingToContext();
-
-            try {
-                var myClass = Class.forName(stepsClass.getTypeName());
-                var constructor = myClass.getDeclaredConstructors();
-                var loginSteps = (LoginSteps) constructor[0].newInstance(page);
+            var loginSteps = instantiateLoginSteps(stepsClass);
+            if (loginSteps != null) {
                 loginSteps.navigate();
                 loginSteps.Login(user);
                 context.storageState(new BrowserContext.StorageStateOptions().setPath(storageStatePath));
-            } catch (Exception ex) {
-                System.out.println("Something went wrong while creating the Context and page : " + ex.getLocalizedMessage());
             }
+        }
+    }
+
+    private static LoginSteps instantiateLoginSteps(Type stepsClass) {
+        try {
+            var myClass = Class.forName(stepsClass.getTypeName());
+            var constructor = myClass.getDeclaredConstructors();
+            return (LoginSteps) constructor[0].newInstance(page);
+        } catch (Exception ex) {
+            System.out.println("Something went wrong while trying to instantiate the Login steps : " + ex.getLocalizedMessage());
+            return null;
         }
     }
 
