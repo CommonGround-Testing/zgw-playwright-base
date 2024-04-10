@@ -2,7 +2,6 @@ package steps.gui.klantportaal;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import pages.klantportaal.KlantportaalPage;
 import steps.gui.login.DigidLoginSteps;
@@ -31,13 +30,12 @@ public abstract class KlantportaalSteps {
     }
 
     /**
-     * Open a url
+     * Open baseUrl
      *
-     * @param url to be opened
      * @return
      */
-    public Response navigate(String url) {
-        return page.navigate(url);
+    public void navigate() {
+        page.navigate("");
     }
 
     /**
@@ -46,7 +44,7 @@ public abstract class KlantportaalSteps {
      * @param user User
      */
     public void Login(User user) {
-        page.navigate("");
+        this.navigate();
         klantportaalPage.inloggenDigidLink.click();
         digidLoginSteps.Login(user);
     }
@@ -57,8 +55,8 @@ public abstract class KlantportaalSteps {
      * @param user
      * @param relativeUrl can be empty string if you want to open the overview page
      */
-    public void log_in_op_het_klantportaal_via_digid_machtigen(ZGWUser user, String relativeUrl) {
-        this.navigate(relativeUrl);
+    public void log_in_op_het_klantportaal_via_digid_machtigen(ZGWUser user) {
+        this.navigate();
         // this.login_met_ad(); TODO weer activeren na ZP-1256
         this.selecteer_optie_inloggen_met_digid_machtigen();
         digidLoginSteps.Login(user);
@@ -71,8 +69,8 @@ public abstract class KlantportaalSteps {
      * @param user
      * @param relativeUrl can be empty string if you want to open the overview page
      */
-    public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user, String relativeUrl) {
-        this.navigate(relativeUrl);
+    public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user) {
+        this.navigate();
         // this.login_met_ad(); TODO weer activeren na ZP-1256
         selecteer_optie_inloggen_met_eherkenning();
         eherkenningSteps.Login(user);
