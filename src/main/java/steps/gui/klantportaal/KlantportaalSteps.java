@@ -31,11 +31,18 @@ public abstract class KlantportaalSteps {
 
     /**
      * Open baseUrl
-     *
-     * @return
      */
     public void navigate() {
         page.navigate("");
+    }
+
+    /**
+     * Open baseUrl
+     *
+     * @param relativeUrl to navigate to
+     */
+    public void navigate(String relativeUrl) {
+        page.navigate(relativeUrl);
     }
 
     /**
@@ -55,8 +62,8 @@ public abstract class KlantportaalSteps {
      * @param user
      * @param relativeUrl can be empty string if you want to open the overview page
      */
-    public void log_in_op_het_klantportaal_via_digid_machtigen(ZGWUser user) {
-        this.navigate();
+    public void log_in_op_het_klantportaal_via_digid_machtigen(ZGWUser user, String relativeUrl) {
+        this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
         this.selecteer_optie_inloggen_met_digid_machtigen();
         digidLoginSteps.Login(user);
@@ -69,8 +76,8 @@ public abstract class KlantportaalSteps {
      * @param user
      * @param relativeUrl can be empty string if you want to open the overview page
      */
-    public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user) {
-        this.navigate();
+    public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user, String relativeUrl) {
+        this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
         selecteer_optie_inloggen_met_eherkenning();
         eherkenningSteps.Login(user);
