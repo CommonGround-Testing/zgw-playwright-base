@@ -34,7 +34,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
     public void open_afgeronde_zaak() {
         mijnZakenPage.afgerondeZakenButton.click();
         mijnZakenPage.zaakTegel.waitFor();
-        mijnZakenPage.zaakTegel.click();
+        mijnZakenPage.zaakTegel.first().click();
     }
 
     /**
@@ -43,7 +43,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
      */
     public void open_lopende_zaak() {
         mijnZakenPage.zaakTegel.waitFor();
-        mijnZakenPage.zaakTegel.click();
+        mijnZakenPage.zaakTegel.first().click();
     }
 
     /**
