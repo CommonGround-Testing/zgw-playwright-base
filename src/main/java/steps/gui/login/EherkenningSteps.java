@@ -29,6 +29,6 @@ public class EherkenningSteps extends LoginSteps {
 
         // TODO: verifieren dat dit op TEST ook goed werkt.
         //  Momenteel staat daar nog een extra scherm tussen dat er niet hoort, op ACC gaat het wel goed.
-        eherkenningPage.buttonGaVerder.click();
+        eherkenningPage.buttonContinue.click();
     }
 }
