@@ -166,7 +166,7 @@ public abstract class KlantportaalSteps {
     public void burger_opent_taalmenu_en_verandert_taal() {
         klantportaalPage.languageButton.click();
         klantportaalPage.disabledLanguageOption.click();
-        assertThat(klantportaalPage.getMenuButtonByText(isLanguageNL)).isHidden();
+        assertThat(klantportaalPage.disabledLanguageOption).isHidden();
         switchLanguage();
     }
 
