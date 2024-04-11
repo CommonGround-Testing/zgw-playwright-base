@@ -22,7 +22,7 @@ public class KlantportaalPage {
     public KlantportaalPage(Page page) {
         this.page = page;
         this.inloggenDigidLink = page.locator("//*[@id='oidc-digid']");
-        this.headerIngelogdeNamen = page.locator("//h3[contains(., 'U bent ingelogd namens')]");
+        this.headerIngelogdeNamen = page.locator("//h3[contains(text(), 'Gemachtigd voor')]");
         this.buttonLogout = page.locator("//span[text()='Uitloggen']");
         this.inloggenDigidMachtigenLink = page.locator("//*[@id='digid-machtigen']");
         this.inloggeneHerkenningLink = page.locator("//*[@id='eherkenning']");

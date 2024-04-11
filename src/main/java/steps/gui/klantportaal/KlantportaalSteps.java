@@ -62,7 +62,7 @@ public abstract class KlantportaalSteps {
      * @param user
      * @param relativeUrl can be empty string if you want to open the overview page
      */
-    public void log_in_op_het_klantportaal_via_digid_machtigen(ZGWUser user, String relativeUrl) {
+    public void log_in_op_het_klantportaal_via_digid_machtigen(User user, String relativeUrl) {
         this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
         this.selecteer_optie_inloggen_met_digid_machtigen();
