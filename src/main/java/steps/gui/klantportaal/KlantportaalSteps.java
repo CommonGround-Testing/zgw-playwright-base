@@ -108,7 +108,7 @@ public abstract class KlantportaalSteps {
      * Klik op de optie burger 'Inloggen met eHerkenning'
      */
     public void selecteer_optie_inloggen_met_eherkenning() {
-        klantportaalPage.inloggeneHerkenningLink.click();
+        klantportaalPage.inloggeneHerkenningLink.first().click();
     }
 
     /**
