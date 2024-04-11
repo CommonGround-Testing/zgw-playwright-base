@@ -2,7 +2,6 @@ package steps.gui.klantportaal;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import pages.klantportaal.KlantportaalPage;
 import steps.gui.login.DigidLoginSteps;
@@ -31,13 +30,19 @@ public abstract class KlantportaalSteps {
     }
 
     /**
-     * Open a url
-     *
-     * @param url to be opened
-     * @return
+     * Open baseUrl
      */
-    public Response navigate(String url) {
-        return page.navigate(url);
+    public void navigate() {
+        page.navigate("");
+    }
+
+    /**
+     * Open baseUrl
+     *
+     * @param relativeUrl to navigate to
+     */
+    public void navigate(String relativeUrl) {
+        page.navigate(relativeUrl);
     }
 
     /**
@@ -46,7 +51,7 @@ public abstract class KlantportaalSteps {
      * @param user User
      */
     public void Login(User user) {
-        page.navigate("");
+        this.navigate();
         klantportaalPage.inloggenDigidLink.click();
         digidLoginSteps.Login(user);
     }
