@@ -24,7 +24,7 @@ public class MijnZakenPage {
         this.page = page;
         this.afgerondeZakenButton = page.locator("//span[text()='Afgeronde zaken']");
         this.zaakTegel = page
-                .locator("//div[@class='denhaag-card__content']");
+                .locator("//div[@role='tabpanel' and not(@hidden)]//div[@class='denhaag-card__content']");
         this.overviewZaakDetailHeaders = page
                 .locator("//h3[contains(@class,'utrecht-heading')]").all();
         this.mijnZakenHeader = page

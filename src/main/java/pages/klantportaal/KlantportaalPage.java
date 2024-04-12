@@ -25,7 +25,7 @@ public class KlantportaalPage {
         this.headerIngelogdeNamen = page.locator("//h3[contains(text(), 'Gemachtigd voor')]");
         this.buttonLogout = page.locator("//span[text()='Uitloggen']");
         this.inloggenDigidMachtigenLink = page.locator("//*[@id='digid-machtigen']");
-        this.inloggeneHerkenningLink = page.locator("//*[@id='eherkenning']");
+        this.inloggeneHerkenningLink = page.locator("//section[contains(.,'Als bedrijf of instelling')]//a");
         this.inloggeneHerkenningMachtigenLink = page.locator("//*[@id='eherkenning-bewindvoering']");
         this.gebruikersMenuBurgerButton = page.locator("//button[contains(.,'Welkom Sierra')]");
         this.gebruikersMenuOndernemerButton = page.locator("//button[contains(.,'Welkom')]");
