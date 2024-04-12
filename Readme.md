@@ -117,6 +117,21 @@ public class SomeOpenFormsTest extends OpenFormsTestRunner {
 Perhaps this is a simplistic assert, but here we test if the h1 element is visible after logging in. You might also want
 to register this element in a page object, but it shows how easy it is to setup a test.
 
+## Test execution
+
+When executing the tests, there are a couple of commandline options that can be set.
+
+| parameter | type      | functie                 | default | 
+|-----------|-----------|-------------------------|---------|
+| headless  | `boolean` | Runs the tests headless | false   |
+|           |           |                         |         |
+
+Example:
+
+```shell
+mvn clean verify -Dheadless=true
+```
+
 ## Info for Developers: deployment to maven central
 
 General info: https://medium.com/@efthymiou.dimitrios1/how-to-publish-your-library-to-maven-central-3923139967e1
