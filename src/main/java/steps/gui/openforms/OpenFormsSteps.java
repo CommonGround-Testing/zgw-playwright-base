@@ -15,7 +15,6 @@ public class OpenFormsSteps extends GeneriekeSteps {
 
     protected final OpenFormsPage openFormsPage;
     protected final DigidLoginSteps digidLoginSteps;
-    private final Page page;
 
     public OpenFormsSteps(Page page) {
         super(page);
