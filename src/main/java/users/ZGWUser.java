@@ -5,11 +5,19 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ZGWUser {
+public class ZGWUser implements User{
 
     private String username;
 
     private String password;
 
-
+    /**
+     * ZGWUser doesn't use the topSecret
+     *
+     * @return
+     */
+    @Override
+    public String getTotpSecret() {
+        return null;
+    }
 }

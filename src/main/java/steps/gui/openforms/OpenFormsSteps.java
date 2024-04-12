@@ -7,6 +7,7 @@ import com.microsoft.playwright.options.WaitForSelectorState;
 import pages.openforms.OpenFormsPage;
 import steps.gui.GeneriekeSteps;
 import steps.gui.login.DigidLoginSteps;
+import users.User;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -32,13 +33,12 @@ public class OpenFormsSteps extends GeneriekeSteps {
     /**
      * Login via Digid
      *
-     * @param username
-     * @param password
+     * @param user User
      */
-    public void login_via_digid(String username, String password) {
+    public void login_via_digid(User user) {
         openFormsPage.buttonAccepteerCookies.click();
         get_tekst("Inloggen met DigiD").click();
-        digidLoginSteps.login_als(username, password);
+        digidLoginSteps.Login(user);
         openFormsPage.textlabelHeaderH1
                 .waitFor(new Locator
                         .WaitForOptions()

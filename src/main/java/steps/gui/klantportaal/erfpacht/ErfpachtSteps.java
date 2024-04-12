@@ -8,9 +8,10 @@ import steps.gui.klantportaal.KlantportaalSteps;
 public class ErfpachtSteps extends KlantportaalSteps {
 
     public final static String URL_ERFPACHT = "/erfpacht";
-    protected ErfpachtPage erfpachtPage;
     public final String ERFPACHT_CONTRACTEN = "Erfpachtcontracten";
     public final String ERFPACHT_TAKEN = "Mijn taken";
+    public final String ERFPACHT_ZAKEN = "Mijn lopende zaken";
+    protected ErfpachtPage erfpachtPage;
 
 
     public ErfpachtSteps(Page page) {
@@ -39,8 +40,8 @@ public class ErfpachtSteps extends KlantportaalSteps {
      *
      * @return Locator voor alle zaken
      */
-    public Locator alle_erfpacht_zaken(){
-        return erfpachtPage.zakenLocator;
+    public Locator alle_erfpacht_zaken() {
+        return erfpachtPage.getZaken(ERFPACHT_ZAKEN);
     }
 
     /**
@@ -48,7 +49,7 @@ public class ErfpachtSteps extends KlantportaalSteps {
      *
      * @return Locator voor alle taken
      */
-    public Locator alle_erfpacht_taken(){
+    public Locator alle_erfpacht_taken() {
         return erfpachtPage.getTaken(ERFPACHT_TAKEN);
     }
 }

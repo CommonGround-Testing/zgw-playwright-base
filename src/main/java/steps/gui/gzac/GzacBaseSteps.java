@@ -7,6 +7,7 @@ import pages.gzac.GzacMenu;
 import steps.gui.GeneriekeSteps;
 import steps.gui.login.ADLoginSteps;
 import users.ADUser;
+import users.User;
 import utils.MathUtils;
 
 import java.util.List;
@@ -100,9 +101,9 @@ public class GzacBaseSteps extends GeneriekeSteps {
      * @param url
      * @param user
      */
-    public void medewerker_logt_in_bij_GZAC(String url, ADUser user) {
+    public void medewerker_logt_in_bij_GZAC(String url, User user) {
         page.navigate(url);
-        adLoginSteps.login_met_ad_user(user);
+        adLoginSteps.Login(user);
         wachtOpLadenMenu();
     }
 

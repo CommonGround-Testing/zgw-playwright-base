@@ -1,6 +1,6 @@
 package users;
 
-public abstract class ADUser {
+public abstract class ADUser implements User{
 
     public abstract String getUsername();
 

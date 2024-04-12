@@ -1,27 +1,35 @@
 package steps.gui.login;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pages.DigidLoginPage;
+import users.User;
 
-public class DigidLoginSteps {
+public class DigidLoginSteps extends LoginSteps {
 
-    private final DigidLoginPage digidLoginPage;
+    protected final DigidLoginPage digidLoginPage;
+    private final Locator inloggenDigidLink;
 
     public DigidLoginSteps(Page page) {
         digidLoginPage = new DigidLoginPage(page);
+        inloggenDigidLink = page.locator("//*[@id='oidc-digid']");
+    }
+
+    public void navigate(){
+        digidLoginPage.navigate();
+        inloggenDigidLink.click();
     }
 
     /**
      * Login met digid niveau Midden
      *
-     * @param username
-     * @param password
+     * @param user User
      */
-    public void login_als(String username, String password) {
+    public void Login(User user) {
         digidLoginPage.linkSelectAuthenticationWithTrustLevel.click();
         digidLoginPage.dropdownBetrouwbaarheidsniveau.selectOption("Midden");
-        digidLoginPage.textfieldUsername.fill(username);
-        digidLoginPage.textfieldPassword.fill(password);
+        digidLoginPage.textfieldUsername.fill(user.getUsername());
+        digidLoginPage.textfieldPassword.fill(user.getPassword());
         digidLoginPage.buttonDoLogin.click();
     }
 

@@ -2,8 +2,11 @@ package pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Response;
 
 public class DigidLoginPage {
+
+    private final Page page;
     public final Locator linkSelectAuthenticationWithTrustLevel;
     public final Locator dropdownBetrouwbaarheidsniveau;
     public final Locator textfieldUsername;
@@ -12,11 +15,21 @@ public class DigidLoginPage {
     public final Locator buttonSelecteerMachtiginggever;
 
     public DigidLoginPage(Page page) {
-        this.linkSelectAuthenticationWithTrustLevel = page.locator("//*[@id='authentication_type_account_test']");
-        this.dropdownBetrouwbaarheidsniveau = page.locator("//*[@id='authentication_test_zekerheidsniveau']");
-        this.textfieldUsername = page.locator("//*[@id='authentication_username']");
-        this.textfieldPassword = page.locator("//*[@id='authentication_password']");
-        this.buttonDoLogin = page.locator("//button[@type='submit']");
-        this.buttonSelecteerMachtiginggever = page.locator("//app-mandates-table//span[text()='Selecteer']");
+        this.page = page;
+        linkSelectAuthenticationWithTrustLevel = page.locator("//*[@id='authentication_type_account_test']");
+        dropdownBetrouwbaarheidsniveau = page.locator("//*[@id='authentication_test_zekerheidsniveau']");
+        textfieldUsername = page.locator("//*[@id='authentication_username']");
+        textfieldPassword = page.locator("//*[@id='authentication_password']");
+        buttonDoLogin = page.locator("//button[@type='submit']");
+        buttonSelecteerMachtiginggever = page.locator("//app-mandates-table//span[text()='Selecteer']");
+    }
+
+    /**
+     * Navigate to baseurl
+     *
+     * @return resonse
+     */
+    public Response navigate() {
+        return page.navigate("");
     }
 }

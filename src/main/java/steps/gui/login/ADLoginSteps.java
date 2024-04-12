@@ -3,9 +3,9 @@ package steps.gui.login;
 import com.microsoft.playwright.Page;
 import org.jboss.aerogear.security.otp.Totp;
 import pages.ADLoginPage;
-import users.ADUser;
+import users.User;
 
-public class ADLoginSteps {
+public class ADLoginSteps extends LoginSteps {
 
     private final ADLoginPage adLoginPage;
 
@@ -13,12 +13,17 @@ public class ADLoginSteps {
         adLoginPage = new ADLoginPage(page);
     }
 
+
+    public void navigate(){
+        adLoginPage.navigate();
+    }
+
     /**
      * Wacht op het veld voor naam gebruiker en vul dan alle gegevens in
      *
-     * @param user
+     * @param user User
      */
-    public void login_met_ad_user(ADUser user) {
+    public void Login(User user) {
         adLoginPage.gebruikersnaamInput.waitFor();
         adLoginPage.gebruikersnaamInput.fill(user.getUsername());
         adLoginPage.volgendeInput.click();

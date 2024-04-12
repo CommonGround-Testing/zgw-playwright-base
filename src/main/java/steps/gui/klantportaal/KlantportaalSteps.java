@@ -2,11 +2,11 @@ package steps.gui.klantportaal;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import pages.klantportaal.KlantportaalPage;
 import steps.gui.login.DigidLoginSteps;
 import steps.gui.login.EherkenningSteps;
+import users.User;
 import users.ZGWUser;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -23,32 +23,37 @@ public abstract class KlantportaalSteps {
 
     public KlantportaalSteps(Page page) {
         this.page = page;
-        this.isLanguageNL = true;
-        this.klantportaalPage = new KlantportaalPage(page);
-        this.digidLoginSteps = new DigidLoginSteps(page);
-        this.eherkenningSteps = new EherkenningSteps(page);
+        isLanguageNL = true;
+        klantportaalPage = new KlantportaalPage(page);
+        digidLoginSteps = new DigidLoginSteps(page);
+        eherkenningSteps = new EherkenningSteps(page);
     }
 
     /**
-     * Open a url
-     *
-     * @param url to be opened
-     * @return
+     * Open baseUrl
      */
-    public Response navigate(String url) {
-        return page.navigate(url);
+    public void navigate() {
+        page.navigate("");
+    }
+
+    /**
+     * Open baseUrl
+     *
+     * @param relativeUrl to navigate to
+     */
+    public void navigate(String relativeUrl) {
+        page.navigate(relativeUrl);
     }
 
     /**
      * Open a certain url and login with a user
      *
-     * @param user
-     * @param relativeUrl can be empty string if you want to open the overview page
+     * @param user User
      */
-    public void login_als_burger_on_page(ZGWUser user, String relativeUrl) {
-        this.navigate(relativeUrl);
+    public void Login(User user) {
+        this.navigate();
         klantportaalPage.inloggenDigidLink.click();
-        digidLoginSteps.login_als(user.getUsername(), user.getPassword());
+        digidLoginSteps.Login(user);
     }
 
     /**
@@ -57,11 +62,11 @@ public abstract class KlantportaalSteps {
      * @param user
      * @param relativeUrl can be empty string if you want to open the overview page
      */
-    public void log_in_op_het_klantportaal_via_digid_machtigen(ZGWUser user, String relativeUrl) {
+    public void log_in_op_het_klantportaal_via_digid_machtigen(User user, String relativeUrl) {
         this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
         this.selecteer_optie_inloggen_met_digid_machtigen();
-        digidLoginSteps.login_als(user.getUsername(), user.getPassword());
+        digidLoginSteps.Login(user);
         digidLoginSteps.selecteer_machtiginggever();
     }
 
@@ -74,8 +79,8 @@ public abstract class KlantportaalSteps {
     public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user, String relativeUrl) {
         this.navigate(relativeUrl);
         // this.login_met_ad(); TODO weer activeren na ZP-1256
-        this.selecteer_optie_inloggen_met_eherkenning();
-        this.eherkenningSteps.login_als(user.getUsername(), user.getPassword());
+        selecteer_optie_inloggen_met_eherkenning();
+        eherkenningSteps.Login(user);
         klantportaalPage.gebruikersMenuOndernemerButton.isVisible();
     }
 
@@ -103,7 +108,7 @@ public abstract class KlantportaalSteps {
      * Klik op de optie burger 'Inloggen met eHerkenning'
      */
     public void selecteer_optie_inloggen_met_eherkenning() {
-        klantportaalPage.inloggeneHerkenningLink.click();
+        klantportaalPage.inloggeneHerkenningLink.first().click();
     }
 
     /**
@@ -161,7 +166,7 @@ public abstract class KlantportaalSteps {
     public void burger_opent_taalmenu_en_verandert_taal() {
         klantportaalPage.languageButton.click();
         klantportaalPage.disabledLanguageOption.click();
-        assertThat(klantportaalPage.getMenuButtonByText(isLanguageNL)).isHidden();
+        assertThat(klantportaalPage.disabledLanguageOption).isHidden();
         switchLanguage();
     }
 
