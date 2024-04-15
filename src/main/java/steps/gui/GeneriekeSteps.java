@@ -16,7 +16,7 @@ public class GeneriekeSteps {
      *
      * @param specialUrl Url starting with http or https
      */
-    public void navigateWithoutBaseUrl(String specialUrl){
+    public void navigate(String specialUrl){
         page.navigate(specialUrl);
     }
 
