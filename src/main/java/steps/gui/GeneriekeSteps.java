@@ -10,6 +10,16 @@ public class GeneriekeSteps {
 
     protected final Page page;
 
+    /**
+     * Only use this method when you don't want to use the default BaseUrl
+     * Note that the url must start with https:// or http://
+     *
+     * @param specialUrl Url starting with http or https
+     */
+    public void navigateWithoutBaseUrl(String specialUrl){
+        page.navigate(specialUrl);
+    }
+
     public GeneriekeSteps(Page page) {
         this.page = page;
     }
