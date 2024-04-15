@@ -24,6 +24,10 @@ public class OpenFormsSteps extends GeneriekeSteps {
         digidLoginSteps = new DigidLoginSteps(page);
     }
 
+    public void navigate(String url){
+        page.navigate(url);
+    }
+
     /**
      * Open de pagina voor aanvraag ooievaarspas
      *
@@ -209,4 +213,17 @@ public class OpenFormsSteps extends GeneriekeSteps {
         genericPage.getInputField(veld, false).waitFor(new Locator.WaitForOptions().setTimeout(500));
         genericPage.fillTextInputField(veld, text, false);
     }
+
+    public void selecteer_login_met_digid() {
+        openFormsPage.inloggenDigidButton.click();
+    }
+
+    public void is_ingelogd() {
+        openFormsPage.headerFirstFormStep.waitFor();
+    }
+
+    public void waitUntilHeaderPageVisible() {
+        this.openFormsPage.headerFirstFormStep.waitFor();
+    }
+
 }
