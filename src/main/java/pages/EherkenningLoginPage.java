@@ -2,6 +2,7 @@ package pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 public class EherkenningLoginPage {
 
@@ -18,7 +19,8 @@ public class EherkenningLoginPage {
         this.buttonConfirmIdentityProviderSelection = page.locator("//*[@name='commit']");
         this.textfieldUsername = page.locator("//*[@id='account_username']");
         this.textfieldPassword = page.locator("//*[@id='account_password']");
-        this.buttonContinue = page.locator("//button[contains(., 'Continue')]");
+        this.buttonContinue = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Continue|Ga Verder"));
         this.buttonLogin = page.locator("//button[contains(., 'Log in')]");
         this.buttonGaVerder = page.locator("//button[contains(., 'Verder')]");
     }
