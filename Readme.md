@@ -172,6 +172,44 @@ So here we store cookies under "user1Klantportaal" and supply a Runnable that lo
 | storageName | `String`   | A String in order to store cookies of application and to identify later on |
 | runnable    | `Runnable` | A Runnable which contains the login sequence.                              |
 
+### LoginCacheHelper
+
+A second mechanism provided is the LoginCacheHelper which can be used in the runner of your application and you will
+only need to define it once. LoginCacheHelper has a constructor which takes a consumer as a parameter with type Page.
+Add it as a private static variable and initialize is in order to store the authenticated state of the application (so
+this is not only the cookies!). For example:
+
+```java
+import org.junit.jupiter.api.BeforeEach;
+import runner.LoginCacheHelper;
+import runner.ZGWTestRunner;
+import steps.gui.openforms.OpenFormsSteps;
+
+public class OpenFormsTestRunner extends ZGWTestRunner {
+
+    protected OpenFormsSteps formsSteps;
+
+    private static LoginCacheHelper storeLogin = new LoginCacheHelper((page) -> {
+        formsSteps = new OpenFormsSteps(page);
+        formsSteps.login_via_digid();
+    });
+
+    public OpenFormsTestRunner() {
+        super("https://openformulieren-zgw.test.denhaag.nl/aanvraag-formulier-ooievaarspas");
+    }
+
+    @BeforeEach
+    public void setupSteps() {
+        formsSteps = new OpenFormsSteps(page);
+        formsSteps.login_via_digid();
+    }
+}
+```
+
+| parameter  | type             | function                                                                           |  
+|------------|------------------|------------------------------------------------------------------------------------|
+| loginSteps | `Consumer<Page>` | A lambda function that takes a parameter Page and performs the login steps defined |
+
 ## Info for Developers: deployment to maven central
 
 General info: https://medium.com/@efthymiou.dimitrios1/how-to-publish-your-library-to-maven-central-3923139967e1

@@ -110,6 +110,9 @@ public class ContextHandler {
     private static Browser.NewContextOptions createContextOptions() {
         Browser.NewContextOptions options = new Browser.NewContextOptions();
         options.baseURL = ZGWTestRunner.getBaseUrl();
+        if (LoginCacheHelper.STORAGE != null || !LoginCacheHelper.STORAGE.isEmpty()) {
+            options.storageState = LoginCacheHelper.STORAGE;
+        }
         return options;
     }
 

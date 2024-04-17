@@ -8,7 +8,7 @@ public class LoginCacheHelper {
 
     public static String STORAGE = "";
 
-    public LoginCacheHelper(Consumer<Page> consumer) {
+    public LoginCacheHelper(Consumer<Page> loginSteps) {
         System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -------Start test suite-----------XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         var headlessProp = System.getProperty("headless");
         var setHeadless = (headlessProp != null && headlessProp.equals("true"))
