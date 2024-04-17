@@ -121,7 +121,7 @@ to register this element in a page object, but it shows how easy it is to setup 
 
 When executing the tests, there are a couple of commandline options that can be set.
 
-| parameter | type      | functie                 | default | 
+| parameter | type      | function                | default | 
 |-----------|-----------|-------------------------|---------|
 | headless  | `boolean` | Runs the tests headless | false   |
 |           |           |                         |         |
@@ -131,6 +131,46 @@ Example:
 ```shell
 mvn clean verify -Dheadless=true
 ```
+
+## Storing authenticated state
+
+With Playwright it is possible to store your authenticated state. In order to store your authenticated state we wrote a
+few convenience classes. Depending on what you need or want, we have an appropiate solution.
+
+### CacheLogin
+
+The first mechanism would be the CacheLogin class, which has a static method `session`. It was designed so that you can
+use it in a @BeforeEach in a testclass. You supply two parameters. First is a name under which your cookies are stored
+or are to be stored and the method will either login and set the cookies or retrieve the stored cookies. The second is a
+Runnable (we would advice a lambda function) which will contain the actions in order to login. For example:
+
+```java
+
+import org.junit.jupiter.api.BeforeEach;
+import steps.gui.klantportaal.MijnZakenSteps;
+import utils.CacheLogin;
+
+
+public class TestThis {
+
+    MijnZakenSteps mijnZakenSteps = new MijnZakenSteps(page);
+
+    @BeforeEach
+    public void setupLogin() {
+        CacheLogin.session("user1Klantportaal", () -> {
+            mijnZakenSteps.Login(digidUser);
+        });
+    }
+}
+```
+
+So here we store cookies under "user1Klantportaal" and supply a Runnable that logs in to klantportaal and navigates to
+"/zaken".
+
+| parameter   | type       | function                                                                   |  
+|-------------|------------|----------------------------------------------------------------------------|
+| storageName | `String`   | A String in order to store cookies of application and to identify later on |
+| runnable    | `Runnable` | A Runnable which contains the login sequence.                              |
 
 ## Info for Developers: deployment to maven central
 
