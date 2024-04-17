@@ -24,7 +24,7 @@ public class LoginCacheHelper {
 
         Page page = contextPre.newPage();
 
-        consumer.accept(page);
+        loginSteps.accept(page);
         STORAGE = contextPre.storageState();
 
         page.close();
