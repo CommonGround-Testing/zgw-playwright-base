@@ -2,6 +2,7 @@ package steps.gui.login;
 
 import com.microsoft.playwright.Page;
 import pages.EherkenningLoginPage;
+import runner.ZGWTestRunner;
 import users.User;
 
 public class EherkenningSteps extends LoginSteps {
@@ -29,6 +30,6 @@ public class EherkenningSteps extends LoginSteps {
 
         // TODO: verifieren dat dit op TEST ook goed werkt.
         //  Momenteel staat daar nog een extra scherm tussen dat er niet hoort, op ACC gaat het wel goed.
-        eherkenningPage.buttonContinue.click();
+        eherkenningPage.buttonVerder.click();
     }
 }

@@ -14,7 +14,7 @@ public class EherkenningLoginPage {
     public final Locator textfieldPassword;
     public final Locator buttonContinue;
     public final Locator buttonLogin;
-    public final Locator buttonGaVerder;
+    public final Locator buttonVerder;
 
     public EherkenningLoginPage(Page page) {
         this.dropdownSelectIdentityProvider = page.locator("//*[@id='identity_provider']");
@@ -22,8 +22,10 @@ public class EherkenningLoginPage {
         this.textfieldUsername = page.locator("//*[@id='account_username']");
         this.textfieldPassword = page.locator("//*[@id='account_password']");
         this.buttonContinue = page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(Pattern.compile("Continue|Ga Verder")));
-        this.buttonLogin = page.locator("//button[contains(., 'Log in')]");
-        this.buttonGaVerder = page.locator("//button[contains(., 'Verder')]");
+                new Page.GetByRoleOptions().setName(Pattern.compile("Continue|Ga verder")));
+        this.buttonLogin = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile("Log in|Inloggen")));
+        this.buttonVerder = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile("Continue|Verder")));
     }
 }
