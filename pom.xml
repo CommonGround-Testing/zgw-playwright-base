@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>ZGW Playwright Testautomation Base Library</name>
-    <description>A library to simplify the testautomation of application on the zgw platform</description>
+    <description>A library to simplify the testautomation of an application on the zgw platform</description>
     <url>https://vng.nl/projecten/zaakgericht-werken</url>
 
     <licenses>
