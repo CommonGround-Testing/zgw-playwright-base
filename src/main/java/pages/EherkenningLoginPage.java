@@ -4,6 +4,8 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
+import java.util.regex.Pattern;
+
 public class EherkenningLoginPage {
 
     public final Locator dropdownSelectIdentityProvider;
@@ -20,7 +22,7 @@ public class EherkenningLoginPage {
         this.textfieldUsername = page.locator("//*[@id='account_username']");
         this.textfieldPassword = page.locator("//*[@id='account_password']");
         this.buttonContinue = page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Continue|Ga Verder"));
+                new Page.GetByRoleOptions().setName(Pattern.compile("Continue|Ga Verder")));
         this.buttonLogin = page.locator("//button[contains(., 'Log in')]");
         this.buttonGaVerder = page.locator("//button[contains(., 'Verder')]");
     }
