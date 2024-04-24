@@ -11,7 +11,7 @@ gericht werken). This mainly entails implementations of three applications Gzac,
 
 To start off with the library we need to create a class that will be responsible for your implementation specific setup.
 To refer to this class, we'll name it a "runner".
-So, create a class and call it <nameOfYourApp>Runner.class. In this class extends it with the class ZGWTestRunner. This
+So, create a class and call it <nameOfYourApp>Runner.class. This class should extend the class ZGWTestRunner. This
 is a class in the library that contains basic Playwright setup.
 Example:
 
