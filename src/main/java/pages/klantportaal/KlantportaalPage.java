@@ -27,7 +27,7 @@ public class KlantportaalPage {
         this.inloggenDigidMachtigenLink = page.locator("//*[@id='digid-machtigen']");
         this.inloggeneHerkenningLink = page.locator("//section[contains(.,'Als bedrijf of instelling')]//a");
         this.inloggeneHerkenningMachtigenLink = page.locator("//*[@id='eherkenning-bewindvoering']");
-        this.gebruikersMenuBurgerButton = page.locator("//button[contains(.,'Welkom Sierra')]");
+        this.gebruikersMenuBurgerButton = page.locator("//div[contains(@class,'denhaag-header__actions-action-user-menu')]");
         this.gebruikersMenuOndernemerButton = page.locator("//button[contains(.,'Welkom')]");
         this.menu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Welkom"));
         this.languageButton = page.locator("//div[contains(@class,'denhaag-header__actions-action-language-switcher')]/button");
