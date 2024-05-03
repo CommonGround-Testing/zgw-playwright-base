@@ -27,7 +27,8 @@ public class OverzichtSteps extends KlantportaalSteps {
      *
      * @param text van de header
      */
-    public void welkom_header_is_zichtbaar_en_juiste_taal(String text) {
+    public void overzicht_header_bevat_tekst(String text) {
+        overzichtPage.headerPage.waitFor();
         assertThat(overzichtPage.headerPage).containsText(text);
     }
 
