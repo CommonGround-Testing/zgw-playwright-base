@@ -3,7 +3,7 @@ package runner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import steps.gui.login.DigidLoginSteps;
-import users.ZGWUser;
+import users.User;
 
 /**
  * This cached runner will store and re-use sessions to speed up tests
@@ -14,7 +14,7 @@ import users.ZGWUser;
 @ExtendWith(TestWatcherExtension.class)
 abstract public class CachedDIGIDTestRunner extends DIGIDTestRunner {
 
-    public CachedDIGIDTestRunner(String baseUrl, ZGWUser user) {
+    public CachedDIGIDTestRunner(String baseUrl, User user) {
         super(baseUrl, user);
     }
 

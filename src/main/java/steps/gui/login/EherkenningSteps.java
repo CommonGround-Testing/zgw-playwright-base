@@ -18,7 +18,7 @@ public class EherkenningSteps extends LoginSteps {
      *
      * @param user User
      */
-    public void Login(User user) {
+    public void login_via_digid(User user) {
 
         eherkenningPage.dropdownSelectIdentityProvider.selectOption("Digidentity AD 1.13 (preproduction)");
         eherkenningPage.buttonConfirmIdentityProviderSelection.click();
@@ -27,9 +27,6 @@ public class EherkenningSteps extends LoginSteps {
         eherkenningPage.buttonContinue.click();
         eherkenningPage.textfieldPassword.fill(user.getPassword());
         eherkenningPage.buttonLogin.click();
-
-        // TODO: verifieren dat dit op TEST ook goed werkt.
-        //  Momenteel staat daar nog een extra scherm tussen dat er niet hoort, op ACC gaat het wel goed.
         eherkenningPage.buttonVerder.click();
     }
 }

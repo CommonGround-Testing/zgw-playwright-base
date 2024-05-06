@@ -2,7 +2,7 @@ package runner;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
-import users.ZGWUser;
+import users.User;
 
 /**
  * This runner will prepare everything for your tests
@@ -13,9 +13,9 @@ import users.ZGWUser;
  */
 @ExtendWith(TestWatcherExtension.class)
 abstract public class DIGIDTestRunner extends ZGWTestRunner {
-    protected ZGWUser zgwUser;
+    protected User zgwUser;
 
-    public DIGIDTestRunner(String baseUrl, ZGWUser user) {
+    public DIGIDTestRunner(String baseUrl, User user) {
         super(baseUrl);
         zgwUser = user;
     }
