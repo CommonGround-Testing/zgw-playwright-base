@@ -45,7 +45,7 @@ public class ContextHandler {
             var loginSteps = instantiateLoginSteps(stepsClass);
             if (loginSteps != null) {
                 loginSteps.navigate();
-                loginSteps.Login(user);
+                loginSteps.login_via_digid(user);
                 context.storageState(new BrowserContext.StorageStateOptions().setPath(storageStatePath));
             }
         }

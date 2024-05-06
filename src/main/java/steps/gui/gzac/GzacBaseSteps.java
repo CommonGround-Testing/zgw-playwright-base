@@ -6,7 +6,6 @@ import pages.gzac.GzacBasePage;
 import pages.gzac.GzacMenu;
 import steps.gui.GeneriekeSteps;
 import steps.gui.login.ADLoginSteps;
-import users.ADUser;
 import users.User;
 import utils.MathUtils;
 
@@ -103,7 +102,7 @@ public class GzacBaseSteps extends GeneriekeSteps {
      */
     public void medewerker_logt_in_bij_GZAC(String url, User user) {
         page.navigate(url);
-        adLoginSteps.Login(user);
+        adLoginSteps.login_via_digid(user);
         wachtOpLadenMenu();
     }
 

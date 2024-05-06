@@ -23,7 +23,7 @@ public class ADLoginSteps extends LoginSteps {
      *
      * @param user User
      */
-    public void Login(User user) {
+    public void login_via_digid(User user) {
         adLoginPage.gebruikersnaamInput.waitFor();
         adLoginPage.gebruikersnaamInput.fill(user.getUsername());
         adLoginPage.volgendeInput.click();

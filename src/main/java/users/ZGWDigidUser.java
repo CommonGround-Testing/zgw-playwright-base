@@ -4,7 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ZGWDigidUser extends ZGWUser {
+public class ZGWDigidUser implements User {
+    private final String username;
+    private final String password;
     private final String nationaliteit;
     private final String name;
     private final String email;
@@ -31,7 +33,8 @@ public class ZGWDigidUser extends ZGWUser {
                  String addressHouseLetter,
                  String addressStreet,
                  String addressCity) {
-        super(username, password);
+        this.username = username;
+        this.password = password;
         this.nationaliteit = nationaliteit;
         this.name = name;
         this.email = email;
@@ -43,5 +46,10 @@ public class ZGWDigidUser extends ZGWUser {
         this.addressHouseLetter = addressHouseLetter;
         this.addressStreet = addressStreet;
         this.addressCity = addressCity;
+    }
+
+    @Override
+    public String getTotpSecret() {
+        return "";
     }
 }

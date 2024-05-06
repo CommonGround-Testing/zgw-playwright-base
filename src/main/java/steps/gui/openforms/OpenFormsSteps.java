@@ -44,7 +44,7 @@ public class OpenFormsSteps extends GeneriekeSteps {
     public void login_via_digid(User user) {
         openFormsPage.buttonAccepteerCookies.click();
         get_tekst("Inloggen met DigiD").click();
-        digidLoginSteps.Login(user);
+        digidLoginSteps.login_via_digid(user);
         openFormsPage.textlabelHeaderH1
                 .waitFor(new Locator
                         .WaitForOptions()

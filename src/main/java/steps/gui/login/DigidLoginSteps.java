@@ -25,7 +25,7 @@ public class DigidLoginSteps extends LoginSteps {
      *
      * @param user User
      */
-    public void Login(User user) {
+    public void login_via_digid(User user) {
         digidLoginPage.linkSelectAuthenticationWithTrustLevel.click();
         digidLoginPage.dropdownBetrouwbaarheidsniveau.selectOption("Midden");
         digidLoginPage.textfieldUsername.fill(user.getUsername());
