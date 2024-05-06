@@ -2,7 +2,6 @@ package steps.gui.login;
 
 import com.microsoft.playwright.Page;
 import pages.EherkenningLoginPage;
-import runner.ZGWTestRunner;
 import users.User;
 
 public class EherkenningSteps extends LoginSteps {
@@ -18,7 +17,7 @@ public class EherkenningSteps extends LoginSteps {
      *
      * @param user User
      */
-    public void login_via_digid(User user) {
+    public void login_via_eherkenning(User user) {
 
         eherkenningPage.dropdownSelectIdentityProvider.selectOption("Digidentity AD 1.13 (preproduction)");
         eherkenningPage.buttonConfirmIdentityProviderSelection.click();

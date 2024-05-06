@@ -82,7 +82,7 @@ public abstract class KlantportaalSteps {
     public void login_via_eherkenning(User user, String relativeUrl) {
         this.navigate(relativeUrl);
         klantportaalPage.inloggeneHerkenningLink.first().click();
-        eherkenningSteps.login_via_digid(user);
+        eherkenningSteps.login_via_eherkenning(user);
         klantportaalPage.gebruikersMenuBurgerButton.isVisible();
     }
 
