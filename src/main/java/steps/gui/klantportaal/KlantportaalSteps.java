@@ -54,7 +54,7 @@ public abstract class KlantportaalSteps {
      *
      * @param user User
      */
-    public void Login_via_digid(User user) {
+    public void login_via_digid(User user) {
         this.navigate();
         klantportaalPage.inloggenDigidLink.click();
         digidLoginSteps.login_via_digid(user);
