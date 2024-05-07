@@ -74,6 +74,20 @@ public abstract class KlantportaalSteps {
     }
 
     /**
+     * Open a certain url and login with a user that is a 'bewindvoerder
+     *
+     * @param user
+     * @param relativeUrl can be empty string if you want to open the overview page
+     */
+    public void login_via_eherkenning_bewindvoerder(User user, String bsn, String relativeUrl) {
+        this.navigate(relativeUrl);
+        klantportaalPage.inloggeneHerkenningMachtigenLink.first().click();
+        eherkenningSteps.login_via_eherkenning(user);
+        eherkenningSteps.vul_bsn_in_als_bewindsvoerder(bsn);
+        klantportaalPage.gebruikersMenuBurgerButton.isVisible();
+    }
+
+    /**
      * Open a certain url and login with a user that is an 'ondernemer'
      *
      * @param user
