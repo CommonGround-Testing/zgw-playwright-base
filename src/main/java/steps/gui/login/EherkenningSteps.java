@@ -28,4 +28,15 @@ public class EherkenningSteps extends LoginSteps {
         eherkenningPage.buttonLogin.click();
         eherkenningPage.buttonVerder.click();
     }
+
+    /**
+     * Als bewindsvoerder kom je op een Logius pagina terecht waar je een BSN moet invullen
+     * Deze moet bij je login horen
+     *
+     */
+    public void vul_bsn_in_als_bewindsvoerder(String bsn){
+        eherkenningPage.inputBsn.fill(bsn);
+        eherkenningPage.buttonZoek.click();
+        eherkenningPage.buttonGaVerder.click();
+    }
 }
