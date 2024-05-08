@@ -15,17 +15,24 @@ public class EherkenningLoginPage {
     public final Locator buttonContinue;
     public final Locator buttonLogin;
     public final Locator buttonVerder;
+    // Logius velden
+    public final Locator inputBsn;
+    public final Locator buttonZoek;
+    public final Locator buttonGaVerder;
 
     public EherkenningLoginPage(Page page) {
-        this.dropdownSelectIdentityProvider = page.locator("//*[@id='identity_provider']");
-        this.buttonConfirmIdentityProviderSelection = page.locator("//*[@name='commit']");
-        this.textfieldUsername = page.locator("//*[@id='account_username']");
-        this.textfieldPassword = page.locator("//*[@id='account_password']");
-        this.buttonContinue = page.getByRole(AriaRole.BUTTON,
+        dropdownSelectIdentityProvider = page.locator("#identity_provider");
+        buttonConfirmIdentityProviderSelection = page.locator("//*[@name='commit']");
+        textfieldUsername = page.locator("#account_username");
+        textfieldPassword = page.locator("#account_password");
+        buttonContinue = page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Continue|Ga verder")));
-        this.buttonLogin = page.getByRole(AriaRole.BUTTON,
+        buttonLogin = page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Log in|Inloggen")));
-        this.buttonVerder = page.getByRole(AriaRole.BUTTON,
+        buttonVerder = page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Continue|Verder")));
+        inputBsn = page.locator("#bsn-input");
+        buttonZoek = page.locator("#search-submit");
+        buttonGaVerder = page.locator(("#dossier-redirect"));
     }
 }

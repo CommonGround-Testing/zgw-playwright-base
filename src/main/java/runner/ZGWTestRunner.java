@@ -2,6 +2,7 @@ package runner;
 
 import com.microsoft.playwright.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,7 @@ abstract public class ZGWTestRunner {
     @Getter
     public static BrowserContext context;
     @Getter
-    public static String baseUrl;
+    private static String baseUrl;
     @Getter
     public static Page page;
 
@@ -48,5 +49,19 @@ abstract public class ZGWTestRunner {
     @BeforeEach
     void createContextAndPage() {
         ContextHandler.createCleanContextAndPage();
+    }
+
+    /**
+     * This method should only be used if your test uses different baseUrls
+     * For example when you are testing different systems (kententest)
+     *
+     * Note that this will turn any current page invalid so after calling
+     * this method you have to initiate the steps again!
+     *
+     * Therefore this method should only be called from a Runner that does not
+     * instantiate anything in it's constructor
+     */
+    public static void changeBaseUrl(String baseUrl){
+        ContextHandler.setNewBaseUrl(baseUrl);
     }
 }

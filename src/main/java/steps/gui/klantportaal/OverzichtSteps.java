@@ -15,7 +15,6 @@ public class OverzichtSteps extends KlantportaalSteps {
 
     /**
      * Valideer dat er een H2 header op het scherm staat
-     *
      */
     public void is_overzicht_zichtbaar_na_login() {
         overzichtPage.headerPage.waitFor();
@@ -34,7 +33,6 @@ public class OverzichtSteps extends KlantportaalSteps {
 
     /**
      * Open het overzicht
-     *
      */
     public void navigate() {
         page.navigate("/");

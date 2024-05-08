@@ -5,21 +5,20 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import pages.klantportaal.KlantportaalPage;
 import steps.gui.login.DigidLoginSteps;
+import steps.gui.login.EIdasLoginSteps;
 import steps.gui.login.EherkenningSteps;
 import users.User;
-import users.ZGWUser;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public abstract class KlantportaalSteps {
 
+    private static boolean isLanguageNL;
     protected final Page page;
     protected final KlantportaalPage klantportaalPage;
-
     private final DigidLoginSteps digidLoginSteps;
     private final EherkenningSteps eherkenningSteps;
-
-    private static boolean isLanguageNL;
+    private final EIdasLoginSteps eIdasLoginSteps;
 
     public KlantportaalSteps(Page page) {
         this.page = page;
@@ -27,6 +26,11 @@ public abstract class KlantportaalSteps {
         klantportaalPage = new KlantportaalPage(page);
         digidLoginSteps = new DigidLoginSteps(page);
         eherkenningSteps = new EherkenningSteps(page);
+        eIdasLoginSteps = new EIdasLoginSteps(page);
+    }
+
+    private static void switchLanguage() {
+        isLanguageNL = !isLanguageNL;
     }
 
     /**
@@ -50,10 +54,10 @@ public abstract class KlantportaalSteps {
      *
      * @param user User
      */
-    public void Login(User user) {
+    public void login_via_digid(User user) {
         this.navigate();
         klantportaalPage.inloggenDigidLink.click();
-        digidLoginSteps.Login(user);
+        digidLoginSteps.login_via_digid(user);
     }
 
     /**
@@ -62,12 +66,25 @@ public abstract class KlantportaalSteps {
      * @param user
      * @param relativeUrl can be empty string if you want to open the overview page
      */
-    public void log_in_op_het_klantportaal_via_digid_machtigen(User user, String relativeUrl) {
+    public void login_via_digid_machtigen(User user, String relativeUrl) {
         this.navigate(relativeUrl);
-        // this.login_met_ad(); TODO weer activeren na ZP-1256
-        this.selecteer_optie_inloggen_met_digid_machtigen();
-        digidLoginSteps.Login(user);
+        klantportaalPage.inloggenDigidMachtigenLink.click();
+        digidLoginSteps.login_via_digid(user);
         digidLoginSteps.selecteer_machtiginggever();
+    }
+
+    /**
+     * Open a certain url and login with a user that is a 'bewindvoerder
+     *
+     * @param user
+     * @param relativeUrl can be empty string if you want to open the overview page
+     */
+    public void login_via_eherkenning_bewindvoerder(User user, String bsn, String relativeUrl) {
+        this.navigate(relativeUrl);
+        klantportaalPage.inloggeneHerkenningMachtigenLink.first().click();
+        eherkenningSteps.login_via_eherkenning(user);
+        eherkenningSteps.vul_bsn_in_als_bewindsvoerder(bsn);
+        klantportaalPage.gebruikersMenuBurgerButton.isVisible();
     }
 
     /**
@@ -76,16 +93,23 @@ public abstract class KlantportaalSteps {
      * @param user
      * @param relativeUrl can be empty string if you want to open the overview page
      */
-    public void een_ondernemer_logt_in_op_het_klantportaal(ZGWUser user, String relativeUrl) {
+    public void login_via_eherkenning(User user, String relativeUrl) {
         this.navigate(relativeUrl);
-        // this.login_met_ad(); TODO weer activeren na ZP-1256
-        selecteer_optie_inloggen_met_eherkenning();
-        eherkenningSteps.Login(user);
-        klantportaalPage.gebruikersMenuOndernemerButton.isVisible();
+        klantportaalPage.inloggeneHerkenningLink.first().click();
+        eherkenningSteps.login_via_eherkenning(user);
+        klantportaalPage.gebruikersMenuBurgerButton.isVisible();
     }
 
-    public void machtiginggever_is(String machtiginggever) {
-        klantportaalPage.headerIngelogdeNamen.waitFor();
+    /**
+     * Open a certain url and login with a user that is has a European Idas
+     *
+     * @param user
+     * @param relativeUrl can be empty string if you want to open the overview page
+     */
+    public void login_via_eidas(User user, String relativeUrl) {
+        this.navigate(relativeUrl);
+        klantportaalPage.inloggeneIdasLink.click();
+        eIdasLoginSteps.login_via_eidas(user);
     }
 
     /**
@@ -98,27 +122,6 @@ public abstract class KlantportaalSteps {
     }
 
     /**
-     * Klik op de optie burger 'Inloggen met DigiD'
-     */
-    public void selecteer_optie_inloggen_met_digid() {
-        klantportaalPage.inloggenDigidLink.click();
-    }
-
-    /**
-     * Klik op de optie burger 'Inloggen met eHerkenning'
-     */
-    public void selecteer_optie_inloggen_met_eherkenning() {
-        klantportaalPage.inloggeneHerkenningLink.first().click();
-    }
-
-    /**
-     * Login via digid voor iemand anders bij 'Als vrijwillig gemachtigde'
-     */
-    public void selecteer_optie_inloggen_met_digid_machtigen() {
-        klantportaalPage.inloggenDigidMachtigenLink.click();
-    }
-
-    /**
      * Login via eHerkenning voor iemand anders bij 'Als professioneel bewindvoerder'
      */
     public void selecteer_optie_inloggen_met_eherkenning_machtiging() {
@@ -128,16 +131,8 @@ public abstract class KlantportaalSteps {
     /**
      * Log uit indien je als burger bent ingelogd
      */
-    public void log_burger_uit() {
+    public void log_uit_via_menu() {
         klantportaalPage.gebruikersMenuBurgerButton.click();
-        klantportaalPage.buttonLogout.click();
-    }
-
-    /**
-     * Log uit indien je als ondernemer bent ingelogd
-     */
-    public void log_ondernemer_uit() {
-        klantportaalPage.gebruikersMenuOndernemerButton.click();
         klantportaalPage.buttonLogout.click();
     }
 
@@ -170,15 +165,7 @@ public abstract class KlantportaalSteps {
         switchLanguage();
     }
 
-    public void ingelogde_gebruiker_is(String naam) {
-        klantportaalPage.headerIngelogdeNamen.waitFor();
-    }
-
     public void is_de_sessie_op_het_klantportaal_beeindigd() {
         assertThat(klantportaalPage.inloggenDigidLink).isVisible();
-    }
-
-    private static void switchLanguage() {
-        isLanguageNL = !isLanguageNL;
     }
 }

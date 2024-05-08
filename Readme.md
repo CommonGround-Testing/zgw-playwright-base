@@ -158,7 +158,7 @@ public class TestThis {
     @BeforeEach
     public void setupLogin() {
         CacheLogin.session("user1Klantportaal", () -> {
-            mijnZakenSteps.Login(digidUser);
+            mijnZakenSteps.Login_via_digid(digidUser);
         });
     }
 }
