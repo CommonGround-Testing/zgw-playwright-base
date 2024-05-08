@@ -61,7 +61,7 @@ abstract public class ZGWTestRunner {
      * Therefore this method should only be called from a Runner that does not
      * instantiate anything in it's constructor
      */
-    public static void changeBaseUrlAndCreateNewContext(String baseUrl){
+    public static void changeBaseUrl(String baseUrl){
         ContextHandler.setNewBaseUrl(baseUrl);
     }
 }
