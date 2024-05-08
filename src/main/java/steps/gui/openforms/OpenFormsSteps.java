@@ -219,4 +219,7 @@ public class OpenFormsSteps extends GeneriekeSteps {
         this.openFormsPage.headerFirstFormStep.waitFor();
     }
 
+    public void aanvraag_zonder_DigiD_login(){
+        openFormsPage.aanvraagZonderDigidButton.click();
+    }
 }
