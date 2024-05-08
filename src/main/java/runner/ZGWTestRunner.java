@@ -2,6 +2,7 @@ package runner;
 
 import com.microsoft.playwright.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +22,7 @@ abstract public class ZGWTestRunner {
     // Cannot use standard library because we need to get cookies fTestWatcherExtensionrom context
     @Getter
     public static BrowserContext context;
-    @Getter
+    @Getter @Setter
     public static String baseUrl;
     @Getter
     public static Page page;
