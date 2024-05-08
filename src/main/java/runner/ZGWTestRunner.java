@@ -22,8 +22,8 @@ abstract public class ZGWTestRunner {
     // Cannot use standard library because we need to get cookies fTestWatcherExtensionrom context
     @Getter
     public static BrowserContext context;
-    @Getter @Setter
-    public static String baseUrl;
+    @Getter
+    private static String baseUrl;
     @Getter
     public static Page page;
 
@@ -49,5 +49,19 @@ abstract public class ZGWTestRunner {
     @BeforeEach
     void createContextAndPage() {
         ContextHandler.createCleanContextAndPage();
+    }
+
+    /**
+     * This method should only be used if your test uses different baseUrls
+     * For example when you are testing different systems (kententest)
+     *
+     * Note that this will turn any current page invalid so after calling
+     * this method you have to initiate the steps again!
+     *
+     * Therefore this method should only be called from a Runner that does not
+     * instantiate anything in it's constructor
+     */
+    public static void changeBaseUrl(String baseUrl){
+        ContextHandler.setNewBaseUrl(baseUrl);
     }
 }

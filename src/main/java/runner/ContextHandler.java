@@ -22,6 +22,7 @@ import static runner.ZGWTestRunner.*;
 public class ContextHandler {
 
     private final static Integer sessionTimeoutInMinutes = 13;
+    private static Browser.NewContextOptions currentOptions;
 
     /**
      * Use an existing session if available and otherwise login and store this session
@@ -56,6 +57,22 @@ public class ContextHandler {
      */
     public static void createCleanContextAndPage() {
         createContextAndPage(createContextOptions());
+        addTracingToContext();
+    }
+
+    /**
+     * Switches baseUrl.
+     * This can only be done by closing the current browser and starting a new one
+     *
+     * @param baseUrl
+     */
+    public static void setNewBaseUrl(String baseUrl){
+        removeTracingToContext();
+        context.close();
+
+        currentOptions.baseURL = baseUrl;
+        context = browser.newContext(currentOptions);
+        page = context.newPage();
         addTracingToContext();
     }
 
@@ -113,6 +130,7 @@ public class ContextHandler {
         if (LoginCacheHelper.STORAGE != null || !LoginCacheHelper.STORAGE.isEmpty()) {
             options.storageState = LoginCacheHelper.STORAGE;
         }
+        currentOptions = options;
         return options;
     }
 
@@ -134,5 +152,12 @@ public class ContextHandler {
                 .setScreenshots(true)
                 .setSnapshots(true)
                 .setSources(true));
+    }
+
+    /**
+     * Adds tracing to the context for the test report
+     */
+    private static void removeTracingToContext() {
+        context.tracing().stop();
     }
 }
