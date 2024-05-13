@@ -28,13 +28,6 @@ public class OpenFormsSteps extends GeneriekeSteps {
         page.navigate(url);
     }
 
-    /**
-     * Open de pagina voor aanvraag ooievaarspas
-     *
-     */
-    public void open_pagina() {
-        page.navigate("/aanvraag-formulier-ooievaarspas/startpagina");
-    }
 
     /**
      * Login via Digid
@@ -45,11 +38,8 @@ public class OpenFormsSteps extends GeneriekeSteps {
         openFormsPage.buttonAccepteerCookies.click();
         get_tekst("Inloggen met DigiD").click();
         digidLoginSteps.login_via_digid(user);
-        openFormsPage.textlabelHeaderH1
-                .waitFor(new Locator
-                        .WaitForOptions()
-                        .setState(
-                                WaitForSelectorState.VISIBLE));
+        openFormsPage.uitloggenDigidButton
+                .waitFor();
     }
 
     /**
@@ -226,4 +216,7 @@ public class OpenFormsSteps extends GeneriekeSteps {
         this.openFormsPage.headerFirstFormStep.waitFor();
     }
 
+    public void aanvraag_zonder_DigiD_login(){
+        openFormsPage.aanvraagZonderDigidButton.click();
+    }
 }
