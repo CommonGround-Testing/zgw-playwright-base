@@ -5,6 +5,7 @@ import com.microsoft.playwright.Page;
 
 public class ErfpachtPage {
 
+    public static String PAGE_URL = "/erfpacht";
     private final static String h3Header = "//h3[contains(text(),'${text}')]";
     private final Page page;
 

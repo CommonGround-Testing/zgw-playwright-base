@@ -14,27 +14,46 @@ public class OverzichtSteps extends KlantportaalSteps {
     }
 
     /**
-     * Valideer dat er een H2 header op het scherm staat
-     */
-    public void is_overzicht_zichtbaar_na_login() {
-        overzichtPage.headerPage.waitFor();
-        assertThat(overzichtPage.headerPage).isVisible();
-    }
-
-    /**
      * Valideer dat de Header correct een bepaalde tekst bevat
      *
      * @param text van de header
      */
-    public void overzicht_header_bevat_tekst(String text) {
-        overzichtPage.headerPage.waitFor();
-        assertThat(overzichtPage.headerPage).containsText(text);
+    public void valideer_overzicht_header(String text) {
+        overzichtPage.pageHeader.waitFor();
+        assertThat(overzichtPage.pageHeader).containsText(text);
     }
 
     /**
      * Open het overzicht
      */
     public void navigate() {
-        page.navigate("/");
+        page.navigate(OverzichtPage.PAGE_URL);
+    }
+
+    /**
+     * Op het overzicht zie je 4 lopende zaken
+     * 1 - 2
+     * 3 - 4
+     *
+     * @param nummer van de kaart die je wilt openen
+     */
+    public void klik_op_lopende_zaak_kaart(int nummer){
+        overzichtPage.zaakTegels.nth(nummer-1).click();
+    }
+
+    /**
+     * Klik op de link voor alle taken
+     */
+    public void klik_op_alle_taken_link(){
+        overzichtPage.linkAlleTaken.click();
+    }
+
+    /**
+     * Klik op een taak op het overzicht
+     *
+     * @param nummer van de taak
+     */
+    public void klik_op_taak(int nummer){
+        overzichtPage.linkTaak.nth(nummer -1).click();
     }
 }

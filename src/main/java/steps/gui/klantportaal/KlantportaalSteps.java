@@ -55,7 +55,7 @@ public abstract class KlantportaalSteps {
      * @param user User
      */
     public void login_via_digid(User user) {
-        this.navigate();
+        navigate();
         klantportaalPage.inloggenDigidLink.click();
         digidLoginSteps.login_via_digid(user);
     }
@@ -136,14 +136,14 @@ public abstract class KlantportaalSteps {
         klantportaalPage.buttonLogout.click();
     }
 
-    public void selecteerNavigatieOptie(String menuOptie) {
+    public void selecteer_navigatie_optie(String menuOptie) {
         page.locator("#site-header").getByRole(AriaRole.LINK,
                 new Locator
                         .GetByRoleOptions()
                         .setName(menuOptie)).click();
     }
 
-    public void selecteerNavigatieHoofdMenu(String menuOptie) {
+    public void selecteer_navigatie_hoofdMenu(String menuOptie) {
         page.getByRole(AriaRole.LINK,
                 new Page.GetByRoleOptions()
                         .setName(menuOptie)).click();
@@ -165,7 +165,7 @@ public abstract class KlantportaalSteps {
         switchLanguage();
     }
 
-    public void is_de_sessie_op_het_klantportaal_beeindigd() {
+    public void valideer_dat_de_sessie_is_beeindigd() {
         assertThat(klantportaalPage.inloggenDigidLink).isVisible();
     }
 }
