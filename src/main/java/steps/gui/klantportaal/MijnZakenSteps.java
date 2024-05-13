@@ -60,7 +60,8 @@ public class MijnZakenSteps extends KlantportaalSteps {
      * @param zaakId van de te openen zaak
      */
     public void open_zaak(String zaakId) {
-        page.navigate("/zaken/zaak?id=" + zaakId);
+        page.navigate("/zaken/zaak/" + zaakId);
+        page.getByText("Status").waitFor();
     }
 
     /**
@@ -81,6 +82,10 @@ public class MijnZakenSteps extends KlantportaalSteps {
      */
     public void controleer_dat_zaakstatus_timeline_zichtbaar_is() {
         assertThat(mijnZakenPage.zaakStatusTimeline).isVisible();
+    }
+
+    public void klik_download_link(){
+        mijnZakenPage.zaakDocumentenDownloadButton.first().click();
     }
 
     /**
