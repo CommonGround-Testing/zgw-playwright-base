@@ -18,7 +18,7 @@ public class MijnTakenSteps extends KlantportaalSteps {
      * Valideer dat de foutmelding zichtbaar is op het scherm
      *
      */
-    public void taken_ophalen_foutmelding_is_zichtbaar() {
+    public void valideer_foutmelding_takenophalen_zichtbaar_is() {
         assertThat(mijnTakenPage.takenOphalenFoutmelding).isVisible();
     }
 
@@ -26,7 +26,7 @@ public class MijnTakenSteps extends KlantportaalSteps {
      * Valideer dat de melding over geen taken zichtbaar is op het scherm
      *
      */
-    public void melding_geen_openstaande_taken_wordt_getoond() {
+    public void valideer_dat_melding_geen_openstaande_taken_zichtbaar_is() {
         assertThat(mijnTakenPage.geenTakenVoorDeHuidigeGebruiker).isVisible();
     }
 
@@ -34,7 +34,7 @@ public class MijnTakenSteps extends KlantportaalSteps {
      * Valideer dat er een taak op het scherm staat
      *
      */
-    public void een_overzicht_van_de_taken_voor_de_burger_wordt_getoond() {
+    public void valideer_dat_een_overzicht_van_de_taken_wordt_getoond() {
         mijnTakenPage.takenCard.waitFor();
         assertThat(mijnTakenPage.takenCard).isVisible();
         assertThat(mijnTakenPage.takenOphalenFoutmelding).isHidden();

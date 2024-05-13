@@ -7,7 +7,6 @@ import steps.gui.klantportaal.KlantportaalSteps;
 
 public class ErfpachtSteps extends KlantportaalSteps {
 
-    public final static String URL_ERFPACHT = "/erfpacht";
     public final String ERFPACHT_CONTRACTEN = "Erfpachtcontracten";
     public final String ERFPACHT_TAKEN = "Mijn taken";
     public final String ERFPACHT_ZAKEN = "Mijn lopende zaken";
@@ -23,7 +22,7 @@ public class ErfpachtSteps extends KlantportaalSteps {
      * Open naar de Erfpacht url
      */
     public void navigate() {
-        page.navigate(URL_ERFPACHT);
+        page.navigate(ErfpachtPage.PAGE_URL);
     }
 
     /**

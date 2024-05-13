@@ -3,6 +3,7 @@ package steps.gui.klantportaal;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.Assertions;
+import pages.klantportaal.MijnTakenPage;
 import pages.klantportaal.MijnZakenPage;
 
 import java.util.List;
@@ -24,14 +25,14 @@ public class MijnZakenSteps extends KlantportaalSteps {
      *
      */
     public void navigate() {
-        page.navigate("/zaken");
+        page.navigate(MijnTakenPage.PAGE_URL);
     }
 
     /**
      * Klik op een afgeronde taak
      *
      */
-    public void open_afgeronde_zaak() {
+    public void open_eerste_afgeronde_zaak() {
         mijnZakenPage.afgerondeZakenButton.click();
         mijnZakenPage.zaakTegel.first().waitFor();
         mijnZakenPage.zaakTegel.first().click();
@@ -41,7 +42,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
      * Klik op een taak
      *
      */
-    public void open_lopende_zaak() {
+    public void open_eerste_lopende_zaak() {
         mijnZakenPage.zaakTegel.first().waitFor();
         mijnZakenPage.zaakTegel.first().click();
     }
@@ -50,7 +51,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
      * Valideer dat de Header 'Mijn taken' op het scherm staat
      *
      */
-    public void mijn_zaken_overzicht_is_zichtbaar() {
+    public void valideer_dat_mijn_zaken_overzicht_zichtbaar_is() {
         assertThat(mijnZakenPage.mijnZakenHeader).isVisible();
     }
 
@@ -69,7 +70,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
      *
      * @return lijst met alle headers
      */
-    public List<String> haal_alle_zaakdetailheaders() {
+    public List<String> haal_alle_zaakdetailheaders_op() {
         mijnZakenPage.zaakStatusTimeline.waitFor();
         return mijnZakenPage.overviewZaakDetailHeaders.stream()
                 .map(Locator::textContent)
@@ -80,7 +81,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
      * Valideer dat de timeline op het scherm staat
      *
      */
-    public void controleer_dat_zaakstatus_timeline_zichtbaar_is() {
+    public void valideer_dat_zaakstatus_timeline_zichtbaar_is() {
         assertThat(mijnZakenPage.zaakStatusTimeline).isVisible();
     }
 
@@ -92,7 +93,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
      * Valideer dat er een download document knop op het scherm staat
      *
      */
-    public void controleer_dat_downloadknop_van_een_document_zichtbaar_is_of_geen_documenten() {
+    public void valideer_dat_downloadknop_van_een_document_zichtbaar_is() {
         assertThat(mijnZakenPage.zaakDocumentenDownloadButton.first()).isVisible();
     }
 
@@ -100,7 +101,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
      * Valideer dat er de lijst met contactmomenten op het scherm staat
      *
      */
-    public void lijst_van_contactmomenten_is_zichtbaar() {
+    public void valideer_dat_lijst_van_contactmomenten_zichtbaar_is() {
         assertThat(mijnZakenPage.zaakContactmomentenList).isVisible();
     }
 
@@ -108,9 +109,9 @@ public class MijnZakenSteps extends KlantportaalSteps {
      * Valideer dat de zaakdetails 'Status, details en Documenten', Aanvraagnummer en Zaaknummer op het scherm staan
      *
      */
-    public void de_zaakdetails_worden_getoond() {
+    public void valideer_dat_de_zaakdetails_zichtbaar_zijn() {
         final String verwachteVelden = "Status, Details, Documenten";
-        final List<String> listTextFields = this.haal_alle_zaakdetailheaders();
+        final List<String> listTextFields = this.haal_alle_zaakdetailheaders_op();
         listTextFields.forEach(text -> Assertions.assertTrue(verwachteVelden.contains(text)));
         assertThat(mijnZakenPage.aanvraagdatumLabel).isVisible();
         assertThat(mijnZakenPage.zaaknummer).isVisible();

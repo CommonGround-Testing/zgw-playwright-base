@@ -22,7 +22,7 @@ public class MijnGegevensSteps extends KlantportaalSteps {
      *
      * @param user gegevens
      */
-    public void zijn_nationaliteit_en_naam_zichtbaar_en_correct(ZGWDigidUser user) {
+    public void valideer_dat_nationaliteit_en_naam_zichtbaar_zijn(ZGWDigidUser user) {
         assertThat(mijnGegevensPage.mijnGegevensNationaliteit).hasText(user.getNationaliteit());
         assertThat(mijnGegevensPage.mijnGegevensNaam).hasText(user.getName());
     }
@@ -53,7 +53,7 @@ public class MijnGegevensSteps extends KlantportaalSteps {
      *
      * @param telNummer
      */
-    public void is_nieuw_telefoonnummer_zichtbaar(String telNummer) {
+    public void valideer_dat_nieuw_telefoonnummer_zichtbaar_is(String telNummer) {
         assertThat(mijnGegevensPage.telefoonNummer).hasText(telNummer);
     }
 
@@ -62,7 +62,7 @@ public class MijnGegevensSteps extends KlantportaalSteps {
      *
      * @param email
      */
-    public void is_nieuw_emailadres_zichtbaar(String email) {
+    public void valideer_dat_nieuw_emailadres_zichtbaar_is(String email) {
         assertThat(mijnGegevensPage.emailAdres).hasText(email);
     }
 
@@ -85,7 +85,7 @@ public class MijnGegevensSteps extends KlantportaalSteps {
      *
      * @param verwachteKoppen
      */
-    public void zijn_de_volgende_gegevens_zichtbaar_in_mijn_gegevens(List<String> verwachteKoppen) {
+    public void valideer_verwachte_headers(List<String> verwachteKoppen) {
         verwachteKoppen.forEach(kop ->
                 assertThat(page.locator(
                         String.format("//h3[contains(.,'%s')]", kop))).isVisible());
