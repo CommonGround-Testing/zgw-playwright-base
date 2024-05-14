@@ -36,7 +36,7 @@ public class OpenFormsSteps extends GeneriekeSteps {
      */
     public void login_via_digid(User user) {
         openFormsPage.buttonAccepteerCookies.click();
-        get_tekst("Inloggen met DigiD").click();
+        openFormsPage.inloggenDigidButton.click();
         digidLoginSteps.login_via_digid(user);
         openFormsPage.uitloggenDigidButton
                 .waitFor();
