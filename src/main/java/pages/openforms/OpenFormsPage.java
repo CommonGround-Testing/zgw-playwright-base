@@ -25,7 +25,7 @@ public class OpenFormsPage {
 
 
     public OpenFormsPage(Page page) {
-        this.inloggenDigidButton = page.getByRole(AriaRole.BUTTON).getByText("Inloggen met DigiD");
+        this.inloggenDigidButton = page.getByRole(AriaRole.LINK).getByText("Inloggen met DigiD");
         this.uitloggenDigidButton = page.getByRole(AriaRole.BUTTON).getByText("Uitloggen");
         this.aanvraagZonderDigidButton = page.getByRole(AriaRole.BUTTON).getByText("zonder DigiD");
 
