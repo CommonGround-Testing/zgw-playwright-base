@@ -6,7 +6,7 @@
 
     <groupId>io.github.commonground-testing</groupId>
     <artifactId>zgw-playwright-base</artifactId>
-    <version>0.0.43</version>
+    <version>0.0.44</version>
     <packaging>jar</packaging>
 
     <name>ZGW Playwright Testautomation Base Library</name>
