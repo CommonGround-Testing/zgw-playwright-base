@@ -25,7 +25,7 @@ public class MijnZakenSteps extends KlantportaalSteps {
      *
      */
     public void navigate() {
-        page.navigate(MijnTakenPage.PAGE_URL);
+        page.navigate(MijnZakenPage.PAGE_URL);
     }
 
     /**
