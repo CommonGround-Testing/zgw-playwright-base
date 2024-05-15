@@ -16,6 +16,6 @@ public class OverzichtPage {
         pageHeader = page.locator("//h2");
         zaakTegels = page.locator("//div[@class='denhaag-card__content']");
         linkAlleTaken = page.getByRole(AriaRole.LINK).getByText("Bekijk alle taken");
-        linkTaak = page.getByRole(AriaRole.LINK).locator("scope:denhaag-action--single");
+        linkTaak = page.getByRole(AriaRole.LINK).locator(":scope.denhaag-action--single");
     }
 }
