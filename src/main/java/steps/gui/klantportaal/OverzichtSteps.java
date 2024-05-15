@@ -49,6 +49,13 @@ public class OverzichtSteps extends KlantportaalSteps {
     }
 
     /**
+     * Klik op de link voor alle zaken
+     */
+    public void klik_op_alle_zaken_link(){
+        overzichtPage.linkAlleZaken.click();
+    }
+
+    /**
      * Klik op een taak op het overzicht
      *
      * @param nummer van de taak

@@ -48,14 +48,6 @@ public class MijnZakenSteps extends KlantportaalSteps {
     }
 
     /**
-     * Valideer dat de Header 'Mijn taken' op het scherm staat
-     *
-     */
-    public void valideer_dat_mijn_zaken_overzicht_zichtbaar_is() {
-        assertThat(mijnZakenPage.mijnZakenHeader).isVisible();
-    }
-
-    /**
      * Open een specefieke zaak
      *
      * @param zaakId van de te openen zaak

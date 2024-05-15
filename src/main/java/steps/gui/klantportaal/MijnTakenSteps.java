@@ -31,8 +31,9 @@ public class MijnTakenSteps extends KlantportaalSteps {
     }
 
     /**
-     * Valideer dat er een taak op het scherm staat
-     *
+     * Valideer
+     * dat er een taak op het scherm staat
+     * dat er geen foutmelding op het scherm staat
      */
     public void valideer_dat_een_overzicht_van_de_taken_wordt_getoond() {
         mijnTakenPage.takenCard.waitFor();
