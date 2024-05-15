@@ -6,7 +6,7 @@ import pages.klantportaal.OverzichtPage;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class OverzichtSteps extends KlantportaalSteps {
-    private final OverzichtPage overzichtPage;
+    public final OverzichtPage overzichtPage;
 
     public OverzichtSteps(Page page) {
         super(page);

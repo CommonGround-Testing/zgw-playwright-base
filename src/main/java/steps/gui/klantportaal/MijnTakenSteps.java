@@ -7,7 +7,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 public class MijnTakenSteps extends KlantportaalSteps {
 
-    private final MijnTakenPage mijnTakenPage;
+    public final MijnTakenPage mijnTakenPage;
 
     public MijnTakenSteps(Page page) {
         super(page);
