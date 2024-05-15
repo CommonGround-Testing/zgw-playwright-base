@@ -10,12 +10,14 @@ public class OverzichtPage {
     public final Locator pageHeader;
     public final Locator linkAlleTaken;
     public final Locator linkTaak;
+    public final Locator linkAlleZaken;
     public final Locator zaakTegels;
 
     public OverzichtPage(Page page) {
         pageHeader = page.locator("//h2");
-        zaakTegels = page.locator("//div[@class='denhaag-card__content']");
         linkAlleTaken = page.getByRole(AriaRole.LINK).getByText("Bekijk alle taken");
         linkTaak = page.getByRole(AriaRole.LINK).locator(":scope.denhaag-action--single");
+        linkAlleZaken = page.getByRole(AriaRole.LINK).getByText("Bekijk alle zaken");
+        zaakTegels = page.locator("//div[@class='denhaag-card__content']");
     }
 }
