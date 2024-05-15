@@ -35,6 +35,7 @@ public class EherkenningSteps extends LoginSteps {
      *
      */
     public void vul_bsn_in_als_bewindsvoerder(String bsn){
+        eherkenningPage.inputBsn.waitFor();
         eherkenningPage.inputBsn.fill(bsn);
         eherkenningPage.buttonZoek.click();
         eherkenningPage.buttonGaVerder.click();
