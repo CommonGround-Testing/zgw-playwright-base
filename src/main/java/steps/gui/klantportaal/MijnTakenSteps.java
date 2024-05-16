@@ -35,7 +35,7 @@ public class MijnTakenSteps extends KlantportaalSteps {
      *
      * @param taakId van de te openen zaak
      */
-    public void open_zaak(String taakId) {
+    public void open_taak(String taakId) {
         page.navigate("/taken/taak/" + taakId);
         page.getByText("Status").waitFor();
     }
