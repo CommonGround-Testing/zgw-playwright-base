@@ -37,7 +37,6 @@ public class MijnTakenSteps extends KlantportaalSteps {
      */
     public void open_taak(String taakId) {
         page.navigate("/taken/taak/" + taakId);
-        page.getByText("Status").waitFor();
     }
     /**
      * Valideer
