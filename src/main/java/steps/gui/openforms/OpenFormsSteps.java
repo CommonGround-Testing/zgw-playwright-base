@@ -13,7 +13,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 public class OpenFormsSteps extends GeneriekeSteps {
 
-    protected final OpenFormsPage openFormsPage;
+    public final OpenFormsPage openFormsPage;
     protected final GeneriekeOpenformsPage genericPage;
     protected final DigidLoginSteps digidLoginSteps;
 
@@ -38,8 +38,6 @@ public class OpenFormsSteps extends GeneriekeSteps {
         openFormsPage.buttonAccepteerCookies.click();
         openFormsPage.inloggenDigidButton.click();
         digidLoginSteps.login_via_digid(user);
-        openFormsPage.uitloggenDigidButton
-                .waitFor();
     }
 
     /**
