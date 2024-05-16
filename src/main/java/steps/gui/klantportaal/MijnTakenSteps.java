@@ -31,6 +31,15 @@ public class MijnTakenSteps extends KlantportaalSteps {
     }
 
     /**
+     * Open een specefieke taak
+     *
+     * @param taakId van de te openen zaak
+     */
+    public void open_zaak(String taakId) {
+        page.navigate("/taken/taak/" + taakId);
+        page.getByText("Status").waitFor();
+    }
+    /**
      * Valideer
      * dat er een taak op het scherm staat
      * dat er geen foutmelding op het scherm staat
