@@ -2,7 +2,6 @@ package runner;
 
 import com.microsoft.playwright.*;
 import lombok.Getter;
-import lombok.Setter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,17 +14,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(TestWatcherExtension.class)
 abstract public class ZGWTestRunner {
 
-    // Shared between all tests in this class.
-    static Playwright playwright;
-    static Browser browser;
     // New instance for each test method.
     // Cannot use standard library because we need to get cookies fTestWatcherExtensionrom context
     @Getter
     public static BrowserContext context;
     @Getter
-    private static String baseUrl;
-    @Getter
     public static Page page;
+    // Shared between all tests in this class.
+    protected static Playwright playwright;
+    protected static Browser browser;
+    @Getter
+    private static String baseUrl;
 
     public ZGWTestRunner(String url) {
         baseUrl = url;
@@ -35,10 +34,22 @@ abstract public class ZGWTestRunner {
     static void launchBrowser() {
         var headlessProp = System.getProperty("headless");
         var setHeadless = headlessProp != null && headlessProp.equals("true");
+        var envBrowser = System.getProperty("browser");
+        if (envBrowser == null) {
+            envBrowser = "chrome";
+        }
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType
-                .LaunchOptions()
-                .setHeadless(setHeadless));
+        if (envBrowser.equals("chrome")) {
+            browser = playwright.chromium().launch(new BrowserType
+                    .LaunchOptions()
+                    .setHeadless(setHeadless));
+        } else {
+            if (envBrowser.equals("firefox")) {
+                browser = playwright.firefox().launch(new BrowserType
+                        .LaunchOptions()
+                        .setHeadless(setHeadless));
+            }
+        }
     }
 
     @AfterAll
@@ -46,22 +57,22 @@ abstract public class ZGWTestRunner {
         playwright.close();
     }
 
-    @BeforeEach
-    void createContextAndPage() {
-        ContextHandler.createCleanContextAndPage();
-    }
-
     /**
      * This method should only be used if your test uses different baseUrls
      * For example when you are testing different systems (kententest)
-     *
+     * <p>
      * Note that this will turn any current page invalid so after calling
      * this method you have to initiate the steps again!
-     *
+     * <p>
      * Therefore this method should only be called from a Runner that does not
      * instantiate anything in it's constructor
      */
-    public static void changeBaseUrl(String baseUrl){
+    public static void changeBaseUrl(String baseUrl) {
         ContextHandler.setNewBaseUrl(baseUrl);
+    }
+
+    @BeforeEach
+    void createContextAndPage() {
+        ContextHandler.createCleanContextAndPage();
     }
 }
