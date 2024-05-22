@@ -71,6 +71,8 @@ public class ContextHandler {
         context.close();
 
         currentOptions.baseURL = baseUrl;
+        currentOptions.setIgnoreHTTPSErrors(true);
+        currentOptions.setBypassCSP(true);
         context = browser.newContext(currentOptions);
         page = context.newPage();
         addTracingToContext();
