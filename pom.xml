@@ -6,8 +6,20 @@
 
     <groupId>io.github.commonground-testing</groupId>
     <artifactId>zgw-playwright-base</artifactId>
-    <version>0.0.55</version>
+    <version>0.0.56</version>
     <packaging>jar</packaging>
+
+    <profiles>
+        <profile>
+            <id>Release note</id>
+            <activation>
+                <file>
+                    <exists>RELEASENOTE.MD</exists>
+                </file>
+            </activation>
+            <!-- deployment of release notes declarations here -->
+        </profile>
+    </profiles>
 
     <name>ZGW Playwright Testautomation Base Library</name>
     <description>A library to simplify the testautomation of an application on the zgw platform</description>
