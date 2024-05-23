@@ -8,15 +8,13 @@ public class OverzichtPage {
 
     public final static String PAGE_URL = "/";
     public final Locator pageHeader;
-    public final Locator subHeader;
     public final Locator linkAlleTaken;
     public final Locator linkTaak;
     public final Locator linkAlleZaken;
     public final Locator zaakTegels;
 
     public OverzichtPage(Page page) {
-        pageHeader = page.locator("//h1");
-        subHeader = page.locator("//h3");
+        pageHeader = page.getByRole(AriaRole.HEADING).first();
         linkAlleTaken = page.getByRole(AriaRole.LINK).getByText("Bekijk alle taken");
         linkTaak = page.getByRole(AriaRole.LINK).locator(":scope.denhaag-action--single");
         linkAlleZaken = page.getByRole(AriaRole.LINK).getByText("Bekijk alle zaken");
