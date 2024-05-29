@@ -21,6 +21,6 @@ abstract public class CachedDIGIDTestRunner extends DIGIDTestRunner {
     @BeforeEach
     @Override
     protected void createContextAndPage() {
-        ContextHandler.createDigidContextAndPage(DigidLoginSteps.class, zgwUser);
+        ContextHandler.createDigidContextAndPage(DigidLoginSteps.class, digidUser);
     }
 }

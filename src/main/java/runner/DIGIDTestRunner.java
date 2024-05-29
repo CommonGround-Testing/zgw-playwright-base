@@ -13,11 +13,11 @@ import users.User;
  */
 @ExtendWith(TestWatcherExtension.class)
 abstract public class DIGIDTestRunner extends ZGWTestRunner {
-    protected User zgwUser;
+    protected User digidUser;
 
     public DIGIDTestRunner(String baseUrl, User user) {
         super(baseUrl);
-        zgwUser = user;
+        digidUser = user;
     }
 
     @BeforeEach
