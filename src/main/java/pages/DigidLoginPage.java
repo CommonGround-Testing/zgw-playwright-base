@@ -20,7 +20,7 @@ public class DigidLoginPage {
      * @return resonse
      */
     public Response navigate() {
-        page.navigate("");
+        return page.navigate("");
     }
 
     public DigidLoginPage(Page page) {
