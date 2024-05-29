@@ -7,7 +7,7 @@ import com.microsoft.playwright.options.AriaRole;
 
 public class EidasLoginPage {
 
-    private final Page page;
+    protected final Page page;
     public final Locator countryLink;
     public final Locator buttonContinue;
     public final Locator cardAtlas;

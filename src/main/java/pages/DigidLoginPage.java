@@ -6,7 +6,7 @@ import com.microsoft.playwright.Response;
 
 public class DigidLoginPage {
 
-    private final Page page;
+    protected final Page page;
     public final Locator linkSelectAuthenticationWithTrustLevel;
     public final Locator dropdownBetrouwbaarheidsniveau;
     public final Locator textfieldUsername;
@@ -14,7 +14,12 @@ public class DigidLoginPage {
     public final Locator buttonDoLogin;
     public final Locator buttonSelecteerMachtiginggever;
 
-    public void navigate(){
+    /**
+     * Navigate to baseurl
+     *
+     * @return resonse
+     */
+    public Response navigate() {
         page.navigate("");
     }
 
@@ -26,14 +31,5 @@ public class DigidLoginPage {
         textfieldPassword = page.locator("//*[@id='authentication_password']");
         buttonDoLogin = page.locator("//button[@type='submit']");
         buttonSelecteerMachtiginggever = page.locator("//app-mandates-table//span[text()='Selecteer']");
-    }
-
-    /**
-     * Navigate to baseurl
-     *
-     * @return resonse
-     */
-    public Response navigateWithResponse() {
-        return page.navigate("");
     }
 }
