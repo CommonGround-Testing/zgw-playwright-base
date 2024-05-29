@@ -14,6 +14,10 @@ public class DigidLoginPage {
     public final Locator buttonDoLogin;
     public final Locator buttonSelecteerMachtiginggever;
 
+    public void navigate(){
+        page.navigate("");
+    }
+
     public DigidLoginPage(Page page) {
         this.page = page;
         linkSelectAuthenticationWithTrustLevel = page.locator("//*[@id='authentication_type_account_test']");
@@ -29,7 +33,7 @@ public class DigidLoginPage {
      *
      * @return resonse
      */
-    public Response navigate() {
+    public Response navigateWithResponse() {
         return page.navigate("");
     }
 }
