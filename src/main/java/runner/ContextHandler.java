@@ -23,6 +23,7 @@ public class ContextHandler {
 
     private final static Integer sessionTimeoutInMinutes = 13;
     private static Browser.NewContextOptions currentOptions;
+    private final static String REPORTING_PATH = "./target/site/";
 
     /**
      * Use an existing session if available and otherwise login and store this session
@@ -32,7 +33,7 @@ public class ContextHandler {
      */
     public static void createDigidContextAndPage(Type stepsClass, User user) {
         String stateFile = user.getUsername() + "-state.json";
-        var storageStatePath = Paths.get(stateFile);
+        var storageStatePath = Paths.get(REPORTING_PATH + stateFile);
         var options = createContextOptions();
 
         if (isThereAnExistingValidSession(stateFile)) {
@@ -86,7 +87,7 @@ public class ContextHandler {
      * @return boolean true or false
      */
     private static boolean isThereAnExistingValidSession(String stateFile) {
-        var storageStatePath = Paths.get(stateFile);
+        var storageStatePath = Paths.get(REPORTING_PATH + stateFile);
         if (!new File(stateFile).exists()) {
             return false;
         }
