@@ -5,7 +5,10 @@ import lombok.Getter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.nio.file.Paths;
 
 /**
  * This runner will prepare everything that is needed for your tests to run
@@ -57,6 +60,31 @@ abstract public class ZGWTestRunner {
         playwright.close();
     }
 
+    @BeforeEach
+    void createContextAndPage() {
+        ContextHandler.createCleanContextAndPage();
+    }
+
+    /**
+     * This is created for running tests in parallel
+     */
+    @AfterEach
+    void closeContext(TestInfo testInfo) {
+        if (context != null) {
+            try {
+                // Stop tracing and export it into a zip archive
+                String testName = testInfo.getTestMethod().orElseThrow().getName();
+                String tracePath = String.format("./target/site/traces/%s-trace.zip", testName);
+                context.tracing().stop( new Tracing.StopOptions().setPath(Paths.get(tracePath)));
+            } catch (Exception e) {
+                System.err.println("Error stopping tracing: " + e.getMessage());
+            } finally {
+                page.close();
+                context.close();
+            }
+        }
+    }
+
     /**
      * This method should only be used if your test uses different baseUrls
      * For example when you are testing different systems (kententest)
@@ -70,9 +98,7 @@ abstract public class ZGWTestRunner {
     public static void changeBaseUrl(String baseUrl) {
         ContextHandler.setNewBaseUrl(baseUrl);
     }
-
-    @BeforeEach
-    void createContextAndPage() {
-        ContextHandler.createCleanContextAndPage();
-    }
 }
+
+
+
