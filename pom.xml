@@ -6,7 +6,7 @@
 
     <groupId>io.github.commonground-testing</groupId>
     <artifactId>zgw-playwright-base</artifactId>
-    <version>0.0.59</version>
+    <version>0.0.60</version>
     <packaging>jar</packaging>
 
     <profiles>
