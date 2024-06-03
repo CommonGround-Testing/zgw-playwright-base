@@ -21,6 +21,11 @@ abstract public class CachedADTestRunner extends ADTestRunner {
     @BeforeEach
     @Override
     protected void createContextAndPage() {
-        ContextHandler.createDigidContextAndPage(ADLoginSteps.class, adUser);
+        var environment = "test";
+        if (getBaseUrl().contains("acc")) {
+            environment = "acc";
+        }
+        String stateFile = adUser.getUsername() + "-" + environment + "-state.json";
+        ContextHandler.createDigidContextAndPage(ADLoginSteps.class, adUser, stateFile);
     }
 }

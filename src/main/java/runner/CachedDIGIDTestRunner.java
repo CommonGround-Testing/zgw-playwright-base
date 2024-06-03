@@ -21,6 +21,11 @@ abstract public class CachedDIGIDTestRunner extends DIGIDTestRunner {
     @BeforeEach
     @Override
     protected void createContextAndPage() {
-        ContextHandler.createDigidContextAndPage(DigidLoginSteps.class, digidUser);
+        var environment = "test";
+        if (getBaseUrl().contains("acc")) {
+            environment = "acc";
+        }
+        String stateFile = digidUser.getUsername() + "-" + environment + "-state.json";
+        ContextHandler.createDigidContextAndPage(DigidLoginSteps.class, digidUser, stateFile);
     }
 }

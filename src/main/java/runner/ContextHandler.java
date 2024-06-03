@@ -22,17 +22,21 @@ import static runner.ZGWTestRunner.*;
 public class ContextHandler {
 
     private final static Integer sessionTimeoutInMinutes = 13;
-    private static Browser.NewContextOptions currentOptions;
     private final static String REPORTING_PATH = "./target/site/";
+    private static Browser.NewContextOptions currentOptions;
 
     /**
      * Use an existing session if available and otherwise login and store this session
      * The sessions are stored in -state.json files which can be re-used for multiple tests
      *
-     * @param user User
+     * The sessionfile will be stored in ./target/site/ (where the report is also stored)
+     *
+     * @param stepsClass with LoginSteps class to be used for Login
+     * @param user that will be logged in
+     * @param stateFile with name of the file for sessionstorage.
      */
-    public static void createDigidContextAndPage(Type stepsClass, User user) {
-        String stateFile = user.getUsername() + "-state.json";
+    public static void createDigidContextAndPage(Type stepsClass, User user, String stateFile) {
+//        String stateFile = user.getUsername() + "-" + environment + "-state.json";
         var storageStatePath = Paths.get(REPORTING_PATH + stateFile);
         var options = createContextOptions();
 
@@ -67,7 +71,7 @@ public class ContextHandler {
      *
      * @param baseUrl
      */
-    public static void setNewBaseUrl(String baseUrl){
+    public static void setNewBaseUrl(String baseUrl) {
         removeTracingToContext();
         context.close();
 
