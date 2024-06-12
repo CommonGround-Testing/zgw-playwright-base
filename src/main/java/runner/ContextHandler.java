@@ -10,6 +10,7 @@ import users.User;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Clock;
 import java.time.Duration;
@@ -40,7 +41,7 @@ public class ContextHandler {
         var storageStatePath = Paths.get(REPORTING_PATH + stateFile);
         var options = createContextOptions();
 
-        if (isThereAnExistingValidSession(stateFile)) {
+        if (isThereAnExistingValidSession(storageStatePath)) {
             options.setStorageStatePath(storageStatePath);
             createContextAndPage(options);
             page.navigate("");
@@ -87,16 +88,16 @@ public class ContextHandler {
      * Check if an existing statefile exists and check if it is still valid
      * Sessions only last 15 minutes
      *
-     * @param stateFile filepath
+     * @param storagePath path+name of stateFile
      * @return boolean true or false
      */
-    private static boolean isThereAnExistingValidSession(String stateFile) {
-        var storageStatePath = Paths.get(REPORTING_PATH + stateFile);
+    private static boolean isThereAnExistingValidSession(Path storagePath) {
+        var stateFile = storagePath.toString();
         if (!new File(stateFile).exists()) {
             return false;
         }
         try {
-            var creationTime = Files.getLastModifiedTime(storageStatePath).toInstant();
+            var creationTime = Files.getLastModifiedTime(storagePath).toInstant();
             var now = Clock.systemDefaultZone().instant();
             var diff = Duration.between(creationTime, now);
             if (diff.toMinutes() >= sessionTimeoutInMinutes) {
