@@ -29,12 +29,12 @@ public class ContextHandler {
     /**
      * Use an existing session if available and otherwise login and store this session
      * The sessions are stored in -state.json files which can be re-used for multiple tests
-     *
+     * <p>
      * The sessionfile will be stored in ./target/site/ (where the report is also stored)
      *
      * @param stepsClass with LoginSteps class to be used for Login
-     * @param user that will be logged in
-     * @param stateFile with name of the file for sessionstorage.
+     * @param user       that will be logged in
+     * @param stateFile  with name of the file for sessionstorage.
      */
     public static void createDigidContextAndPage(Type stepsClass, User user, String stateFile) {
 //        String stateFile = user.getUsername() + "-" + environment + "-state.json";
@@ -134,6 +134,8 @@ public class ContextHandler {
      */
     private static Browser.NewContextOptions createContextOptions() {
         Browser.NewContextOptions options = new Browser.NewContextOptions();
+        options.setLocale("nl-NL")
+                .setTimezoneId("Europe/Amsterdam");
         options.baseURL = ZGWTestRunner.getBaseUrl();
         if (LoginCacheHelper.STORAGE != null || !LoginCacheHelper.STORAGE.isEmpty()) {
             options.storageState = LoginCacheHelper.STORAGE;
