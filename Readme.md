@@ -213,6 +213,9 @@ public class OpenFormsTestRunner extends ZGWTestRunner {
 ## Info for Developers: deployment to maven central
 
 General info: https://medium.com/@efthymiou.dimitrios1/how-to-publish-your-library-to-maven-central-3923139967e1
+Info about publishing via OSSRH (we use this instead of maven central): https://central.sonatype.org/register/legacy/
+Info about your settings.xml file which needs to be in your .m2 directory: https://central.sonatype.org/publish/publish-guide/
+
 
 Deploy naar Maven Central
 mvn clean deploy -DskipTests
