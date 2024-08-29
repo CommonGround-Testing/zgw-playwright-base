@@ -33,6 +33,6 @@ public class EherkenningLoginPage {
                 new Page.GetByRoleOptions().setName(Pattern.compile("Continue|Verder")));
         inputBsn = page.locator("#bsn-input");
         buttonZoek = page.locator("#search-submit");
-        buttonGaVerder = page.locator(("#dossier-redirect"));
+        buttonGaVerder = page.getByRole(AriaRole.BUTTON).getByText("Ga verder");
     }
 }
