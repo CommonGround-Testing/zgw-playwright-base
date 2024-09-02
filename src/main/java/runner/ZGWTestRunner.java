@@ -24,7 +24,7 @@ abstract public class ZGWTestRunner {
     protected static Playwright playwright;
     protected static Browser browser;
     @Getter
-    private static String baseUrl;
+    public static String baseUrl;
 
     public ZGWTestRunner(String url) {
         baseUrl = url;

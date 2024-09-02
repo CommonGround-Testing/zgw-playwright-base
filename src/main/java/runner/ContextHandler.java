@@ -70,7 +70,7 @@ public class ContextHandler {
      * Switches baseUrl.
      * This can only be done by closing the current browser and starting a new one
      *
-     * @param baseUrl
+     * @param baseUrl with new baseurl
      */
     public static void setNewBaseUrl(String baseUrl) {
         removeTracingToContext();
@@ -134,9 +134,7 @@ public class ContextHandler {
      */
     private static Browser.NewContextOptions createContextOptions() {
         Browser.NewContextOptions options = new Browser.NewContextOptions();
-        options.setLocale("nl-NL")
-                .setTimezoneId("Europe/Amsterdam");
-        options.baseURL = ZGWTestRunner.getBaseUrl();
+        options.baseURL = baseUrl;
         if (LoginCacheHelper.STORAGE != null || !LoginCacheHelper.STORAGE.isEmpty()) {
             options.storageState = LoginCacheHelper.STORAGE;
         }
