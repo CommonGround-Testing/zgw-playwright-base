@@ -18,7 +18,7 @@ public class EherkenningLoginPage {
     // Logius velden
     public final Locator inputBsn;
     public final Locator buttonZoek;
-    public final Locator buttonGaVerder;
+    public final Locator linkGaVerder;
 
     public EherkenningLoginPage(Page page) {
         dropdownSelectIdentityProvider = page.locator("#identity_provider");
@@ -33,6 +33,6 @@ public class EherkenningLoginPage {
                 new Page.GetByRoleOptions().setName(Pattern.compile("Continue|Verder")));
         inputBsn = page.locator("#bsn-input");
         buttonZoek = page.locator("#search-submit");
-        buttonGaVerder = page.getByRole(AriaRole.BUTTON).getByText("Ga verder");
+        linkGaVerder = page.getByRole(AriaRole.LINK).getByText("Ga verder");
     }
 }

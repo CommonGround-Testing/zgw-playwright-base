@@ -38,6 +38,6 @@ public class EherkenningSteps extends LoginSteps {
         eherkenningPage.inputBsn.waitFor();
         eherkenningPage.inputBsn.fill(bsn);
         eherkenningPage.buttonZoek.click();
-        eherkenningPage.buttonGaVerder.click();
+        eherkenningPage.linkGaVerder.click();
     }
 }
